@@ -1,0 +1,6 @@
+{
+  "env": ["browser", "development", "module"],
+  "imports": {
+    "shelf": "https://raw.githubusercontent.com/canadaduane/shelf/main/index.js"
+  }
+}

@@ -10,10 +10,10 @@
   "author": "Duane Johnson",
   "license": "MIT",
   "dependencies": {
-    "@hocuspocus/extension-sqlite": "^2.1.0",
-    "@hocuspocus/server": "^2.1.0",
+    "@tinyhttp/app": "^2.1.0",
+    "express": "^4.18.2",
+    "shelf": "github:canadaduane/shelf",
     "solid-js": "^1.7.6",
-    "valtio-yjs": "^0.5.0",
-    "yjs": "^13.6.2"
+    "tinyws": "^0.1.0"
   }
 }
