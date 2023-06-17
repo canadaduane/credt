@@ -8,7 +8,8 @@
     "esModuleInterop": true,
     "jsx": "preserve",
     "checkJs": true,
-    "noEmit": true
-    // "isolatedModules": true
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true
   }
 }

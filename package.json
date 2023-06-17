@@ -1,19 +1,23 @@
 {
   "name": "credit",
   "version": "1.0.0",
-  "description": "",
+  "description": "An experimental web framework based on CRDTs",
   "type": "module",
+  "author": "Duane Johnson",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/canadaduane/credit.git"
+  },
   "scripts": {
     "start": "node server.js"
   },
-  "keywords": [],
-  "author": "Duane Johnson",
-  "license": "MIT",
   "dependencies": {
-    "@tinyhttp/app": "^2.1.0",
-    "express": "^4.18.2",
+    "chef-uws": "^2.1.3",
+    "chomp": "^0.2.14",
+    "liquidjs": "^10.8.2",
     "shelf": "github:canadaduane/shelf",
     "solid-js": "^1.7.6",
-    "tinyws": "^0.1.0"
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.19.0"
   }
 }

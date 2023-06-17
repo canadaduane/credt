@@ -1,0 +1,8 @@
+{
+  "env": ["browser", "development", "module"],
+  "imports": {
+    "antimatter": "https://cdn.jsdelivr.net/npm/@braidjs/antimatter/+esm",
+    "sinuous": "https://cdn.jsdelivr.net/npm/sinuous@0.30.0/src/index.js",
+    "sinuous/map": "https://cdn.jsdelivr.net/npm/sinuous@0.30.0/src/map.js"
+  }
+}

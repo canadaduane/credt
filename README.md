@@ -3,46 +3,50 @@
 A small, fast web framework that uses a CRDT to sync server and client.
 
 Goals:
+
 - minimal compilation steps
-  - use plain es2022 js on both client & server
+  - use plain es2022 javascript on both client & server
   - type safety via jsdoc comments
-- zero API using full state sync
+- no API--state sync takes care of variables
 - extremely fast load time and render time
 - server is just another peer
 - peers can selectively trust signature-validated messages
 - stretch goal: multiplayer
 
+Non-goals:
+
+- backwards compat with non-modern browsers
+- look similar to React development
+
 ## Building Blocks
 
-tinyhttp
-- https://github.com/tinyhttp/tinyhttp
-- fast, modern express replacement with middleware compat
-- [tinyws](https://github.com/tinyhttp/tinyws) provides sensible websockets
+### Client
 
-Shelf
-- https://github.com/dglittle/shelf
-- efficient and flexible CRDT for nested object tree
-- size: 6.8kb / 1.5kb brotli
+[Antimatter](https://braid.org/antimatter)
+- JSON CRDT with non-tombstone deletion
+- size: 17.5kb / 6.6kb brotli
 
-Mikado
-- https://github.com/nextapps-de/mikado/
-- fastest render time in the world (https://krausest.github.io/js-framework-benchmark/2023/table_chrome_114.0.5735.90.html)
-- size:
-  - "full" 23kb / 7.9kb brotli
-  - "light" 7.6kb / 3.0kb brotli
+[Sinuous](https://sinuous.netlify.app/)
+- fast, efficient, tiny reactive UI library
+- supports es modules, hydration
+- size: 5kb / 2.9kb brotli
 
-jspm-cli
-- https://github.com/jspm/jspm-cli
+[Zod](https://github.com/colinhacks/zod)
+- best-in-class runtime schema validator
+- size: 14kb brotli
+
+### Server
+
+[chef-uws](https://github.com/chef-js/uws)
+- ~150k req/s nodejs server based on uWebsockets
+- easily serves static files
+
+[jspm-cli](https://github.com/jspm/jspm-cli)
 - installs packages for importmap
 
-Chomp
-- https://github.com/guybedford/chomp
+[Chomp](https://github.com/guybedford/chomp)
 - fast, rust-based "make" system for javascript
-
-Zod
-- https://github.com/colinhacks/zod
-- best-in-class runtime schema validator
 
 ## Research
 
-- valtio?
+- jsdelivr seems to offer best CDN for js--fast, and brotli compressed

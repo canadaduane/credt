@@ -1,26 +1,41 @@
-import { App } from "@tinyhttp/app";
-import { tinyws } from "tinyws";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+import startServer from "chef-uws";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const appPath = join(__dirname, "build");
 
 /**
- * @type {App<any, import('@tinyhttp/app').Request & import('tinyws').TinyWSRequest>}
+ * @type {Global.WSPlugin}
  */
-const app = new App();
+const shelfMergePlugin = function (ws, { id, event, data }) {
+  // broadcast to all sockets inside this topic
+  console.log({ this: this });
+  this.to("shelf").emit(event, id, data);
+};
 
-app.use(tinyws());
+const server = await startServer({
+  debug: process.argv.includes("--debug"),
+  port: Number(process.env.PORT || 4200),
+  plugins: {
+    shelf: shelfMergePlugin,
+  },
+  join: "/join",
+  leave: "/leave",
+  folder: appPath, //static files
+  maxCacheSize: 0,
+});
 
-app.use("/ws", async (req, res) => {
-  if (req.ws) {
-    const ws = await req.ws();
+server.any(
+  "/*",
 
-    return ws.send("hello there");
-  } else {
-    res.send("Hello from HTTP!");
+  /**
+   *
+   * @param {Global.HttpResponse} res
+   * @param {Global.HttpRequest} req
+   */
+  (res, req) => {
+    res.end("200 OK");
   }
-});
-
-app.use("/", async (req, res) => {
-  res.appendHeader("Content-Type", "text/html");
-  res.end("Home");
-});
-
-app.listen(3000);
+);
