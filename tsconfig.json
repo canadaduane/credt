@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    // Set up type checking to use "expected" ES modules and native resolution
+    "target": "es2020",
+    "module": "es2020",
+    "moduleResolution": "nodenext",
+
+    // Instruct typescript language server to look inside js files and check them,
+    // and avoid creating ".d.ts" files (we'll do this manually on an as-needed basis)
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+    "noEmit": true,
+
+    // Instruct non-relative imports to start within the `src` directory
+    "baseUrl": "src",
+
+    // Allow modules to `export default`
+    "esModuleInterop": true,
+
+    // You should also have @types/node as a devDependency in package.json
+    "types": ["node"]
+  },
+  "include": ["app/**/*.js", "app/**/*.d.ts"]
+}
