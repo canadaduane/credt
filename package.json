@@ -10,14 +10,15 @@
     "url": "https://github.com/canadaduane/credit.git"
   },
   "scripts": {
-    "start": "node server.js"
+    "//": "note: use chomp instead"
   },
   "dependencies": {
     "chef-uws": "^2.1.3",
-    "chomp": "^0.2.14",
-    "liquidjs": "^10.8.2",
-    "shelf": "github:canadaduane/shelf",
-    "solid-js": "^1.7.6",
     "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.19.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.3.1",
+    "chomp": "^0.2.14",
+    "liquidjs": "^10.8.2"
   }
 }
