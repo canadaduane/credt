@@ -23,30 +23,55 @@ Non-goals:
 ### Client
 
 [Antimatter](https://braid.org/antimatter)
+
 - JSON CRDT with non-tombstone deletion
 - size: 17.5kb / 6.6kb brotli
 
 [Sinuous](https://sinuous.netlify.app/)
+
 - fast, efficient, tiny reactive UI library
 - supports es modules, hydration
 - size: 5kb / 2.9kb brotli
 
 [Zod](https://github.com/colinhacks/zod)
+
 - best-in-class runtime schema validator
 - size: 14kb brotli
 
 ### Server
 
 [chef-uws](https://github.com/chef-js/uws)
+
 - ~150k req/s nodejs server based on uWebsockets
 - easily serves static files
 
 [jspm-cli](https://github.com/jspm/jspm-cli)
+
 - installs packages for importmap
 
 [Chomp](https://github.com/guybedford/chomp)
+
 - fast, rust-based "make" system for javascript
 
 ## Research
 
 - jsdelivr seems to offer best CDN for js--fast, and brotli compressed
+
+### Scratch
+
+Tree of Thought ?
+
+Capability Set:
+
+- "look up anything on a search engine"
+- "calculate a number"
+
+- "create a new capability" <-- "I need another agent to help me"
+
+Functions API
+here's the format of my function:
+JSON schema
+
+{
+tool: "calculator" | "google search" | "new capability"
+}
