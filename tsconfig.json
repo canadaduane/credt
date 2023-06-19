@@ -24,5 +24,10 @@
     // You should also have @types/node as a devDependency in package.json
     "types": ["node"]
   },
-  "include": ["src/**/*.js", "src/**/*.d.ts"]
+  "include": [
+    "src/**/*.js",
+    "src/**/*.d.ts",
+    "server/**/*.js",
+    "server/**/*.d.ts"
+  ]
 }
