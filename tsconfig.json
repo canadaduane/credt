@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
     // Set up type checking to use "expected" ES modules and native resolution
-    "target": "es2020",
-    "module": "es2020",
+    "target": "es2022",
+    "module": "es2022",
     "moduleResolution": "nodenext",
 
-    // Instruct typescript language server to look inside js files and check them,
-    // and avoid creating ".d.ts" files (we'll do this manually on an as-needed basis)
+    // Instruct typescript language server to look inside js files and check them.
+    // Also avoid creating ".d.ts" files (we'll do this manually on an as-needed basis)
     "allowJs": true,
     "checkJs": true,
     "strict": true,
@@ -18,8 +18,11 @@
     // Allow modules to `export default`
     "esModuleInterop": true,
 
+    // Allow importing JSON files directly
+    "resolveJsonModule": true,
+
     // You should also have @types/node as a devDependency in package.json
     "types": ["node"]
   },
-  "include": ["app/**/*.js", "app/**/*.d.ts"]
+  "include": ["src/**/*.js", "src/**/*.d.ts"]
 }
