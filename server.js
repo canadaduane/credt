@@ -1,7 +1,14 @@
-import uws, { DEDICATED_COMPRESSOR_3KB } from "uWebSockets.js";
+import path from "node:path";
+import url from "node:url";
+import { App, DEDICATED_COMPRESSOR_3KB } from "uWebSockets.js";
+import { serveDir } from "./server/serveDir.js";
 
-uws
-  .App()
+const dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const publicPath = path.resolve(dirname, "public");
+
+const serveStatic = serveDir(publicPath);
+
+App()
   .ws("/*", {
     compression: DEDICATED_COMPRESSOR_3KB,
 
@@ -9,12 +16,7 @@ uws
       let ok = ws.send(message, isBinary, true);
     },
   })
-  .get("/*", (res, req) => {
-    res
-      .writeStatus("200 OK")
-      .writeHeader("IsExample", "Yes")
-      .end("Hello there!");
-  })
+  .get("/*", serveStatic)
   .listen(9001, (listenSocket) => {
     if (listenSocket) {
       console.log("Listening to port 9001");

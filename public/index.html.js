@@ -2,11 +2,6 @@ import { ssrRender } from "./ssr.js";
 
 import { o, html } from "sinuous";
 
-// export const App = () => {
-//   return html`<div>Hello</div>`;
-// };
-// document.body.append(App());
-
 /** @typedef {{id: number, text: string}} Item */
 
 const TodoApp = () => {
@@ -64,7 +59,7 @@ const TodoApp = () => {
 const TodoList = ({ items }) => {
   return html`
     <ul>
-      ${items().map((item) => html` <li id=${item.id}>${item.text}</li> `)}
+      ${items().map((item) => html`<li id=${item.id}>${item.text}</li>`)}
     </ul>
   `;
 };

@@ -1,6 +1,6 @@
 import { lstatSync } from "fs";
 import path from "path";
-import mime from "mrmime";
+import { lookup } from "mrmime";
 
 /**
  * @property {Function} isDirectory
@@ -19,7 +19,7 @@ export const getFileStats = (filePath) => {
     return;
   }
   const fileExtension = path.extname(filePath);
-  const contentType = mime.lookup(fileExtension) || "application/octet-stream";
+  const contentType = lookup(fileExtension) || "application/octet-stream";
   const { mtime, size } = stats;
   const lastModified = mtime.toUTCString();
 

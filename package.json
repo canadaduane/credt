@@ -20,7 +20,7 @@
     "rehype-parse": "^8.0.4",
     "rehype-stringify": "^9.0.3",
     "sinuous": "^0.30.0",
-    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.19.0",
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.30.0",
     "unified": "^10.1.2"
   },
   "devDependencies": {

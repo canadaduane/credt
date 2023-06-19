@@ -25,8 +25,9 @@
     "types": ["node"]
   },
   "include": [
-    "src/**/*.js",
-    "src/**/*.d.ts",
+    "public/**/*.js",
+    "public/**/*.d.ts",
+    "server.js",
     "server/**/*.js",
     "server/**/*.d.ts"
   ]

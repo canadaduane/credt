@@ -4,3 +4,9 @@ version = 0.1
 name = "run"
 dep = "server.js"
 run = "node server.js"
+
+[[task]]
+name = "build"
+deps = ['src/##.html.js']
+target = 'src/##.html'
+run = 'node $DEP > $TARGET'

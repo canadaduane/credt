@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="importmap">
+      {
+        "env": ["browser", "development", "module"],
+        "imports": {
+          "antimatter": "https://cdn.jsdelivr.net/npm/@braidjs/antimatter/+esm",
+          "sinuous": "https://cdn.jsdelivr.net/npm/sinuous@0.30.0/src/index.js",
+          "sinuous/map": "https://cdn.jsdelivr.net/npm/sinuous@0.30.0/src/map.js"
+        }
+      }
+    </script>
+    <script type="module" src="./index.html.js"></script>
+  </head>
+  <body>
+    <div class="todos">
+      <div>
+        <h3>TODO</h3>
+        <ul></ul>
+        <form><label for="new-todo">What needs to be done? </label><input id="new-todo"><button>Add #1</button></form>
+      </div>
+    </div>
+  </body>
+</html>
+
