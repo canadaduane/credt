@@ -1,6 +1,12 @@
 import { ssrRender } from "./ssr.js";
 
 import { o, html } from "sinuous";
+import { hydrate } from "sinuous/hydrate";
+
+// const html =
+//   typeof global === "object"
+//     ? (await import("sinuous/hydrate")).dhtml
+//     : (await import("sinuous")).html;
 
 /** @typedef {{id: number, text: string}} Item */
 
@@ -9,7 +15,7 @@ const TodoApp = () => {
   let text = o("");
 
   const view = html`
-    <div>
+    <div id="todo-div">
       <h3>TODO</h3>
       <${TodoList} items=${items} />
       <form onsubmit=${handleSubmit}>
@@ -64,6 +70,9 @@ const TodoList = ({ items }) => {
   `;
 };
 
-document.querySelector(".todos")?.append(TodoApp());
+const app = TodoApp();
+
+if (app instanceof Node) document.querySelector(".todos")?.append(app);
+else hydrate(app);
 
 ssrRender(import.meta.url);
