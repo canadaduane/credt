@@ -10,7 +10,7 @@
     "url": "https://github.com/canadaduane/credit.git"
   },
   "scripts": {
-    "//": "# note: use `chomp` instead"
+    "start": "node server.js"
   },
   "dependencies": {
     "chef-uws": "^2.1.3",

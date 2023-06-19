@@ -1,0 +1,6 @@
+version = 0.1
+
+[[task]]
+name = "run"
+dep = "server.js"
+run = "node server.js"
