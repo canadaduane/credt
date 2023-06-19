@@ -7,6 +7,10 @@ run = "node server.js"
 
 [[task]]
 name = "build"
-deps = ['src/##.html.js']
-target = 'src/##.html'
+deps = ['public/##.html.js', 'public/importmap.json']
+target = 'public/##.html'
 run = 'node $DEP > $TARGET'
+
+# [[task]]
+# name = "add"
+# run = 'pnpm add jspm'
