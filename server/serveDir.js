@@ -2,10 +2,7 @@ import path from "path";
 import { getFileStats } from "./getFileStats.js";
 import { streamFile } from "./streamFile.js";
 
-/**
- * @property {string} contentType
- * @property {string} lastModified
- */
+// Taken from https://github.com/kolodziejczak-sz/uwebsocket-serve
 
 /**
  * @param {string} dir
