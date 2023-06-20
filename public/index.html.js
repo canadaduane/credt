@@ -1,15 +1,14 @@
 import { credit } from "./credit.js";
 
-const { isServer, html, o, attach, subscribe } = await credit(import.meta.url);
+const { isServer, html, o, attach, subscribe } = await credit(import.meta.url, {
+  ssr: ({ document, html }) => {
+    const css = "sakura-dark.css";
+    document.head.append(html`<link rel="stylesheet" href="/${css}" />`);
+    document.body.append(html`<div id="todos"></div>`);
+  },
+});
 
-/**
- * @template T
- * @typedef {import('sinuous/observable').Observable<T>} Observable
- **/
-
-/**
- * @typedef {{id: number, text: string}} Item
- **/
+/** @typedef {{id: number, text: string}} Item */
 
 const TodoApp = () => {
   /** @type {Item[]} */
@@ -78,4 +77,4 @@ const TodoList = ({ items }) => {
 
 const app = TodoApp();
 
-attach(".todos", app);
+attach("#todos", app);

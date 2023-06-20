@@ -1,3 +1,4 @@
+/* $color-text: #dedce5; */
 /* Sakura.css v1.4.1
  * ================
  * Minimal css theme.
@@ -14,8 +15,8 @@ body {
   line-height: 1.618;
   max-width: 38em;
   margin: auto;
-  color: #4a4a4a;
-  background-color: #f9f9f9;
+  color: #c9c9c9;
+  background-color: #222222;
   padding: 13px;
 }
 
@@ -75,19 +76,19 @@ small, sub, sup {
 }
 
 hr {
-  border-color: #1d7484;
+  border-color: #ffffff;
 }
 
 a {
   text-decoration: none;
-  color: #1d7484;
+  color: #ffffff;
 }
 a:visited {
-  color: #144f5a;
+  color: #e6e6e6;
 }
 a:hover {
-  color: #982c61;
-  border-bottom: 2px solid #4a4a4a;
+  color: #c9c9c9;
+  border-bottom: 2px solid #c9c9c9;
 }
 
 ul {
@@ -107,9 +108,9 @@ blockquote {
   padding-top: 0.8em;
   padding-bottom: 0.8em;
   padding-right: 0.8em;
-  border-left: 5px solid #1d7484;
+  border-left: 5px solid #ffffff;
   margin-bottom: 2.5rem;
-  background-color: #f1f1f1;
+  background-color: #4a4a4a;
 }
 
 blockquote p {
@@ -125,7 +126,7 @@ img, video {
 
 /* Pre and Code */
 pre {
-  background-color: #f1f1f1;
+  background-color: #4a4a4a;
   display: block;
   padding: 1em;
   overflow-x: auto;
@@ -137,7 +138,7 @@ pre {
 code, kbd, samp {
   font-size: 0.9em;
   padding: 0 0.5em;
-  background-color: #f1f1f1;
+  background-color: #4a4a4a;
   white-space: pre-wrap;
 }
 
@@ -157,15 +158,15 @@ table {
 
 td, th {
   padding: 0.5em;
-  border-bottom: 1px solid #f1f1f1;
+  border-bottom: 1px solid #4a4a4a;
 }
 
 /* Buttons, forms and input */
 input, textarea {
-  border: 1px solid #4a4a4a;
+  border: 1px solid #c9c9c9;
 }
 input:focus, textarea:focus {
-  border: 1px solid #1d7484;
+  border: 1px solid #ffffff;
 }
 
 textarea {
@@ -178,10 +179,10 @@ textarea {
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
-  background-color: #1d7484;
-  color: #f9f9f9;
+  background-color: #ffffff;
+  color: #222222;
   border-radius: 1px;
-  border: 1px solid #1d7484;
+  border: 1px solid #ffffff;
   cursor: pointer;
   box-sizing: border-box;
 }
@@ -190,29 +191,29 @@ textarea {
   opacity: 0.5;
 }
 .button:focus:enabled, .button:hover:enabled, button:focus:enabled, button:hover:enabled, input[type=submit]:focus:enabled, input[type=submit]:hover:enabled, input[type=reset]:focus:enabled, input[type=reset]:hover:enabled, input[type=button]:focus:enabled, input[type=button]:hover:enabled {
-  background-color: #982c61;
-  border-color: #982c61;
-  color: #f9f9f9;
+  background-color: #c9c9c9;
+  border-color: #c9c9c9;
+  color: #222222;
   outline: 0;
 }
 
 textarea, select, input {
-  color: #4a4a4a;
+  color: #c9c9c9;
   padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
   margin-bottom: 10px;
-  background-color: #f1f1f1;
-  border: 1px solid #f1f1f1;
+  background-color: #4a4a4a;
+  border: 1px solid #4a4a4a;
   border-radius: 4px;
   box-shadow: none;
   box-sizing: border-box;
 }
 textarea:focus, select:focus, input:focus {
-  border: 1px solid #1d7484;
+  border: 1px solid #ffffff;
   outline: 0;
 }
 
 input[type=checkbox]:focus {
-  outline: 1px dotted #1d7484;
+  outline: 1px dotted #ffffff;
 }
 
 label, legend, fieldset {

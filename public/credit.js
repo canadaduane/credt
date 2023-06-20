@@ -4,19 +4,20 @@ import { o, observable, subscribe } from "sinuous/observable";
 export const isServer = typeof global === "object";
 
 /**
+ * @typedef {typeof import('sinuous').html} HtmlFn
+ * @typedef {typeof import('sinuous/hydrate').dhtml} DhtmlFn
  * @typedef {(selector: string, dom: any) => void} AttachFn
- * @typedef {typeof import('sinuous').html | typeof import('sinuous/hydrate').dhtml} HtmlFn
+ * @typedef {HtmlFn | DhtmlFn} HtmlOrDhtmlFn
  */
-
-/** @type {import("jsdom").JSDOM} */
-let dom;
 
 /**
  * @param {string} caller The import.meta.url of the caller
+ * @param {{ssr?: ({document, html}: {document: Document, html: HtmlFn}) => void}} options Options
  */
-export async function credit(caller) {
+export async function credit(caller, options = {}) {
+  /** @type {import("jsdom").JSDOM} */ let dom;
   /** @type {AttachFn} */ let attachFn;
-  /** @type {HtmlFn} */ let htmlFn;
+  /** @type {HtmlOrDhtmlFn} */ let htmlOrDhtmlFn;
 
   if (isServer) {
     const url = await import("node:url");
@@ -37,9 +38,7 @@ export async function credit(caller) {
             ${importMap.trimEnd()}
           </script>
         </head>
-        <body>
-          <div class="todos" /> 
-        </body> 
+        <body />
       </html>
     `);
 
@@ -54,6 +53,8 @@ export async function credit(caller) {
     dom.window.document.head.append(
       html`<script type="module" src="./${relPath}"></script>`
     );
+
+    options.ssr?.({ document: dom.window.document, html });
 
     const { unified } = await import("unified");
     const { default: parse } = await import("rehype-parse");
@@ -72,7 +73,7 @@ export async function credit(caller) {
       console.log(String(output));
     });
 
-    htmlFn = html;
+    htmlOrDhtmlFn = html;
 
     attachFn = (selector, node) => {
       const mountPoint = globalThis.document.body.querySelector(selector);
@@ -81,7 +82,7 @@ export async function credit(caller) {
   } else {
     const { dhtml, hydrate } = await import("sinuous/hydrate");
 
-    htmlFn = dhtml;
+    htmlOrDhtmlFn = dhtml;
 
     attachFn = (selector, node) => {
       const mountPoint = globalThis.document.body.querySelector(selector);
@@ -102,7 +103,7 @@ export async function credit(caller) {
     hs,
     svg,
     subscribe,
-    html: htmlFn,
+    html: htmlOrDhtmlFn,
     attach: attachFn,
   };
 }
