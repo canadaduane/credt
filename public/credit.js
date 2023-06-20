@@ -14,23 +14,27 @@ export const isServer = typeof global === "object";
  * @param {string} caller The import.meta.url of the caller
  * @param {{ssr?: ({document, html}: {document: Document, html: HtmlFn}) => void}} options Options
  */
-export async function credit(caller, options = {}) {
+export default async function credit(caller, options = {}) {
   /** @type {import("jsdom").JSDOM} */ let dom;
   /** @type {AttachFn} */ let attachFn;
   /** @type {HtmlOrDhtmlFn} */ let htmlOrDhtmlFn;
 
+  const isHtml = caller.endsWith(".html.js");
+
   if (isServer) {
-    const url = await import("node:url");
-    const path = await import("node:path");
     const { html } = await import("sinuous");
-    const { JSDOM } = await import("jsdom");
-    const { default: multiline } = await import("multiline-ts");
-    const { readFile } = await import("./readFile.js");
 
-    const importMap = await readFile("importmap.json");
+    if (isHtml) {
+      const url = await import("node:url");
+      const path = await import("node:path");
+      const { JSDOM } = await import("jsdom");
+      const { default: multiline } = await import("multiline-ts");
+      const { readFile } = await import("./readFile.js");
 
-    // Create a virtual server-side DOM
-    dom = new JSDOM(multiline`
+      const importMap = await readFile("importmap.json");
+
+      // Create a virtual server-side DOM
+      dom = new JSDOM(multiline`
       <!DOCTYPE html>
       <html>
         <head>
@@ -42,36 +46,37 @@ export async function credit(caller, options = {}) {
       </html>
     `);
 
-    const filePath = url.fileURLToPath(caller);
-    const currDir = path.dirname(url.fileURLToPath(import.meta.url));
-    const relPath = path.relative(currDir, filePath);
+      const filePath = url.fileURLToPath(caller);
+      const currDir = path.dirname(url.fileURLToPath(import.meta.url));
+      const relPath = path.relative(currDir, filePath);
 
-    // Prepare globals necessary for server-side rendering via jsdom
-    globalThis.document = dom.window.document;
-    globalThis.Node = dom.window.Node;
+      // Prepare globals necessary for server-side rendering via jsdom
+      globalThis.document = dom.window.document;
+      globalThis.Node = dom.window.Node;
 
-    dom.window.document.head.append(
-      html`<script type="module" src="./${relPath}"></script>`
-    );
+      dom.window.document.head.append(
+        html`<script type="module" src="./${relPath}"></script>`
+      );
 
-    options.ssr?.({ document: dom.window.document, html });
+      options.ssr?.({ document: dom.window.document, html });
 
-    const { unified } = await import("unified");
-    const { default: parse } = await import("rehype-parse");
-    const { default: format } = await import("rehype-format");
-    const { default: stringify } = await import("rehype-stringify");
+      const { unified } = await import("unified");
+      const { default: parse } = await import("rehype-parse");
+      const { default: format } = await import("rehype-format");
+      const { default: stringify } = await import("rehype-stringify");
 
-    process.on("beforeExit", async (code) => {
-      if (code !== 0) return;
+      process.on("beforeExit", async (code) => {
+        if (code !== 0) return;
 
-      const output = await unified()
-        .use(parse, { emitParseErrors: true, verbose: true })
-        .use(format, { indent: "\t" })
-        .use(stringify)
-        .process(dom.serialize());
+        const output = await unified()
+          .use(parse, { emitParseErrors: true, verbose: true })
+          .use(format, { indent: "\t" })
+          .use(stringify)
+          .process(dom.serialize());
 
-      console.log(String(output));
-    });
+        console.log(String(output));
+      });
+    }
 
     htmlOrDhtmlFn = html;
 

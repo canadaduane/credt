@@ -1,6 +1,7 @@
-import { credit } from "./credit.js";
+import credit from "./credit.js";
+import { TodoList } from "./TodoList.js";
 
-const { isServer, html, o, attach, subscribe } = await credit(import.meta.url, {
+const { isServer, html, o, attach } = await credit(import.meta.url, {
   ssr: ({ document, html }) => {
     const css = "sakura-dark.css";
     document.head.append(html`<link rel="stylesheet" href="/${css}" />`);
@@ -8,10 +9,8 @@ const { isServer, html, o, attach, subscribe } = await credit(import.meta.url, {
   },
 });
 
-/** @typedef {{id: number, text: string}} Item */
-
 const TodoApp = () => {
-  /** @type {Item[]} */
+  /** @type {public.Item[]} */
   const emptyList = [];
   const items = o(emptyList);
   const text = o("");
@@ -37,7 +36,7 @@ const TodoApp = () => {
     if (!text().length) {
       return;
     }
-    /** @type {Item} */
+    /** @type {public.Item} */
     const newItem = {
       text: text(),
       id: Date.now(),
@@ -57,22 +56,6 @@ const TodoApp = () => {
   }
 
   return view;
-};
-
-/**
- *
- * @param {{items: import('sinuous/observable').Observable<Item[]>}} param0
- * @returns
- */
-const TodoList = ({ items }) => {
-  subscribe(() => {
-    if (!isServer) console.log("items", items());
-  });
-  return html`
-    <ul>
-      ${() => items().map((item) => html`<li id=${item.id}>${item.text}</li>`)}
-    </ul>
-  `;
 };
 
 const app = TodoApp();
