@@ -86,15 +86,3 @@ const TodoList = ({ items }) => {
 const app = TodoApp();
 
 attach(".todos", app);
-
-// const container = document.querySelector(".todos");
-// if (!isServer) {
-//   console.log("appending app to .todos");
-//   container?.append(app);
-// } else {
-//   // console.log("hydrating app");
-//   // hydrate(app, container);
-//   container?.append(app);
-// }
-
-// render(import.meta.url, { ssr: false });

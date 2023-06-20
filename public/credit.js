@@ -1,8 +1,11 @@
-import { html } from "sinuous";
 import { o } from "sinuous";
-import { hydrate } from "sinuous/hydrate";
 
 export const isServer = typeof global === "object";
+
+/**
+ * @typedef {(selector: string, dom: any) => void} AttachFn
+ * @typedef {typeof import('sinuous').html | typeof import('sinuous/hydrate').dhtml} HtmlFn
+ */
 
 /** @type {import("jsdom").JSDOM} */
 let dom;
@@ -11,9 +14,13 @@ let dom;
  * @param {string} caller The import.meta.url of the caller
  */
 export async function credit(caller) {
+  /** @type {AttachFn} */ let attachFn;
+  /** @type {HtmlFn} */ let htmlFn;
+
   if (isServer) {
     const url = await import("node:url");
     const path = await import("node:path");
+    const { html } = await import("sinuous");
     const { JSDOM } = await import("jsdom");
     const { default: multiline } = await import("multiline-ts");
     const { readFile } = await import("./readFile.js");
@@ -53,33 +60,43 @@ export async function credit(caller) {
     const { default: stringify } = await import("rehype-stringify");
 
     process.on("beforeExit", async (code) => {
+      if (code !== 0) return;
+
       const output = await unified()
-        .use(parse)
-        .use(format)
+        .use(parse, { emitParseErrors: true, verbose: true })
+        .use(format, { indent: "\t" })
         .use(stringify)
         .process(dom.serialize());
 
       console.log(String(output));
     });
-  }
 
-  // /** @type {ReturnType<import("sinuous/hydrate").hydrate>} */
-  // let hydrate;
-  // if (!isServer) hydrate = await import("sinuous/hydrate");
+    htmlFn = html;
+
+    attachFn = (selector, node) => {
+      const mountPoint = globalThis.document.body.querySelector(selector);
+      mountPoint?.append(node);
+    };
+  } else {
+    const { dhtml, hydrate } = await import("sinuous/hydrate");
+
+    htmlFn = dhtml;
+
+    attachFn = (selector, node) => {
+      const mountPoint = globalThis.document.body.querySelector(selector);
+      const firstChild = mountPoint?.firstElementChild;
+      if (firstChild) {
+        hydrate(node, firstChild);
+      } else {
+        throw Error(`hydration mountpoint missing first child: ${selector}`);
+      }
+    };
+  }
 
   return {
     isServer,
     o,
-    html: isServer
-      ? (await import("sinuous")).html
-      : (await import("sinuous/hydrate")).dhtml,
-    attach: (selector, node) => {
-      const mountPoint = globalThis.document.body.querySelector(selector);
-      if (isServer) {
-        mountPoint?.append(node);
-      } else {
-        hydrate(node, mountPoint.firstElementChild);
-      }
-    },
+    html: htmlFn,
+    attach: attachFn,
   };
 }
