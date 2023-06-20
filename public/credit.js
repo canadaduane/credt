@@ -1,4 +1,5 @@
-import { o } from "sinuous";
+import { h, hs, svg } from "sinuous";
+import { o, observable, subscribe } from "sinuous/observable";
 
 export const isServer = typeof global === "object";
 
@@ -96,6 +97,11 @@ export async function credit(caller) {
   return {
     isServer,
     o,
+    observable,
+    h,
+    hs,
+    svg,
+    subscribe,
     html: htmlFn,
     attach: attachFn,
   };

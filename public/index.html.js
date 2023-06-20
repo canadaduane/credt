@@ -1,31 +1,24 @@
 import { credit } from "./credit.js";
 
-import { subscribe } from "sinuous/observable";
+const { isServer, html, o, attach, subscribe } = await credit(import.meta.url);
 
 /**
- * - Be able to pass `html` or `dhtml` in, depending on context
- * - In SSR case,
- *   - send the components' DOM as string to console.log
- * - in CSR case,
- *   - add self JS file to importmap
- *   - hydrate the components' DOM
- */
+ * @template T
+ * @typedef {import('sinuous/observable').Observable<T>} Observable
+ **/
 
-const { isServer, html, o, attach } = await credit(import.meta.url);
-
-// const html =
-//   typeof global === "object"
-//     ? (await import("sinuous/hydrate")).dhtml
-//     : (await import("sinuous")).html;
-
-/** @typedef {{id: number, text: string}} Item */
+/**
+ * @typedef {{id: number, text: string}} Item
+ **/
 
 const TodoApp = () => {
-  let items = o([]);
-  let text = o("");
+  /** @type {Item[]} */
+  const emptyList = [];
+  const items = o(emptyList);
+  const text = o("");
 
   const view = html`
-    <div id="todo-div">
+    <div>
       <h3>TODO</h3>
       <${TodoList} items=${items} />
       <form onsubmit=${handleSubmit}>
