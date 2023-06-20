@@ -24,7 +24,7 @@ dependencies:
     specifier: ^9.0.3
     version: 9.0.3
   sinuous:
-    specifier: ^0.30.0
+    specifier: github:canadaduane/sinuous#434f93f9
     version: 0.30.0
   uWebSockets.js:
     specifier: github:uNetworking/uWebSockets.js#v20.30.0
