@@ -4,6 +4,7 @@
     "antimatter": "https://cdn.jsdelivr.net/npm/@braidjs/antimatter/+esm",
     "sinuous": "https://cdn.jsdelivr.net/npm/sinuous@0.30.0/src/index.js",
     "sinuous/hydrate": "https://cdn.jsdelivr.net/npm/sinuous@0.30.0/src/hydrate.js",
-    "sinuous/map": "https://cdn.jsdelivr.net/npm/sinuous@0.30.0/src/map.js"
+    "sinuous/map": "https://cdn.jsdelivr.net/npm/sinuous@0.30.0/src/map.js",
+    "sinuous/observable": "https://cdn.jsdelivr.net/npm/sinuous@0.30.0/src/observable.js"
   }
 }

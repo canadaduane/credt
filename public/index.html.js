@@ -1,7 +1,17 @@
-import { ssrRender } from "./ssr.js";
+import { credit } from "./credit.js";
 
-import { o, html } from "sinuous";
-import { hydrate } from "sinuous/hydrate";
+import { subscribe } from "sinuous/observable";
+
+/**
+ * - Be able to pass `html` or `dhtml` in, depending on context
+ * - In SSR case,
+ *   - send the components' DOM as string to console.log
+ * - in CSR case,
+ *   - add self JS file to importmap
+ *   - hydrate the components' DOM
+ */
+
+const { isServer, html, o, attach } = await credit(import.meta.url);
 
 // const html =
 //   typeof global === "object"
@@ -63,16 +73,28 @@ const TodoApp = () => {
  * @returns
  */
 const TodoList = ({ items }) => {
+  subscribe(() => {
+    if (!isServer) console.log("items", items());
+  });
   return html`
     <ul>
-      ${items().map((item) => html`<li id=${item.id}>${item.text}</li>`)}
+      ${() => items().map((item) => html`<li id=${item.id}>${item.text}</li>`)}
     </ul>
   `;
 };
 
 const app = TodoApp();
 
-if (app instanceof Node) document.querySelector(".todos")?.append(app);
-else hydrate(app);
+attach(".todos", app);
 
-ssrRender(import.meta.url);
+// const container = document.querySelector(".todos");
+// if (!isServer) {
+//   console.log("appending app to .todos");
+//   container?.append(app);
+// } else {
+//   // console.log("hydrating app");
+//   // hydrate(app, container);
+//   container?.append(app);
+// }
+
+// render(import.meta.url, { ssr: false });
