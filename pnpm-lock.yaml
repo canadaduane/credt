@@ -43,9 +43,6 @@ devDependencies:
   chomp:
     specifier: ^0.2.14
     version: 0.2.14
-  liquidjs:
-    specifier: ^10.8.2
-    version: 10.8.2
 
 packages:
 
@@ -264,11 +261,6 @@ packages:
   /comma-separated-tokens@2.0.3:
     resolution: {integrity: sha512-Fu4hJdvzeylCfQPp9SGWidpzrMs7tTrlu6Vb8XGaRGck8QSNZJJp538Wrb60Lax4fPwR64ViY468OIUTbRlGZg==}
     dev: false
-
-  /commander@10.0.1:
-    resolution: {integrity: sha512-y4Mg2tXshplEbSGzx7amzPwKKOCGuoSRP/CjEdwwk0FOGlUbq6lKuoyDZTNZkmxHdJtp54hdfY/JUrdL7Xfdug==}
-    engines: {node: '>=14'}
-    dev: true
 
   /commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
@@ -928,14 +920,6 @@ packages:
     resolution: {integrity: sha512-eguHnq22OE3uVoSYG0LVWNP+4ppamWr9+zWBe1bsNcovIMy6huUJFPgy4mGwCd/rnl3vOLGW1MTlu4c57CT1xA==}
     dependencies:
       json-buffer: 3.0.0
-    dev: true
-
-  /liquidjs@10.8.2:
-    resolution: {integrity: sha512-U6T0nLCwQjdYKh6e32X0f8cpMpRByrCgk6PViMaKszSbNIwobe24T050CSUauklYIuDtvVlfW8DRM+QS6gPCSQ==}
-    engines: {node: '>=14'}
-    hasBin: true
-    dependencies:
-      commander: 10.0.1
     dev: true
 
   /lowercase-keys@1.0.0:

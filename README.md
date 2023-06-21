@@ -8,7 +8,7 @@ Goals:
   - use plain es2022 javascript on both client & server
   - type safety via jsdoc comments
 - no API--state sync takes care of variables
-- extremely fast load time and render time
+- extremely fast load time and render time (SSR, small deps)
 - server is just another peer
 - peers can selectively trust signature-validated messages
 - stretch goal: multiplayer
@@ -33,17 +33,14 @@ Non-goals:
 - supports es modules, hydration
 - size: 5kb / 2.9kb brotli
 
-[Zod](https://github.com/colinhacks/zod)
-
-- best-in-class runtime schema validator
-- size: 14kb brotli
-
 ### Server
 
-[chef-uws](https://github.com/chef-js/uws)
+[uWebSockets.js](https://github.com/uNetworking/uWebSockets.js/)
 
-- ~150k req/s nodejs server based on uWebsockets
+- ~150k req/s nodejs server
+- supports both HTTP and WS
 - easily serves static files
+  via [uwebsocket-serve](https://github.com/kolodziejczak-sz/uwebsocket-serve)
 
 [jspm-cli](https://github.com/jspm/jspm-cli)
 
@@ -56,22 +53,3 @@ Non-goals:
 ## Research
 
 - jsdelivr seems to offer best CDN for js--fast, and brotli compressed
-
-### Scratch
-
-Tree of Thought ?
-
-Capability Set:
-
-- "look up anything on a search engine"
-- "calculate a number"
-
-- "create a new capability" <-- "I need another agent to help me"
-
-Functions API
-here's the format of my function:
-JSON schema
-
-{
-tool: "calculator" | "google search" | "new capability"
-}
