@@ -5,7 +5,6 @@ const { isServer, html, o, attach } = await credit(import.meta.url, {
   ssr: ({ document, html }) => {
     const css = "sakura-dark.css";
     document.head.append(html`<link rel="stylesheet" href="/${css}" />`);
-    document.body.append(html`<div id="todos"></div>`);
   },
 });
 
@@ -60,4 +59,4 @@ const TodoApp = () => {
 
 const app = TodoApp();
 
-attach("#todos", app);
+attach(app);

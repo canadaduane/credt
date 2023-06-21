@@ -7,7 +7,7 @@ export const isServer = typeof global === "object";
  * @typedef {import("jsdom").JSDOM} JSDOM
  * @typedef {typeof import('sinuous').html} HtmlFn
  * @typedef {typeof import('sinuous/hydrate').dhtml} DhtmlFn
- * @typedef {(selector: string, dom: Node) => void} AttachFn
+ * @typedef {(dom: Node) => void} AttachFn
  * @typedef {HtmlFn | DhtmlFn} HtmlOrDhtmlFn
  */
 
@@ -16,7 +16,6 @@ export const isServer = typeof global === "object";
  * @param {{ssr?: ({document, html}: {document: Document, html: HtmlFn}) => void}} options Options
  */
 export default async function credit(caller, options = {}) {
-  /** @type {JSDOM} */ let dom;
   /** @type {AttachFn} */ let attachFn;
   /** @type {HtmlOrDhtmlFn} */ let htmlOrDhtmlFn;
 
@@ -37,10 +36,7 @@ export default async function credit(caller, options = {}) {
 
     htmlOrDhtmlFn = html;
 
-    attachFn = (selector, node) => {
-      const mountPoint = globalThis.document.body.querySelector(selector);
-      mountPoint?.append(node);
-    };
+    attachFn = (node) => globalThis.document.body.append(node);
   } else if (globalThis.document.body.childElementCount > 0) {
     // This is the client, and the HTML body is present, so we hydrate
 
@@ -48,14 +44,13 @@ export default async function credit(caller, options = {}) {
 
     htmlOrDhtmlFn = dhtml;
 
-    attachFn = (selector, node) => {
-      const mountPoint = globalThis.document.body.querySelector(selector);
-      let firstChild = mountPoint?.firstElementChild;
+    attachFn = (node) => {
+      const firstChild = globalThis.document.body.firstElementChild;
       if (firstChild) {
         // @ts-ignore
         hydrate(node, firstChild);
       } else {
-        throw Error(`hydration mountpoint missing first child: ${selector}`);
+        throw Error(`unable to hydrate: html body missing first child`);
       }
     };
   } else {
@@ -65,10 +60,7 @@ export default async function credit(caller, options = {}) {
 
     htmlOrDhtmlFn = html;
 
-    attachFn = (_selector, node) => {
-      const mountPoint = globalThis.document.body;
-      mountPoint?.append(node);
-    };
+    attachFn = (node) => globalThis.document.body.append(node);
   }
 
   return {
