@@ -11,9 +11,6 @@ dependencies:
   mrmime:
     specifier: ^1.0.1
     version: 1.0.1
-  multiline-ts:
-    specifier: ^3.0.0
-    version: 3.0.0
   rehype-format:
     specifier: ^4.0.1
     version: 4.0.1
@@ -969,12 +966,6 @@ packages:
 
   /ms@2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
-    dev: false
-
-  /multiline-ts@3.0.0:
-    resolution: {integrity: sha512-/xE90udEXtpPLRFbhp9J7jzqtLbFPWvnqVwzuxSwuvh31w2O0/SUusUuiOSVGxRI2buMdnrt8B+eFD5etFFGYw==}
-    engines: {node: '>=14'}
-    requiresBuild: true
     dev: false
 
   /nice-try@1.0.5:

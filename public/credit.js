@@ -27,6 +27,14 @@ export default async function credit(caller, options = {}) {
     if (isHtml) {
       const dom = await createServerSideDom();
 
+      const { readFile } = await import("./readFile.js");
+      const importMap = await readFile("importmap.json");
+      dom.window.document.head.append(html`
+        <script type="importmap">
+          ${importMap.trimEnd()}
+        </script>
+      `);
+
       await insertCallerModule(dom, caller, html);
 
       options.ssr?.({ document: dom.window.document, html });
@@ -109,26 +117,17 @@ async function registerPrintOnExit(dom) {
   });
 }
 
+/**
+ * One-time setup of server-side DOM object.
+ *
+ * @returns {Promise<JSDOM>}
+ */
 async function createServerSideDom() {
   if (globalThis.document) throw Error("dom already exists");
 
-  const { JSDOM } = await import("jsdom");
-  const { default: multiline } = await import("multiline-ts");
-  const { readFile } = await import("./readFile.js");
-  const importMap = await readFile("importmap.json");
-
   // Create a virtual server-side DOM
-  const dom = new JSDOM(multiline`
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <script type="importmap">
-          ${importMap.trimEnd()}
-        </script>
-      </head>
-      <body />
-    </html>
-  `);
+  const { JSDOM } = await import("jsdom");
+  const dom = new JSDOM();
 
   // Prepare globals necessary for server-side rendering via jsdom
   globalThis.document = dom.window.document;
