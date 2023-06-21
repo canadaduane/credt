@@ -4,9 +4,10 @@ import { o, observable, subscribe } from "sinuous/observable";
 export const isServer = typeof global === "object";
 
 /**
+ * @typedef {import("jsdom").JSDOM} JSDOM
  * @typedef {typeof import('sinuous').html} HtmlFn
  * @typedef {typeof import('sinuous/hydrate').dhtml} DhtmlFn
- * @typedef {(selector: string, dom: any) => void} AttachFn
+ * @typedef {(selector: string, dom: JSDOM) => void} AttachFn
  * @typedef {HtmlFn | DhtmlFn} HtmlOrDhtmlFn
  */
 
@@ -15,7 +16,7 @@ export const isServer = typeof global === "object";
  * @param {{ssr?: ({document, html}: {document: Document, html: HtmlFn}) => void}} options Options
  */
 export default async function credit(caller, options = {}) {
-  /** @type {import("jsdom").JSDOM} */ let dom;
+  /** @type {JSDOM} */ let dom;
   /** @type {AttachFn} */ let attachFn;
   /** @type {HtmlOrDhtmlFn} */ let htmlOrDhtmlFn;
 
