@@ -16,7 +16,7 @@ export const isServer = typeof global === "object";
  * @param {{ssr?: ({document, html}: {document: Document, html: HtmlFn}) => void}} options Options
  */
 export default async function credit(caller, options = {}) {
-  /** @type {AttachFn} */ let attachFn;
+  /** @type {AttachFn} */ let bodyFn;
   /** @type {HtmlOrDhtmlFn} */ let htmlOrDhtmlFn;
 
   const isHtml = caller.endsWith(".html.js");
@@ -36,7 +36,7 @@ export default async function credit(caller, options = {}) {
 
     htmlOrDhtmlFn = html;
 
-    attachFn = (node) => globalThis.document.body.append(node);
+    bodyFn = (node) => globalThis.document.body.append(node);
   } else if (globalThis.document.body.childElementCount > 0) {
     // This is the client, and the HTML body is present, so we hydrate
 
@@ -44,7 +44,7 @@ export default async function credit(caller, options = {}) {
 
     htmlOrDhtmlFn = dhtml;
 
-    attachFn = (node) => {
+    bodyFn = (node) => {
       const firstChild = globalThis.document.body.firstElementChild;
       if (firstChild) {
         // @ts-ignore
@@ -60,7 +60,7 @@ export default async function credit(caller, options = {}) {
 
     htmlOrDhtmlFn = html;
 
-    attachFn = (node) => globalThis.document.body.append(node);
+    bodyFn = (node) => globalThis.document.body.append(node);
   }
 
   return {
@@ -72,7 +72,7 @@ export default async function credit(caller, options = {}) {
     svg,
     subscribe,
     html: htmlOrDhtmlFn,
-    attach: attachFn,
+    body: bodyFn,
   };
 }
 
