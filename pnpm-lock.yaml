@@ -25,7 +25,7 @@ dependencies:
     version: 9.0.3
   sinuous:
     specifier: github:canadaduane/sinuous#434f93f9
-    version: 0.30.0
+    version: github.com/canadaduane/sinuous/434f93f9
   uWebSockets.js:
     specifier: github:uNetworking/uWebSockets.js#v20.30.0
     version: github.com/uNetworking/uWebSockets.js/d39d4181daf5b670d44cbc1b18f8c28c85fd4142
@@ -1294,10 +1294,6 @@ packages:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
     dev: true
 
-  /sinuous@0.30.0:
-    resolution: {integrity: sha512-8mj2hDw1tMZGNxJ/2BSQnjt+EBe0kXSyu/TWxCeH9ZmmyJBYnPH74vGhTWb419w+rgjlg0bAIY0STFV41FLMSw==}
-    dev: false
-
   /sort-keys-length@1.0.1:
     resolution: {integrity: sha512-GRbEOUqCxemTAk/b32F2xa8wDTs+Z1QHOkbhJDQTvv/6G3ZkbJ+frYWsTcc7cBB3Fu4wy4XlLCuNtJuMn7Gsvw==}
     engines: {node: '>=0.10.0'}
@@ -1613,6 +1609,12 @@ packages:
 
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
+    dev: false
+
+  github.com/canadaduane/sinuous/434f93f9:
+    resolution: {tarball: https://codeload.github.com/canadaduane/sinuous/tar.gz/434f93f9}
+    name: sinuous
+    version: 0.30.0
     dev: false
 
   github.com/uNetworking/uWebSockets.js/d39d4181daf5b670d44cbc1b18f8c28c85fd4142:

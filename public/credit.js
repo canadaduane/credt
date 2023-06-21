@@ -35,16 +35,16 @@ export default async function credit(caller, options = {}) {
 
       // Create a virtual server-side DOM
       dom = new JSDOM(multiline`
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <script type="importmap">
-            ${importMap.trimEnd()}
-          </script>
-        </head>
-        <body />
-      </html>
-    `);
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <script type="importmap">
+              ${importMap.trimEnd()}
+            </script>
+          </head>
+          <body />
+        </html>
+      `);
 
       const filePath = url.fileURLToPath(caller);
       const currDir = path.dirname(url.fileURLToPath(import.meta.url));
@@ -76,6 +76,8 @@ export default async function credit(caller, options = {}) {
 
         console.log(String(output));
       });
+    } else {
+      console.warn("Credit: not an html file, skipping dom establishment")
     }
 
     htmlOrDhtmlFn = html;
@@ -84,19 +86,32 @@ export default async function credit(caller, options = {}) {
       const mountPoint = globalThis.document.body.querySelector(selector);
       mountPoint?.append(node);
     };
-  } else {
+  } else if (globalThis.document.body.childElementCount > 0) {
+    // This is the client, and the HTML body is present, so we hydrate
+
     const { dhtml, hydrate } = await import("sinuous/hydrate");
 
     htmlOrDhtmlFn = dhtml;
 
     attachFn = (selector, node) => {
       const mountPoint = globalThis.document.body.querySelector(selector);
-      const firstChild = mountPoint?.firstElementChild;
+      let firstChild = mountPoint?.firstElementChild;
       if (firstChild) {
         hydrate(node, firstChild);
       } else {
         throw Error(`hydration mountpoint missing first child: ${selector}`);
       }
+    };
+  } else {
+    // This is the client, but the HTML body is missing all data, so we
+    // build the nodes rather than hydrate
+    const { html } = await import("sinuous");
+
+    htmlOrDhtmlFn = html;
+
+    attachFn = (_selector, node) => {
+      const mountPoint = globalThis.document.body;
+      mountPoint?.append(node);
     };
   }
 
