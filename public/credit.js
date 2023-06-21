@@ -7,7 +7,7 @@ export const isServer = typeof global === "object";
  * @typedef {import("jsdom").JSDOM} JSDOM
  * @typedef {typeof import('sinuous').html} HtmlFn
  * @typedef {typeof import('sinuous/hydrate').dhtml} DhtmlFn
- * @typedef {(selector: string, dom: JSDOM) => void} AttachFn
+ * @typedef {(selector: string, dom: Node) => void} AttachFn
  * @typedef {HtmlFn | DhtmlFn} HtmlOrDhtmlFn
  */
 
@@ -26,57 +26,13 @@ export default async function credit(caller, options = {}) {
     const { html } = await import("sinuous");
 
     if (isHtml) {
-      const url = await import("node:url");
-      const path = await import("node:path");
-      const { JSDOM } = await import("jsdom");
-      const { default: multiline } = await import("multiline-ts");
-      const { readFile } = await import("./readFile.js");
+      const dom = await createServerSideDom();
 
-      const importMap = await readFile("importmap.json");
-
-      // Create a virtual server-side DOM
-      dom = new JSDOM(multiline`
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <script type="importmap">
-              ${importMap.trimEnd()}
-            </script>
-          </head>
-          <body />
-        </html>
-      `);
-
-      const filePath = url.fileURLToPath(caller);
-      const currDir = path.dirname(url.fileURLToPath(import.meta.url));
-      const relPath = path.relative(currDir, filePath);
-
-      // Prepare globals necessary for server-side rendering via jsdom
-      globalThis.document = dom.window.document;
-      globalThis.Node = dom.window.Node;
-
-      dom.window.document.head.append(
-        html`<script type="module" src="./${relPath}"></script>`
-      );
+      await insertCallerModule(dom, caller, html);
 
       options.ssr?.({ document: dom.window.document, html });
 
-      const { unified } = await import("unified");
-      const { default: parse } = await import("rehype-parse");
-      const { default: format } = await import("rehype-format");
-      const { default: stringify } = await import("rehype-stringify");
-
-      process.on("beforeExit", async (code) => {
-        if (code !== 0) return;
-
-        const output = await unified()
-          .use(parse, { emitParseErrors: true, verbose: true })
-          .use(format, { indent: "\t" })
-          .use(stringify)
-          .process(dom.serialize());
-
-        console.log(String(output));
-      });
+      await registerPrintOnExit(dom);
     }
 
     htmlOrDhtmlFn = html;
@@ -96,6 +52,7 @@ export default async function credit(caller, options = {}) {
       const mountPoint = globalThis.document.body.querySelector(selector);
       let firstChild = mountPoint?.firstElementChild;
       if (firstChild) {
+        // @ts-ignore
         hydrate(node, firstChild);
       } else {
         throw Error(`hydration mountpoint missing first child: ${selector}`);
@@ -125,4 +82,85 @@ export default async function credit(caller, options = {}) {
     html: htmlOrDhtmlFn,
     attach: attachFn,
   };
+}
+
+/**
+ *
+ * @param {JSDOM} dom
+ * @param {public.UnifiedModules} modules
+ */
+async function printTidyDom(dom, modules) {
+  const output = await modules
+    .unified()
+    .use(modules.parse, { emitParseErrors: true, verbose: true })
+    .use(modules.format)
+    .use(modules.stringify)
+    .process(dom.serialize());
+
+  console.log(String(output));
+}
+
+/**
+ *
+ * @param {JSDOM} dom
+ */
+async function registerPrintOnExit(dom) {
+  const { unified } = await import("unified");
+  const { default: parse } = await import("rehype-parse");
+  const { default: format } = await import("rehype-format");
+  const { default: stringify } = await import("rehype-stringify");
+
+  process.on("beforeExit", async (code) => {
+    if (code === 0) {
+      printTidyDom(dom, { unified, parse, format, stringify });
+    }
+  });
+}
+
+async function createServerSideDom() {
+  if (globalThis.document) throw Error("dom already exists");
+
+  const { JSDOM } = await import("jsdom");
+  const { default: multiline } = await import("multiline-ts");
+  const { readFile } = await import("./readFile.js");
+  const importMap = await readFile("importmap.json");
+
+  // Create a virtual server-side DOM
+  const dom = new JSDOM(multiline`
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <script type="importmap">
+          ${importMap.trimEnd()}
+        </script>
+      </head>
+      <body />
+    </html>
+  `);
+
+  // Prepare globals necessary for server-side rendering via jsdom
+  globalThis.document = dom.window.document;
+  globalThis.Node = dom.window.Node;
+
+  return dom;
+}
+
+/**
+ * Inserts the **javascript module that called Credit** into the dom.
+ *
+ * @param {JSDOM} dom
+ * @param {string} caller
+ * @param {HtmlFn} html
+ */
+async function insertCallerModule(dom, caller, html) {
+  const url = await import("node:url");
+  const path = await import("node:path");
+
+  const filePath = url.fileURLToPath(caller);
+  const currDir = path.dirname(url.fileURLToPath(import.meta.url));
+  const relPath = path.relative(currDir, filePath);
+
+  dom.window.document.head.append(
+    html`<script type="module" src="./${relPath}"></script>`
+  );
 }
