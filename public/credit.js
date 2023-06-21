@@ -77,8 +77,6 @@ export default async function credit(caller, options = {}) {
 
         console.log(String(output));
       });
-    } else {
-      console.warn("Credit: not an html file, skipping dom establishment")
     }
 
     htmlOrDhtmlFn = html;
