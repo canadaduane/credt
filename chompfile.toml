@@ -10,7 +10,3 @@ name = "build"
 deps = ['public/##.html.js', 'public/importmap.json', 'public/credit.js']
 target = 'public/##.html'
 run = 'node $DEP > $TARGET'
-
-# [[task]]
-# name = "add"
-# run = 'pnpm add jspm'
