@@ -1,15 +1,15 @@
-import { mount } from "./credit.js";
+import { mount, html, observable as o } from "./credit.js";
 import { TodoList } from "./TodoList.js";
 
 await mount({
   modules: [import.meta.url],
-  head: ({ builtins, html }) => {
+  head: ({ builtins }) => {
     return html`
       ${builtins}
       <link rel="stylesheet" href="/sakura-dark.css" />
     `;
   },
-  body: ({ html, observable: o }) => {
+  body: () => {
     /** @type {public.Item[]} */
     const emptyList = [];
     const items = o(emptyList);

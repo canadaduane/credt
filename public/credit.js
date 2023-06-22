@@ -1,8 +1,11 @@
 import { html as chtml, svg, h, hs } from "sinuous";
 import { dhtml, hydrate } from "sinuous/hydrate";
-import { observable, subscribe } from "sinuous/observable";
+
+export { observable, subscribe } from "sinuous/observable";
 
 export const isServer = typeof global === "object";
+const headEl = globalThis.document?.head.firstElementChild;
+const bodyEl = globalThis.document?.body.firstElementChild;
 
 /**
  * @param {{modules: string[], head?: credit.HeadFn, body?: credit.BodyFn}} options
@@ -35,50 +38,40 @@ export async function mount({ modules, head, body }) {
     `;
 
     if (head) {
-      const node = head({ builtins, html: chtml, observable }) ?? builtins;
+      const node = head({ builtins }) ?? builtins;
       globalThis.document.head.append(node);
     }
 
     if (body) {
-      const node = body({ html: chtml, observable }) ?? chtml``;
+      const node = body({}) ?? chtml``;
       globalThis.document.body.append(node);
     }
   } else {
     // This is the client
 
-    const headEl = globalThis.document.head.firstElementChild;
-
     if (headEl) {
       // This is the client, and the HTML head is present, so we hydrate
-
       if (head) {
         const builtins = dhtml``;
-        const node = head({ builtins, html: dhtml, observable }) ?? builtins;
+        const node = head({ builtins }) ?? builtins;
         hydrate(node, headEl);
       }
     } else {
       // This is the client, but the HTML head is missing--not good!
-      if (head) {
-        const builtins = chtml``;
-        const node = head({ builtins, html: chtml, observable }) ?? builtins;
-        globalThis.document.head.append(node);
-      }
+      console.warn("html head content missing");
     }
-
-    const bodyEl = globalThis.document.body.firstElementChild;
 
     if (bodyEl) {
       // This is the client, and the HTML body is present, so we hydrate
-
       if (body) {
-        const node = body({ html: dhtml, observable }) ?? dhtml``;
+        const node = body({}) ?? dhtml``;
         hydrate(node, bodyEl);
       }
     } else {
       // This is the client, but the HTML body is missing (probably development mode)
       if (body) {
         const builtins = chtml``;
-        const node = body({ html: chtml, observable }) ?? builtins;
+        const node = body({}) ?? builtins;
         globalThis.document.body.append(node);
       }
     }
@@ -91,8 +84,7 @@ export async function mount({ modules, head, body }) {
  * @param  {...any[]} values
  * @returns {credit.NodeType}
  */
-export const html =
-  isServer || !globalThis.document.body.firstElementChild ? chtml : dhtml;
+export const html = isServer || !bodyEl ? chtml : dhtml;
 
 /**
  *

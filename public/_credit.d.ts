@@ -9,22 +9,8 @@ export type HtmlFn = typeof chtml;
 export type DhtmlFn = typeof dhtml;
 export type HtmlOrDhtmlFn = HtmlFn | DhtmlFn;
 
-export type HeadFn = ({
-  builtins,
-  html,
-  observable,
-}: {
-  builtins: NodeType;
-  html: HtmlOrDhtmlFn;
-  observable: typeof observe;
-}) => NodeType;
+export type HeadFn = ({ builtins }: { builtins: NodeType }) => NodeType;
 
-export type BodyFn = ({
-  html,
-  observable,
-}: {
-  html: HtmlOrDhtmlFn;
-  observable: typeof observe;
-}) => NodeType;
+export type BodyFn = ({}: {}) => NodeType;
 
 export as namespace credit;
