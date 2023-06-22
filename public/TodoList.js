@@ -1,6 +1,4 @@
-import credit from "./credit.js";
-
-const { html } = await credit(import.meta.url);
+import { html } from "./credit.js";
 
 /**
  * @param {{items: import('sinuous/observable').Observable<public.Item[]>}} param0

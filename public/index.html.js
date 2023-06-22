@@ -1,7 +1,8 @@
-import credit from "./credit.js";
+import { mount } from "./credit.js";
 import { TodoList } from "./TodoList.js";
 
-await credit(import.meta.url, {
+await mount({
+  modules: [import.meta.url],
   head: ({ builtins, html }) => {
     return html`
       ${builtins}
