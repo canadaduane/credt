@@ -16,6 +16,7 @@ export const isServer = typeof global === "object";
  * @param {{ssr?: ({document, html}: {document: Document, html: HtmlFn}) => void}} options Options
  */
 export default async function credit(caller, options = {}) {
+  /** @type {AttachFn} */ let headFn;
   /** @type {AttachFn} */ let bodyFn;
   /** @type {HtmlOrDhtmlFn} */ let htmlOrDhtmlFn;
 
@@ -29,17 +30,23 @@ export default async function credit(caller, options = {}) {
 
       const { readFile } = await import("./readFile.js");
       const importMap = await readFile("importmap.json");
-      dom.window.document.head.append(html`
-        <script type="importmap">
-          ${importMap.trimEnd()}
-        </script>
-      `);
 
       await insertCallerModule(dom, caller, html);
 
       options.ssr?.({ document: dom.window.document, html });
 
       await registerPrintOnExit(dom);
+
+      headFn = (fn) =>
+        globalThis.document.head.append(
+          fn(html`
+            <script type="importmap">
+              ${importMap.trimEnd()}
+            </script>
+          `)
+        );
+    } else {
+      headFn = (fn) => globalThis.document.head.append(fn(html``));
     }
 
     htmlOrDhtmlFn = html;
@@ -52,6 +59,7 @@ export default async function credit(caller, options = {}) {
 
     htmlOrDhtmlFn = dhtml;
 
+    headFn = (fn) => globalThis.document.head.append(fn(html``));
     bodyFn = (node) => {
       const firstChild = globalThis.document.body.firstElementChild;
       if (firstChild) {
@@ -68,6 +76,7 @@ export default async function credit(caller, options = {}) {
 
     htmlOrDhtmlFn = html;
 
+    headFn = (fn) => globalThis.document.head.append(fn(html``));
     bodyFn = (node) => globalThis.document.body.append(node);
   }
 
@@ -80,6 +89,7 @@ export default async function credit(caller, options = {}) {
     svg,
     subscribe,
     html: htmlOrDhtmlFn,
+    head: headFn,
     body: bodyFn,
   };
 }

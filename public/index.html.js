@@ -1,12 +1,19 @@
 import credit from "./credit.js";
 import { TodoList } from "./TodoList.js";
 
-const { isServer, html, o, body } = await credit(import.meta.url, {
+const { isServer, html, o, body, head } = await credit(import.meta.url, {
   ssr: ({ document, html }) => {
-    const css = "sakura-dark.css";
-    document.head.append(html`<link rel="stylesheet" href="/${css}" />`);
+    // const css = "sakura-dark.css";
+    // document.head.append(html`<link rel="stylesheet" href="/${css}" />`);
   },
 });
+
+const Head = (builtins) => {
+  return html`
+    ${builtins}
+    <link rel="stylesheet" href="/sakura-dark.css" />
+  `;
+};
 
 const TodoApp = () => {
   /** @type {public.Item[]} */
@@ -59,4 +66,5 @@ const TodoApp = () => {
 
 const app = TodoApp();
 
+head(Head);
 body(app);
