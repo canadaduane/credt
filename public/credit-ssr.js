@@ -3,6 +3,7 @@ import path from "node:path";
 import { html as chtml } from "sinuous";
 
 import { readFile } from "./readFile.js";
+import { registerPrintOnExit } from "./printDom.js";
 
 /**
  * @param {{modules: string[], head?: credit.HeadFn, body?: credit.BodyFn}} options
@@ -52,39 +53,6 @@ function scriptModuleSrc(module, url, path) {
   const filePath = url.fileURLToPath(module);
   const currDir = path.dirname(url.fileURLToPath(import.meta.url));
   return path.relative(currDir, filePath);
-}
-
-/**
- *
- * @param {credit.JSDOM} dom
- */
-async function registerPrintOnExit(dom) {
-  const { unified } = await import("unified");
-  const { default: parse } = await import("rehype-parse");
-  const { default: format } = await import("rehype-format");
-  const { default: stringify } = await import("rehype-stringify");
-
-  process.on("beforeExit", async (code) => {
-    if (code === 0) {
-      printTidyDom(dom, { unified, parse, format, stringify });
-    }
-  });
-}
-
-/**
- *
- * @param {credit.JSDOM} dom
- * @param {public.UnifiedModules} modules
- */
-async function printTidyDom(dom, modules) {
-  const output = await modules
-    .unified()
-    .use(modules.parse, { emitParseErrors: true, verbose: true })
-    .use(modules.format)
-    .use(modules.stringify)
-    .process(dom.serialize());
-
-  console.log(String(output));
 }
 
 /**

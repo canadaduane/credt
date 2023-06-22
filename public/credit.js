@@ -12,7 +12,7 @@ const bodyEl = globalThis.document?.body.firstElementChild;
  */
 export async function mount({ modules, head, body }) {
   if (isServer) {
-    (await import("./credit-server.js")).mount({ modules, head, body });
+    (await import("./credit-ssr.js")).mount({ modules, head, body });
   } else {
     // This is the client
 
