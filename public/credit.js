@@ -4,26 +4,21 @@ import { o, observable, subscribe } from "sinuous/observable";
 export const isServer = typeof global === "object";
 
 /**
- * @typedef {import("jsdom").JSDOM} JSDOM
- * @typedef {typeof import('sinuous').html} HtmlFn
- * @typedef {typeof import('sinuous/hydrate').dhtml} DhtmlFn
- * @typedef {(dom: Node) => void} AttachFn
- * @typedef {HtmlFn | DhtmlFn} HtmlOrDhtmlFn
- */
-
-/**
  * @param {string} caller The import.meta.url of the caller
- * @param {{ssr?: ({document, html}: {document: Document, html: HtmlFn}) => void}} options Options
+ * @param {{head?: credit.HeadFn, body?: credit.BodyFn}} options
  */
-export default async function credit(caller, options = {}) {
-  /** @type {AttachFn} */ let headFn;
-  /** @type {AttachFn} */ let bodyFn;
-  /** @type {HtmlOrDhtmlFn} */ let htmlOrDhtmlFn;
+export default async function credit(caller, { head, body } = {}) {
+  // /** @type {credit.AttachFn} */ let headFn;
+  // /** @type {credit.AttachFn} */ let bodyFn;
+  /** @type {credit.HtmlOrDhtmlFn} */ let htmlOrDhtmlFn;
 
   const isHtml = caller.endsWith(".html.js");
 
   if (isServer) {
     const { html } = await import("sinuous");
+    htmlOrDhtmlFn = html;
+
+    let builtins;
 
     if (isHtml) {
       const dom = await createServerSideDom();
@@ -31,67 +26,79 @@ export default async function credit(caller, options = {}) {
       const { readFile } = await import("./readFile.js");
       const importMap = await readFile("importmap.json");
 
-      await insertCallerModule(dom, caller, html);
-
-      options.ssr?.({ document: dom.window.document, html });
-
       await registerPrintOnExit(dom);
 
-      headFn = (fn) =>
-        globalThis.document.head.append(
-          fn(html`
-            <script type="importmap">
-              ${importMap.trimEnd()}
-            </script>
-          `)
-        );
+      builtins = html`
+        <script type="importmap">
+          ${importMap.trimEnd()}
+        </script>
+        ${await getCallerModule(caller, html)}
+      `;
     } else {
-      headFn = (fn) => globalThis.document.head.append(fn(html``));
+      builtins = html``;
     }
 
-    htmlOrDhtmlFn = html;
+    if (head) {
+      const node = head({ builtins, html, o }) ?? builtins;
+      globalThis.document.head.append(node);
+    }
 
-    bodyFn = (node) => globalThis.document.body.append(node);
-  } else if (globalThis.document.body.childElementCount > 0) {
-    // This is the client, and the HTML body is present, so we hydrate
-
-    const { dhtml, hydrate } = await import("sinuous/hydrate");
-
-    htmlOrDhtmlFn = dhtml;
-
-    headFn = (fn) => globalThis.document.head.append(fn(html``));
-    bodyFn = (node) => {
-      const firstChild = globalThis.document.body.firstElementChild;
-      if (firstChild) {
-        // @ts-ignore
-        hydrate(node, firstChild);
-      } else {
-        throw Error(`unable to hydrate: html body missing first child`);
-      }
-    };
+    if (body) {
+      const node = body({ html, o }) ?? html``;
+      globalThis.document.body.append(node);
+    }
   } else {
-    // This is the client, but the HTML body is missing all data, so we
-    // build the nodes rather than hydrate
-    const { html } = await import("sinuous");
+    // This is the client
 
-    htmlOrDhtmlFn = html;
+    const headEl = globalThis.document.head.firstElementChild;
 
-    headFn = (fn) => globalThis.document.head.append(fn(html``));
-    bodyFn = (node) => globalThis.document.body.append(node);
+    if (headEl) {
+      // This is the client, and the HTML head is present, so we hydrate
+      const { dhtml: html, hydrate } = await import("sinuous/hydrate");
+      htmlOrDhtmlFn = html;
+
+      if (head) {
+        const builtins = html``;
+        const node = head({ builtins, html, o }) ?? builtins;
+        hydrate(node, headEl);
+      }
+    } else {
+      // This is the client, but the HTML head is missing--not good!
+      const { html } = await import("sinuous");
+      htmlOrDhtmlFn = html;
+
+      if (head) {
+        const builtins = html``;
+        const node = head({ builtins, html, o }) ?? builtins;
+        globalThis.document.head.append(node);
+      }
+    }
+
+    const bodyEl = globalThis.document.body.firstElementChild;
+
+    if (bodyEl) {
+      // This is the client, and the HTML body is present, so we hydrate
+      const { dhtml: html, hydrate } = await import("sinuous/hydrate");
+      htmlOrDhtmlFn = html;
+
+      if (body) {
+        const node = body({ html, o }) ?? html``;
+        hydrate(node, bodyEl);
+      }
+    } else {
+      // This is the client, but the HTML body is missing (probably development mode)
+      const { html } = await import("sinuous");
+      htmlOrDhtmlFn = html;
+
+      if (body) {
+        const builtins = html``;
+        const node = body({ html, o }) ?? builtins;
+        globalThis.document.body.append(node);
+      }
+    }
   }
 
-  return {
-    isServer,
-    o,
-    observable,
-    h,
-    hs,
-    svg,
-    subscribe,
-    html: htmlOrDhtmlFn,
-    head: headFn,
-    body: bodyFn,
-  };
+  return { html: htmlOrDhtmlFn };
 }
 
 /**
@@ -130,7 +137,7 @@ async function registerPrintOnExit(dom) {
 /**
  * One-time setup of server-side DOM object.
  *
- * @returns {Promise<JSDOM>}
+ * @returns {Promise<credit.JSDOM>}
  */
 async function createServerSideDom() {
   if (globalThis.document) throw Error("dom already exists");
@@ -149,11 +156,10 @@ async function createServerSideDom() {
 /**
  * Inserts the **javascript module that called Credit** into the dom.
  *
- * @param {JSDOM} dom
  * @param {string} caller
- * @param {HtmlFn} html
+ * @param {credit.HtmlFn} html
  */
-async function insertCallerModule(dom, caller, html) {
+async function getCallerModule(caller, html) {
   const url = await import("node:url");
   const path = await import("node:path");
 
@@ -161,7 +167,5 @@ async function insertCallerModule(dom, caller, html) {
   const currDir = path.dirname(url.fileURLToPath(import.meta.url));
   const relPath = path.relative(currDir, filePath);
 
-  dom.window.document.head.append(
-    html`<script type="module" src="./${relPath}"></script>`
-  );
+  return html`<script type="module" src="./${relPath}"></script>`;
 }
