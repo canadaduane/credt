@@ -1,5 +1,6 @@
-import { h, hs, svg } from "sinuous";
-import { o, observable, subscribe } from "sinuous/observable";
+import { html, svg, h, hs } from "sinuous";
+import { dhtml, hydrate } from "sinuous/hydrate";
+import { observable, subscribe } from "sinuous/observable";
 
 export const isServer = typeof global === "object";
 
@@ -8,43 +9,37 @@ export const isServer = typeof global === "object";
  * @param {{head?: credit.HeadFn, body?: credit.BodyFn}} options
  */
 export default async function credit(caller, { head, body } = {}) {
-  // /** @type {credit.AttachFn} */ let headFn;
-  // /** @type {credit.AttachFn} */ let bodyFn;
-  /** @type {credit.HtmlOrDhtmlFn} */ let htmlOrDhtmlFn;
-
   const isHtml = caller.endsWith(".html.js");
 
-  if (isServer) {
-    const { html } = await import("sinuous");
-    htmlOrDhtmlFn = html;
+  // SSR needs a DOM
+  if (!globalThis.document) {
+    const dom = await createServerSideDom();
+    await registerPrintOnExit(dom);
+  }
 
+  if (isServer) {
     let builtins;
 
     if (isHtml) {
-      const dom = await createServerSideDom();
-
       const { readFile } = await import("./readFile.js");
-      const importMap = await readFile("importmap.json");
-
-      await registerPrintOnExit(dom);
 
       builtins = html`
         <script type="importmap">
-          ${importMap.trimEnd()}
+          ${await readFile("importmap.json")}
         </script>
-        ${await getCallerModule(caller, html)}
+        <script type="module" src="./${await getCallerPath(caller)}"></script>
       `;
     } else {
       builtins = html``;
     }
 
     if (head) {
-      const node = head({ builtins, html, o }) ?? builtins;
+      const node = head({ builtins, html, observable }) ?? builtins;
       globalThis.document.head.append(node);
     }
 
     if (body) {
-      const node = body({ html, o }) ?? html``;
+      const node = body({ html, observable }) ?? html``;
       globalThis.document.body.append(node);
     }
   } else {
@@ -55,21 +50,19 @@ export default async function credit(caller, { head, body } = {}) {
     if (headEl) {
       // This is the client, and the HTML head is present, so we hydrate
       const { dhtml: html, hydrate } = await import("sinuous/hydrate");
-      htmlOrDhtmlFn = html;
 
       if (head) {
         const builtins = html``;
-        const node = head({ builtins, html, o }) ?? builtins;
+        const node = head({ builtins, html, observable }) ?? builtins;
         hydrate(node, headEl);
       }
     } else {
       // This is the client, but the HTML head is missing--not good!
       const { html } = await import("sinuous");
-      htmlOrDhtmlFn = html;
 
       if (head) {
         const builtins = html``;
-        const node = head({ builtins, html, o }) ?? builtins;
+        const node = head({ builtins, html, observable }) ?? builtins;
         globalThis.document.head.append(node);
       }
     }
@@ -79,16 +72,14 @@ export default async function credit(caller, { head, body } = {}) {
     if (bodyEl) {
       // This is the client, and the HTML body is present, so we hydrate
       const { dhtml: html, hydrate } = await import("sinuous/hydrate");
-      htmlOrDhtmlFn = html;
 
       if (body) {
-        const node = body({ html, o }) ?? html``;
+        const node = body({ html, observable }) ?? html``;
         hydrate(node, bodyEl);
       }
     } else {
       // This is the client, but the HTML body is missing (probably development mode)
       const { html } = await import("sinuous");
-      htmlOrDhtmlFn = html;
 
       if (body) {
         const builtins = html``;
@@ -98,12 +89,23 @@ export default async function credit(caller, { head, body } = {}) {
     }
   }
 
-  return { html: htmlOrDhtmlFn };
+  /**
+   *
+   * @param {TemplateStringsArray} strings
+   * @param  {...any[]} values
+   * @returns {credit.VNode<{}> | credit.VNode<{}>[]}
+   */
+  const htmlFn =
+    isServer || !globalThis.document.body.firstElementChild
+      ? html
+      : (await import("sinuous/hydrate")).dhtml;
+
+  return { html: htmlFn };
 }
 
 /**
  *
- * @param {JSDOM} dom
+ * @param {credit.JSDOM} dom
  * @param {public.UnifiedModules} modules
  */
 async function printTidyDom(dom, modules) {
@@ -119,7 +121,7 @@ async function printTidyDom(dom, modules) {
 
 /**
  *
- * @param {JSDOM} dom
+ * @param {credit.JSDOM} dom
  */
 async function registerPrintOnExit(dom) {
   const { unified } = await import("unified");
@@ -157,15 +159,13 @@ async function createServerSideDom() {
  * Inserts the **javascript module that called Credit** into the dom.
  *
  * @param {string} caller
- * @param {credit.HtmlFn} html
+ * @returns {Promise<string>}
  */
-async function getCallerModule(caller, html) {
+async function getCallerPath(caller) {
   const url = await import("node:url");
   const path = await import("node:path");
 
   const filePath = url.fileURLToPath(caller);
   const currDir = path.dirname(url.fileURLToPath(import.meta.url));
-  const relPath = path.relative(currDir, filePath);
-
-  return html`<script type="module" src="./${relPath}"></script>`;
+  return path.relative(currDir, filePath);
 }

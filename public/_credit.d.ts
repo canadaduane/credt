@@ -1,7 +1,8 @@
 import { html } from "sinuous";
 import { dhtml } from "sinuous/hydrate";
-import { observable } from "sinuous/observable";
+import { observable as observe } from "sinuous/observable";
 export { JSDOM } from "jsdom";
+export { VNode } from "sinuous/hydrate";
 
 export type HtmlFn = typeof html;
 export type DhtmlFn = typeof dhtml;
@@ -11,19 +12,19 @@ export type HtmlOrDhtmlFn = HtmlFn | DhtmlFn;
 export type HeadFn = ({
   builtins,
   html,
-  o,
+  observable,
 }: {
   builtins: ReturnType<typeof html> | ReturnType<typeof dhtml>;
   html: HtmlOrDhtmlFn;
-  o: typeof observable;
+  observable: typeof observe;
 }) => Node;
 
 export type BodyFn = ({
   html,
-  o,
+  observable,
 }: {
   html: HtmlOrDhtmlFn;
-  o: typeof observable;
+  observable: typeof observe;
 }) => Node;
 
 export as namespace credit;

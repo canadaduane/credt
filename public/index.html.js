@@ -8,7 +8,7 @@ await credit(import.meta.url, {
       <link rel="stylesheet" href="/sakura-dark.css" />
     `;
   },
-  body: ({ html, o }) => {
+  body: ({ html, observable: o }) => {
     /** @type {public.Item[]} */
     const emptyList = [];
     const items = o(emptyList);
