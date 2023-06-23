@@ -14,4 +14,4 @@ export type UnifiedModules = {
   stringify: typeof stringify;
 };
 
-export as namespace public;
+export as namespace todo;

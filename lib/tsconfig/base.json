@@ -12,9 +12,6 @@
     "strict": true,
     "noEmit": true,
 
-    // Instruct non-relative imports to start within the `src` directory
-    "baseUrl": "src",
-
     // Allow modules to `export default`
     "esModuleInterop": true,
 
@@ -23,12 +20,5 @@
 
     // You should also have @types/node as a devDependency in package.json
     "types": ["node"]
-  },
-  "include": [
-    "public/**/*.js",
-    "public/**/*.d.ts",
-    "server.js",
-    "server/**/*.js",
-    "server/**/*.d.ts"
-  ]
+  }
 }

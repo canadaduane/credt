@@ -11,6 +11,7 @@
     "credit": "workspace:*"
   },
   "devDependencies": {
-    "sirv-cli": "^2.0.2"
+    "sirv-cli": "^2.0.2",
+    "tsconfig": "workspace:*"
   }
 }

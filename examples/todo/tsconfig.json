@@ -1,0 +1,8 @@
+{
+  "extends": "tsconfig/base.json",
+  "compilerOptions": {
+    // Instruct non-relative imports to start within the `src` directory
+    "baseUrl": "src"
+  },
+  "include": ["src/**/*.js", "src/**/*.d.ts"]
+}

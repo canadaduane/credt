@@ -10,7 +10,7 @@ await mount({
     `;
   },
   body: () => {
-    /** @type {public.Item[]} */
+    /** @type {todo.Item[]} */
     const emptyList = [];
     const items = o(emptyList);
     const text = o("");
