@@ -1,6 +1,5 @@
 import { html as chtml } from "sinuous";
 import { dhtml } from "sinuous/hydrate";
-import { observable as observe } from "sinuous/observable";
 export { JSDOM } from "jsdom";
 export { VNode } from "sinuous/hydrate";
 
@@ -12,5 +11,11 @@ export type HtmlOrDhtmlFn = HtmlFn | DhtmlFn;
 export type HeadFn = ({ builtins }: { builtins: NodeType }) => NodeType;
 
 export type BodyFn = ({}: {}) => NodeType;
+
+export type MountPayload = {
+  rootImports: string[];
+  head?: credit.HeadFn;
+  body?: credit.BodyFn;
+};
 
 export as namespace credit;

@@ -8,11 +8,11 @@ const headEl = globalThis.document?.head.firstElementChild;
 const bodyEl = globalThis.document?.body.firstElementChild;
 
 /**
- * @param {{modules: string[], head?: credit.HeadFn, body?: credit.BodyFn}} options
+ * @param {credit.MountPayload} options
  */
-export async function mount({ modules, head, body }) {
+export async function mount({ rootImports, head, body }) {
   if (isServer) {
-    (await import("./credit-ssr.js")).mount({ modules, head, body });
+    (await import("./credit-ssr.js")).mount({ rootImports, head, body });
   } else {
     // This is the client
 
@@ -21,6 +21,7 @@ export async function mount({ modules, head, body }) {
       if (head) {
         const builtins = dhtml``;
         const node = head({ builtins }) ?? builtins;
+        // @ts-expect-error
         hydrate(node, headEl);
       }
     } else {
@@ -32,6 +33,7 @@ export async function mount({ modules, head, body }) {
       // This is the client, and the HTML body is present, so we hydrate
       if (body) {
         const node = body({}) ?? dhtml``;
+        // @ts-expect-error
         hydrate(node, bodyEl);
       }
     } else {
@@ -39,6 +41,7 @@ export async function mount({ modules, head, body }) {
       if (body) {
         const builtins = chtml``;
         const node = body({}) ?? builtins;
+        // @ts-expect-error
         globalThis.document.body.append(node);
       }
     }

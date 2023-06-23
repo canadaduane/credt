@@ -2,7 +2,7 @@ import { mount, html, observable as o } from "./credit.js";
 import { TodoList } from "./TodoList.js";
 
 await mount({
-  modules: [import.meta.url],
+  rootImports: [import.meta.url],
   head: ({ builtins }) => {
     return html`
       ${builtins}

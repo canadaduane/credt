@@ -6,9 +6,9 @@ import { readFile } from "./readFile.js";
 import { registerPrintOnExit } from "./printDom.js";
 
 /**
- * @param {{modules: string[], head?: credit.HeadFn, body?: credit.BodyFn}} options
+ * @param {credit.MountPayload} options
  */
-export async function mount({ modules, head, body }) {
+export async function mount({ rootImports, head, body }) {
   // SSR needs a DOM
   if (!globalThis.document) {
     const dom = await createServerSideDom();
@@ -20,22 +20,24 @@ export async function mount({ modules, head, body }) {
       <script type="importmap">
         ${await readFile("importmap.json")}
       </script>
-      ${modules.map(
-        (m) =>
+      ${rootImports.map(
+        (r) =>
           chtml`<script
             type="module"
-            src="./${scriptModuleSrc(m, url, path)}"
+            src="./${scriptModuleSrc(r, url, path)}"
           ></script> `
       )}
     `;
 
   if (head) {
     const node = head({ builtins }) ?? builtins;
+    // @ts-expect-error
     globalThis.document.head.append(node);
   }
 
   if (body) {
     const node = body({}) ?? chtml``;
+    // @ts-expect-error
     globalThis.document.body.append(node);
   }
 }
