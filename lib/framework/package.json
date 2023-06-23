@@ -6,7 +6,7 @@
   "types": "src/_credit.d.ts",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "sirv src --port 9000 --cors"
   },
   "dependencies": {
     "jsdom": "^22.1.0",
@@ -18,7 +18,8 @@
   },
   "devDependencies": {
     "@types/jsdom": "^21.1.1",
-    "@types/node": "^20.3.1"
+    "@types/node": "^20.3.1",
+    "sirv-cli": "^2.0.2"
   },
   "author": "Duane Johnson <duane.johnson@gmail.com>",
   "license": "MIT"
