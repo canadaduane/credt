@@ -1,4 +1,4 @@
-import { html } from "./credit.js";
+import { html } from "credit";
 
 /**
  * @param {{items: public.Observable<public.Item[]>}} param0

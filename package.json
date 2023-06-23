@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "An experimental web framework based on CRDTs",
   "type": "module",
+  "main": "src/index.js",
+  "types": "src/index.d.ts", 
   "author": "Duane Johnson",
   "license": "MIT",
   "repository": {

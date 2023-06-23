@@ -1,0 +1,25 @@
+{
+  "name": "credit",
+  "version": "1.0.0",
+  "description": "Credit framework",
+  "main": "src/credit.js",
+  "types": "src/_credit.d.ts",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "jsdom": "^22.1.0",
+    "rehype-format": "^4.0.1",
+    "rehype-parse": "^8.0.4",
+    "rehype-stringify": "^9.0.3",
+    "sinuous": "github:canadaduane/sinuous#434f93f9",
+    "unified": "^10.1.2"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^21.1.1",
+    "@types/node": "^20.3.1"
+  },
+  "author": "Duane Johnson <duane.johnson@gmail.com>",
+  "license": "MIT"
+}
