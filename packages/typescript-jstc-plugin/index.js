@@ -1,6 +1,6 @@
 // @ts-check
 const { ScriptSnapshot } = require("typescript/lib/tsserverlibrary.js");
-const { replaceMultilineComments } = require("@credit/jstc");
+const { replaceMultilineComments } = require("./comments.js");
 const { ConfigManager } = require("./ConfigManager.js");
 const { Logger } = require("./Logger.js");
 
@@ -19,7 +19,7 @@ module.exports = function ({
     ) {
       const logger = new Logger(info.project.projectService.logger);
 
-      logger.log("Created typescript-jstc-plugin");
+      logger.log("Created jstc-typescript-plugin");
 
       configManager.updateConfigFromPluginConfig(info.config);
       if (configManager.getConfig().enable) {
@@ -34,23 +34,28 @@ module.exports = function ({
         info.languageServiceHost
       );
       info.languageServiceHost.getScriptSnapshot = (fileName) => {
+        const normalizedPath = typescript.server.toNormalizedPath(fileName);
+
         /** @type {import('typescript/lib/tsserverlibrary').server.ScriptInfo | undefined} */
         const scriptInfo =
           info.project.projectService.getOrCreateScriptInfoForNormalizedPath(
-            typescript.server.toNormalizedPath(fileName),
+            normalizedPath,
             false
           );
 
-        if (scriptInfo) {
-          // @ts-expect-error
-          scriptInfo.scriptKind = typescript.ScriptKind.TS;
-        }
-
         const snapshot = getScriptSnapshot(fileName);
+
+        if (!scriptInfo || !snapshot) return snapshot;
+
+        // const isJs = scriptInfo.scriptKind === typescript.ScriptKind.JS;
+
+        // @ts-expect-error
+        scriptInfo.scriptKind = typescript.ScriptKind.TS;
 
         if (
           configManager.getConfig().enable &&
-          fileName.startsWith("^") &&
+          (fileName.startsWith("^") ||
+            info.project.containsFile(normalizedPath)) &&
           snapshot
         ) {
           const input = snapshot.getText(0, snapshot.getLength());

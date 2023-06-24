@@ -39,7 +39,7 @@
   "contributes": {
     "typescriptServerPlugins": [
       {
-        "name": "typescript-jstc-plugin",
+        "name": "jstc-typescript-plugin",
         "enableForWorkspaceTypeScriptVersions": true
       }
     ],
@@ -81,7 +81,7 @@
     "vscode-tmgrammar-test": "^0.0.11"
   },
   "dependencies": {
-    "typescript-jstc-plugin": "workspace:*",
+    "jstc-typescript-plugin": "workspace:*",
     "lodash": "^4.17.21",
     "vscode-languageclient": "^8.0.0"
   }

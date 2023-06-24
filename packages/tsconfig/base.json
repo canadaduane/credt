@@ -24,6 +24,6 @@
     // We should also have @types/node as a devDependency in package.json
     "types": ["node"],
 
-    "plugin": [{ "name": "typescript-jstc-plugin" }]
+    "plugin": [{ "name": "jstc-typescript-plugin" }]
   }
 }

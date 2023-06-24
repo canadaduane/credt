@@ -1,5 +1,5 @@
 {
-  "name": "typescript-jstc-plugin",
+  "name": "jstc-typescript-plugin",
   "main": "index.js",
   "dependencies": {
     "@credit/jstc": "workspace:*",

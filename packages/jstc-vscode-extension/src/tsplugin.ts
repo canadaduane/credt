@@ -46,7 +46,7 @@ export class TsPlugin {
     // and without having to do hacks like updating the extension's package.json.
     commands.executeCommand(
       "_typescript.configurePlugin",
-      "typescript-jstc-plugin",
+      "jstc-typescript-plugin",
       {
         enable,
       }
