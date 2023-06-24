@@ -1,0 +1,76 @@
+{
+  "name": "jstc-vscode",
+  "version": "0.1.0",
+  "description": "Javascript with typescript comments (JSTC) support for VSCode",
+  "main": "dist/src/extension.js",
+  "publisher": "canadaduane",
+  "scripts": {
+    "build:ts": "tsc -p ./",
+    "vscode:prepublish": "npm install && npm run build && npm prune --production",
+    "watch": "tsc -w -p ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/canadaduane/credit.git"
+  },
+  "keywords": [
+    "vscode"
+  ],
+  "author": "Duane Johnson <duane.johnson@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/canadaduane/credit#readme",
+  "displayName": "JSTC for VSCode",
+  "categories": [
+    "Programming Languages",
+    "Formatters"
+  ],
+  "engines": {
+    "vscode": "^1.67.0"
+  },
+  "activationEvents": [
+    "onLanguage:javascript"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "The extension requires workspace trust because it executes code specified by the workspace. Loading the user's node_modules and loading config files is disabled when untrusted"
+    }
+  },
+  "contributes": {
+    "typescriptServerPlugins": [
+      {
+        "name": "typescript-jstc-plugin",
+        "enableForWorkspaceTypeScriptVersions": true
+      }
+    ],
+    "configuration": {
+      "jstc.enable-ts-plugin": {
+        "type": "boolean",
+        "default": false,
+        "title": "Enable TypeScript JSTC plugin",
+        "description": "Enables a TypeScript plugin which enalbes typescript comments in javascript"
+      },
+      "jstc.ask-to-enable-ts-plugin": {
+        "type": "boolean",
+        "default": true,
+        "title": "Ask to enable TypeScript JSTC plugin",
+        "description": "Ask on startup to enable the TypeScript plugin."
+      }
+    }
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.0",
+    "@types/lodash": "^4.14.116",
+    "@types/node": "^16.0.0",
+    "@types/vscode": "^1.67",
+    "js-yaml": "^3.14.0",
+    "tslib": "^2.4.0",
+    "typescript": "*",
+    "vscode-tmgrammar-test": "^0.0.11"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "typescript-jstc-plugin": "workspace:*",
+    "vscode-languageclient": "^8.0.0"
+  }
+}

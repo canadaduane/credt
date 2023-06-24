@@ -1,0 +1,8 @@
+{
+  "name": "typescript-jstc-plugin",
+  "main": "index.js",
+  "dependencies": {
+    "escaper": "^3.0.6",
+    "typescript": "*"
+  }
+}
