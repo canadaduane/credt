@@ -101,12 +101,12 @@ importers:
 
   packages/jstc-vscode-extension:
     dependencies:
+      jstc-typescript-plugin:
+        specifier: workspace:*
+        version: link:../typescript-jstc-plugin
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
-      typescript-jstc-plugin:
-        specifier: workspace:*
-        version: link:../typescript-jstc-plugin
       vscode-languageclient:
         specifier: ^8.0.0
         version: 8.0.0
