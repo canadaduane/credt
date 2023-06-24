@@ -1,7 +1,7 @@
 {
-  "name": "jstc-vscode",
+  "name": "@credit/jstc-vscode",
   "version": "0.1.0",
-  "description": "Javascript with typescript comments (JSTC) support for VSCode",
+  "description": "Javascript with Typescript Comments (JSTC) support for VSCode",
   "main": "dist/src/extension.js",
   "publisher": "canadaduane",
   "scripts": {
@@ -56,7 +56,19 @@
         "title": "Ask to enable TypeScript JSTC plugin",
         "description": "Ask on startup to enable the TypeScript plugin."
       }
-    }
+    },
+    "grammars": [
+      {
+        "path": "./src/grammar.json",
+        "scopeName": "jstc.injection",
+        "injectTo": [
+          "source.js"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.ts": "typescriptreact"
+        }
+      }
+    ]
   },
   "devDependencies": {
     "@tsconfig/node16": "^1.0.0",
@@ -69,8 +81,8 @@
     "vscode-tmgrammar-test": "^0.0.11"
   },
   "dependencies": {
-    "lodash": "^4.17.21",
     "typescript-jstc-plugin": "workspace:*",
+    "lodash": "^4.17.21",
     "vscode-languageclient": "^8.0.0"
   }
 }

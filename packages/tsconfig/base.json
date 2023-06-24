@@ -12,13 +12,18 @@
     "strict": true,
     "noEmit": true,
 
+    // Don't check libraries, e.g. since they may not support nodenex module resolution
+    "skipLibCheck": true,
+
+    // Instruct non-relative imports to start within the `src` directory
+    "baseUrl": "src",
+
     // Allow modules to `export default`
     "esModuleInterop": true,
 
-    // Allow importing JSON files directly
-    "resolveJsonModule": true,
+    // We should also have @types/node as a devDependency in package.json
+    "types": ["node"],
 
-    // You should also have @types/node as a devDependency in package.json
-    "types": ["node"]
+    "plugin": [{ "name": "typescript-jstc-plugin" }]
   }
 }

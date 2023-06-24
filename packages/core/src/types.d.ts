@@ -14,8 +14,8 @@ export type BodyFn = ({}: {}) => NodeType;
 
 export type MountPayload = {
   rootImports: string[];
-  head?: credit.HeadFn;
-  body?: credit.BodyFn;
+  head?: HeadFn;
+  body?: BodyFn;
 };
 
 export as namespace credit;

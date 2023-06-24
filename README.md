@@ -53,3 +53,4 @@ Non-goals:
 ## Research
 
 - jsdelivr seems to offer best CDN for js--fast, and brotli compressed
+- animejs 6.5kb

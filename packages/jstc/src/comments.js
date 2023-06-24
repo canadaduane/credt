@@ -2,7 +2,7 @@
 
 // Credit goes to https://github.com/DrewML/es-comments
 
-class ESCommentsParser {
+export class ESCommentsParser {
   constructor(input) {
     this.input = input;
     this.position = 0;
@@ -96,7 +96,7 @@ class ESCommentsParser {
  * @param {string} input
  * @param {(string) => string} fn
  */
-module.exports = function replace(input, fn) {
+export function replaceMultilineComments(input, fn) {
   const parser = new ESCommentsParser(input);
   let start = 0;
   let output = "";
@@ -109,4 +109,4 @@ module.exports = function replace(input, fn) {
   }
   output += input.slice(start);
   return output;
-};
+}

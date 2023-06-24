@@ -1,9 +1,10 @@
 // @ts-check
 const { ScriptSnapshot } = require("typescript/lib/tsserverlibrary.js");
+const { replaceMultilineComments } = require("@credit/jstc");
 const { ConfigManager } = require("./ConfigManager.js");
 const { Logger } = require("./Logger.js");
-const comments = require("./comments.js");
 
+/* test */
 module.exports = function ({
   /** @type {import('typescript/lib/tsserverlibrary')} */
   typescript,
@@ -54,7 +55,7 @@ module.exports = function ({
         ) {
           const input = snapshot.getText(0, snapshot.getLength());
           logger.log("snap in", fileName, input);
-          const output = comments(input, (s) => {
+          const output = replaceMultilineComments(input, (s) => {
             if (s.startsWith("/*:")) {
               return "  " + s.slice(2, s.length - 2) + "  ";
             } else if (s.startsWith("/*+")) {

@@ -1,3 +1,4 @@
+import * as Types from "./types.ts";
 import { html as chtml, svg, h, hs } from "sinuous";
 import { dhtml, hydrate } from "sinuous/hydrate";
 
@@ -8,7 +9,7 @@ const headEl = globalThis.document?.head.firstElementChild;
 const bodyEl = globalThis.document?.body.firstElementChild;
 
 /**
- * @param {credit.MountPayload} options
+ * @param {types.MountPayload} options
  */
 export async function mount({ rootImports, head, body }) {
   if (isServer) {

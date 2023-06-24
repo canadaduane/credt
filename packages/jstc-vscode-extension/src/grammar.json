@@ -1,0 +1,27 @@
+{
+  "fileTypes": [],
+  "scopeName": "jstc.injection",
+  "injectionSelector": "L:source.js",
+  "patterns": [
+    {
+      "begin": "/\\*((\\+)|(:))",
+      "beginCaptures": {
+        "3": {
+          "name": "keyword.operator.type.annotation.ts"
+        }
+      },
+      "end": "\\*/",
+      "endCaptures": {
+        "0": {
+          "name": "comment.block.ts.embedded.js"
+        }
+      },
+      "name": "comment.block.ts.embedded.js",
+      "patterns": [
+        {
+          "include": "source.ts"
+        }
+      ]
+    }
+  ]
+}

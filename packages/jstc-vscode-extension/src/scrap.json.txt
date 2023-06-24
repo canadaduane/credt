@@ -1,0 +1,123 @@
+      "contentName": "meta.embedded.block.typescript",
+      "begin": "(/\\*\\+)",
+      "end": "(\\*/)",
+      "patterns": [
+        {
+          "include": "source.ts"
+        }
+      ]
+
+
+      "begin": "/\\*\\+",
+      "end": "\\*/",
+      "name": "meta.embedded.block.typescript",
+      "patterns": [
+        {
+          "include": "source.ts"
+        }
+      ]
+
+     
+      {
+        "scopeName": "source.js",
+        "fileTypes": ["js"],
+        "patterns": [
+          {
+            "name": "jstc",
+            "contentName": "meta.embedded.block.ts",
+            "begin": "(?x)(/\\*\\+)",
+            "beginCaptures": {
+              "1": {
+                "name": "comment.block.ts"
+              }
+            },
+            "end": "(?=\\*/)",
+            "endCaptures": {
+              "1": {
+                "name": "comment.block.ts"
+              }
+            },
+            "patterns": [
+              {
+                "include": "source.ts"
+              },
+              {
+                "match": "."
+              }
+            ]
+          }
+        ]
+      }
+      
+      {
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "fileTypes": ["js"],
+  "scopeName": "source.js",
+  "injectionSelector": "L:source comment -meta.embedded.ts",
+  "patterns": [
+    {
+      "include": "#jstc-block"
+    }
+  ],
+  "repository": {
+    "jstc-block": {
+      "begin": "ABC",
+      "end": "XYZ",
+      "contentName": "meta.embedded.ts"
+    }
+  }
+}
+
+
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "injectionSelector": "L:comment.block.js",
+  "patterns": [
+    {
+      "begin": "(/\\*\\+)",
+      "end": "(?=\\*/)",
+      "patterns": [
+        {
+          "include": "meta.embedded.ts"
+        }
+      ]
+    },
+    {
+      "match": "ABC",
+      "name": "keyword.todo"
+    }
+  ]
+}
+
+
+{
+  "scopeName": "jstc.injection",
+  "patterns": [
+    {
+      "begin": "/\\*",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.js"
+        }
+      },
+      "end": "\\*/",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.js"
+        }
+      },
+      "contentName": "meta.embedded.ts",
+      "name": "comment.block.js"
+    }
+  ]
+}
+
+
+        "path": "./src/grammar.json",
+        "scopeName": "jstc.injection",
+        "injectTo": [
+          "source.js"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.ts": "typescriptreact"
+        }

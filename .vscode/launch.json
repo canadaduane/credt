@@ -6,7 +6,7 @@
       "name": "Run Extension",
       "type": "extensionHost",
       "request": "launch",
-      "args": ["--extensionDevelopmentPath=${workspaceFolder}/lib/jstc-vscode"]
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}/packages/jstc-vscode-extension"]
     }
   ]
 }

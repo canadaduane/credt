@@ -1,0 +1,15 @@
+{
+  "name": "@credit/jstc",
+  "version": "1.0.0",
+  "description": "Javascript with Typescript Comments tools",
+  "main": "src/index.js",
+  "bin": {
+    "jstc": "src/cli.js"
+  },
+  "type": "module",
+  "devDependencies": {
+    "tsconfig": "workspace:*"
+  },
+  "author": "Duane Johnson <duane.johnson@gmail.com>",
+  "license": "MIT"
+}
