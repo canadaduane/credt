@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Credit framework",
   "main": "src/credit.js",
+  "types": "dist/credit.d.ts",
   "type": "module",
   "scripts": {
     "dev": "sirv src --port 9000 --cors",
