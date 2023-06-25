@@ -2,7 +2,7 @@
 
 An unconventional, small+fast web framework that uses a CRDT to sync server and client.
 
-Thank you to each of the innovators who has gone before. You are a credit to us all.
+Thank you to each innovator who has gone before. You are a credit to us all.
 
 ## Goals:
 
