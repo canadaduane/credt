@@ -8,6 +8,7 @@
   },
   "main": "./src/extension.js",
   "author": "Duane Johnson <duane.johnson@gmail.com>",
+  "publisher": "canadaduane",
   "license": "MIT",
   "categories": [
     "Programming Languages",
@@ -63,8 +64,8 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "pnpm install",
-    "package": "vsce package --no-dependencies"
+    "vscode:prepublish": "rm -rf node_modules && npm install",
+    "package": "vsce package"
   },
   "dependencies": {
     "js-with-ts-typescript-plugin": "0.1.0"
