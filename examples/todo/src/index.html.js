@@ -1,4 +1,4 @@
-import { mount, html, observable as o } from "credit";
+import { mount, html, observable as o } from "@credit/core";
 import { TodoList } from "./TodoList.js";
 
 await mount({
