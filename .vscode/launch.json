@@ -6,7 +6,7 @@
       "name": "Run Extension",
       "type": "extensionHost",
       "request": "launch",
-      "args": ["--extensionDevelopmentPath=${workspaceFolder}/packages/jswithts-vscode-extension"]
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}/packages/js-with-ts/vscode-extension"]
     }
   ]
 }

@@ -19,13 +19,11 @@ module.exports = function ({
     ) {
       const logger = new Logger(info.project.projectService.logger);
 
-      logger.log("Created jswithts-typescript-plugin");
-
       configManager.updateConfigFromPluginConfig(info.config);
       if (configManager.getConfig().enable) {
-        logger.log("Starting jswithts plugin");
+        logger.log("Starting js-with-ts plugin");
       } else {
-        logger.log("jswithts plugin disabled");
+        logger.log("js-with-ts plugin disabled");
         logger.log(info.config);
       }
 

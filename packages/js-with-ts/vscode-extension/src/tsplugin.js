@@ -1,6 +1,6 @@
 const vscode = require("vscode");
 
-export class TsPlugin {
+class TsPlugin {
   constructor(context /*: ExtensionContext*/) {
     this.enabled = TsPlugin.isEnabled();
     this.toggleTsPlugin(this.enabled);
@@ -77,3 +77,5 @@ export class TsPlugin {
     }
   }
 }
+
+module.exports = TsPlugin;

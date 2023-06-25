@@ -1,9 +1,8 @@
 {
-  "name": "jswithts-typescript-plugin",
+  "name": "js-with-ts-typescript-plugin",
   "version": "0.1.0",
   "main": "index.js",
   "dependencies": {
-    "@credit/jswithts": "workspace:*",
     "typescript": "*"
   }
 }

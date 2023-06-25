@@ -1,5 +1,5 @@
 const vscode = require("vscode");
-const { TsPlugin } = require("./tsplugin");
+const TsPlugin = require("./tsplugin");
 
 /**
  * @param {vscode.ExtensionContext} context
