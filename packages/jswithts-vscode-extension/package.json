@@ -4,6 +4,9 @@
   "description": "Javascript with Typescript Comments (jswithts) support for VSCode",
   "main": "dist/src/extension.js",
   "publisher": "canadaduane",
+  "scripts-comments": {
+    "#1": "Thanks to F3n67u for a tidy solution to packaging this extension while employing pnpm: https://github.com/microsoft/vscode-vsce/issues/421#issuecomment-1038911725"
+  },
   "scripts": {
     "build": "tsc -p ./",
     "vscode:prepublish": "pnpm install && pnpm run esbuild-base --minify",
