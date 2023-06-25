@@ -67,7 +67,7 @@
     "package": "vsce package --no-dependencies"
   },
   "dependencies": {
-    "js-with-ts-typescript-plugin": "workspace:*"
+    "js-with-ts-typescript-plugin": "0.1.0"
   },
   "devDependencies": {
     "@types/node": "20.2.5",

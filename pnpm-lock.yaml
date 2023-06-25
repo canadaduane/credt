@@ -108,7 +108,7 @@ importers:
   packages/js-with-ts/vscode-extension:
     dependencies:
       js-with-ts-typescript-plugin:
-        specifier: workspace:*
+        specifier: 0.1.0
         version: link:../typescript-plugin
     devDependencies:
       '@types/node':
