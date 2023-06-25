@@ -1,22 +1,19 @@
 {
   "fileTypes": [],
   "scopeName": "jswithts.injection",
-  "injectionSelector": "L:source.js",
+  "injectionSelector": "L:source.js - string",
   "patterns": [
     {
-      "begin": "/\\*((\\+)|(:))",
+      "begin": "(/\\*)((\\+)|(:))",
       "beginCaptures": {
-        "3": {
+        "1": {
+          "name": "comment.block.ts.embedded.js"
+        },
+        "4": {
           "name": "keyword.operator.type.annotation.ts"
         }
       },
       "end": "\\*/",
-      "endCaptures": {
-        "0": {
-          "name": "comment.block.ts.embedded.js"
-        }
-      },
-      "name": "comment.block.ts.embedded.js",
       "patterns": [
         {
           "include": "source.ts"
