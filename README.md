@@ -1,8 +1,10 @@
 # Credit - A web framework experiment
 
-A small, fast web framework that uses a CRDT to sync server and client.
+An unconventional, small+fast web framework that uses a CRDT to sync server and client.
 
-Goals:
+Thank you to each of the innovators who has gone before. You are a credit to us all.
+
+## Goals:
 
 - minimal compilation steps
   - use plain es2022 javascript on both client & server
@@ -13,10 +15,16 @@ Goals:
 - peers can selectively trust signature-validated messages
 - stretch goal: multiplayer
 
-Non-goals:
+### Non-goals:
 
 - backwards compat with non-modern browsers
-- look similar to React development
+- similarity to React development
+
+## Questions
+
+1. Can we get good type checking without a compile step? [It's looking promising](https://elk.vmst.io/vmst.io/@canadaduane/110601683275741791).
+2. Can we have fast web development without vite, and even faster SSR without bundling?
+3. Can we sync state between server and client without spending so much time on API plumbing?
 
 ## Building Blocks
 
