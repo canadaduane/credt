@@ -2,7 +2,7 @@
   "env": ["browser", "development", "module"],
   "imports": {
     "antimatter": "https://cdn.jsdelivr.net/npm/@braidjs/antimatter/+esm",
-    "credit": "http://localhost:9000/credit.js",
+    "@credit/core": "http://localhost:9000/credit.js",
     "sinuous": "https://cdn.jsdelivr.net/npm/sinuous@0.30.0/src/index.js",
     "sinuous/hydrate": "https://cdn.jsdelivr.net/npm/sinuous@0.30.0/src/hydrate.js",
     "sinuous/map": "https://cdn.jsdelivr.net/npm/sinuous@0.30.0/src/map.js",
