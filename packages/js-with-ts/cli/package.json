@@ -1,10 +1,10 @@
 {
-  "name": "@credit/jswithts",
+  "name": "@credit/js-with-ts",
   "version": "1.0.0",
   "description": "Javascript with Typescript Comments tools",
   "main": "src/index.js",
   "bin": {
-    "jswithts": "src/cli.js"
+    "js-with-ts": "src/cli.js"
   },
   "type": "module",
   "devDependencies": {
