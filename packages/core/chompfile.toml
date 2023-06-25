@@ -1,0 +1,21 @@
+version = 0.1
+
+[[task]]
+name = "clean"
+run = "rimraf .js-with-ts/ dist/"
+
+[[task]]
+name = "copy-js"
+dep = "clean"
+run = "cp -r src/ .js-with-ts/"
+
+[[task]]
+name = "make-ts"
+deps = ["copy-js", ".js-with-ts/##.js"]
+target = ".js-with-ts/##.ts"
+run = "js-with-ts $DEP"
+
+[[task]]
+name = "build"
+deps = ["make-ts"]
+run = "tsc -p tsconfig.build.json"

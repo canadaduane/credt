@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "sirv src --port 9000 --cors",
-    "tsc": "tsc"
+    "build": "chomp build"
   },
   "dependencies": {
     "jsdom": "^22.1.0",
@@ -17,8 +17,11 @@
     "unified": "^10.1.2"
   },
   "devDependencies": {
+    "@credit/js-with-ts": "workspace:*",
     "@types/jsdom": "^21.1.1",
     "@types/node": "^20.3.1",
+    "chomp": "^0.2.17",
+    "rimraf": "^5.0.1",
     "sirv-cli": "^2.0.2",
     "tsconfig": "workspace:*",
     "typescript": "^5.1.3"
