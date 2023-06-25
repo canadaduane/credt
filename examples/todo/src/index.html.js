@@ -1,3 +1,4 @@
+/*+ import { Item } from "./types.ts" */
 import { mount, html, observable as o } from "@credit/core";
 import { TodoList } from "./TodoList.js";
 
@@ -10,9 +11,7 @@ await mount({
     `;
   },
   body: () => {
-    /** @type {todo.Item[]} */
-    const emptyList = [];
-    const items = o(emptyList);
+    const items = o/*+<Item[]>*/([]);
     const text = o("");
 
     const view = html`
@@ -27,11 +26,7 @@ await mount({
       </div>
     `;
 
-    /**
-     *
-     * @param {SubmitEvent} e
-     */
-    function handleSubmit(e) {
+    function handleSubmit(e/*: SubmitEvent*/) {
       e.preventDefault();
       if (!text().length) {
         return;
@@ -45,11 +40,7 @@ await mount({
       text("");
     }
 
-    /**
-     *
-     * @param {InputEvent} e
-     */
-    function handleChange(e) {
+    function handleChange(e/*: InputEvent*/) {
       if (e.target instanceof HTMLInputElement) {
         text(e.target?.value);
       }

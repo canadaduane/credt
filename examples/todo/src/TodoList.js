@@ -1,9 +1,8 @@
-import { html } from "credit";
+/*+ import type { Item } from "./types.ts"; */
+/*+ import type { Observable } from "sinuous/observable"; */
+import { html } from "@credit/core";
 
-/**
- * @param {{items: todo.Observable<todo.Item[]>}} param0
- */
-export const TodoList = ({ items }) => {
+export const TodoList = ({ items }/*: { items: Observable<Item[]> }*/) => {
   return html`
     <ul>
       ${() => items().map((item) => html`<li id=${item.id}>${item.text}</li>`)}
