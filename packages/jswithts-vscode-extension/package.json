@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "tsc -p ./",
-    "vscode:prepublish": "pnpm install && pnpm run esbuild-base --minify",
+    "vscode:prepublish": "pnpm install && pnpm run esbuild-base",
     "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
     "package": "vsce package --no-dependencies",
     "watch": "tsc -w -p ./"
