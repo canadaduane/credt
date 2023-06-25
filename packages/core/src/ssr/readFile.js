@@ -6,8 +6,8 @@ import { readFile as _readFile } from "node:fs/promises";
  * @param relativeUrl Can be used to pass `import.meta.url` of calling file
  */
 export async function readFile(
-  filename/*: string*/,
-  relativeUrl/*: string | null*/ = null
+  filename /*: string*/,
+  relativeUrl /*: string | null*/ = null
 ) /*: Promise<string>*/ {
   // Determine the directory of the current module
   const dirname = path.dirname(

@@ -4,7 +4,7 @@ import parse from "rehype-parse";
 import format from "rehype-format";
 import stringify from "rehype-stringify";
 
-export async function registerPrintOnExit(dom/*: JSDOM*/) {
+export async function registerPrintOnExit(dom /*: JSDOM*/) {
   process.on("beforeExit", async (code) => {
     if (code === 0) {
       printTidyDom(dom);
@@ -12,7 +12,7 @@ export async function registerPrintOnExit(dom/*: JSDOM*/) {
   });
 }
 
-async function printTidyDom(dom/*: JSDOM*/) {
+async function printTidyDom(dom /*: JSDOM*/) {
   const output = await unified()
     .use(parse, { emitParseErrors: true, verbose: true })
     .use(format)

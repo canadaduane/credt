@@ -6,7 +6,7 @@ import { readFile } from "./readFile.js";
 import { registerPrintOnExit } from "./printDom.js";
 import { MountPayload } from "../types.ts";
 
-export async function mount({ rootImports, head, body }/*: MountPayload*/) {
+export async function mount({ rootImports, head, body } /*: MountPayload*/) {
   // SSR needs a DOM
   if (!globalThis.document) {
     const dom = await createServerSideDom();
@@ -29,12 +29,12 @@ export async function mount({ rootImports, head, body }/*: MountPayload*/) {
 
   if (head) {
     const node = head({ builtins }) ?? builtins;
-    globalThis.document.head.append(node/*+ as Node*/);
+    globalThis.document.head.append(node /*+ as Node*/);
   }
 
   if (body && process.env.NODE_ENV !== "development") {
     const node = body({}) ?? chtml``;
-    globalThis.document.body.append(node/*+ as Node*/);
+    globalThis.document.body.append(node /*+ as Node*/);
   }
 }
 
@@ -42,12 +42,12 @@ export async function mount({ rootImports, head, body }/*: MountPayload*/) {
  * Returns the relative path of the **javascript module that called Credit**
  * suitable to be inserted as a script into the dom.
  */
-function scriptModuleSrc(module/*: string*/) {
+function scriptModuleSrc(module /*: string*/) {
   return path.basename(module);
 }
 
 // One-time setup of server-side DOM object.
-async function createServerSideDom()/*: Promise<JSDOM>*/ {
+async function createServerSideDom() /*: Promise<JSDOM>*/ {
   if (globalThis.document) throw Error("dom already exists");
 
   // Create a virtual server-side DOM
