@@ -4,8 +4,8 @@
   "description": "Example todo app for Credit framework",
   "type": "module",
   "scripts": {
-    "dev": "NODE_ENV=development node src/index.html.js >src/index.html && sirv src/",
-    "build": "node src/index.html.js >src/index.html"
+    "dev": "node src/index.html.js >src/index.html && sirv src/",
+    "build": "NODE_ENV=production node src/index.html.js >src/index.html"
   },
   "dependencies": {
     "@credit/core": "workspace:*"

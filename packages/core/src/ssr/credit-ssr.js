@@ -32,7 +32,7 @@ export async function mount({ rootImports, head, body } /*: MountPayload*/) {
     globalThis.document.head.append(node /*+ as Node*/);
   }
 
-  if (body && process.env.NODE_ENV !== "development") {
+  if (body && process.env.NODE_ENV === "production") {
     const node = body({}) ?? chtml``;
     globalThis.document.body.append(node /*+ as Node*/);
   }
