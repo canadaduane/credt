@@ -1,13 +1,13 @@
 class Logger {
-  constructor(tsLogService, suppressNonJstcLogs = false, logDebug = false) {
+  constructor(tsLogService, suppressNonjswithtsLogs = false, logDebug = false) {
     this.tsLogService = tsLogService;
-    this.suppressNonJstcLogs = suppressNonJstcLogs;
+    this.suppressNonjswithtsLogs = suppressNonjswithtsLogs;
     this.logDebug = logDebug;
 
-    if (suppressNonJstcLogs) {
+    if (suppressNonjswithtsLogs) {
       const log = this.tsLogService.info.bind(this.tsLogService);
       this.tsLogService.info = (s) => {
-        if (s.startsWith("-Jstc Plugin-")) {
+        if (s.startsWith("-jswithts Plugin-")) {
           log(s);
         }
       };
@@ -27,7 +27,7 @@ class Logger {
         return arg;
       })
       .join(" ");
-    this.tsLogService.info("-Jstc Plugin- " + str);
+    this.tsLogService.info("-jswithts Plugin- " + str);
   }
 
   debug(...args) {

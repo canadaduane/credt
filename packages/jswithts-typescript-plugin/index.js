@@ -19,13 +19,13 @@ module.exports = function ({
     ) {
       const logger = new Logger(info.project.projectService.logger);
 
-      logger.log("Created jstc-typescript-plugin");
+      logger.log("Created jswithts-typescript-plugin");
 
       configManager.updateConfigFromPluginConfig(info.config);
       if (configManager.getConfig().enable) {
-        logger.log("Starting JSTC plugin");
+        logger.log("Starting jswithts plugin");
       } else {
-        logger.log("JSTC plugin disabled");
+        logger.log("jswithts plugin disabled");
         logger.log(info.config);
       }
 

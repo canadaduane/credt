@@ -2,7 +2,7 @@ import { ExtensionContext, workspace } from "vscode";
 import { TsPlugin } from "./tsplugin";
 
 export function activate(context: ExtensionContext) {
-  console.info("Activate jstc-vscode extension");
+  console.info("Activate jswithts-vscode extension");
   const tsPlugin = new TsPlugin(context);
 
   if (workspace.textDocuments.some((doc) => doc.languageId === "javascript")) {
@@ -20,7 +20,7 @@ export function activate(context: ExtensionContext) {
 }
 
 export function deactivate() {
-  console.info("Deactivate jstc-vscode extension");
+  console.info("Deactivate jswithts-vscode extension");
   return stop;
 }
 

@@ -1,7 +1,7 @@
 {
-  "name": "jstc-vscode",
+  "name": "jswithts-vscode",
   "version": "0.1.0",
-  "description": "Javascript with Typescript Comments (JSTC) support for VSCode",
+  "description": "Javascript with Typescript Comments (jswithts) support for VSCode",
   "main": "dist/src/extension.js",
   "publisher": "canadaduane",
   "scripts": {
@@ -21,7 +21,7 @@
   "author": "Duane Johnson <duane.johnson@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/canadaduane/credit#readme",
-  "displayName": "JSTC for VSCode",
+  "displayName": "jswithts for VSCode",
   "categories": [
     "Programming Languages",
     "Formatters"
@@ -41,28 +41,28 @@
   "contributes": {
     "typescriptServerPlugins": [
       {
-        "name": "jstc-typescript-plugin",
+        "name": "jswithts-typescript-plugin",
         "enableForWorkspaceTypeScriptVersions": true
       }
     ],
     "configuration": {
-      "jstc.enable-ts-plugin": {
+      "jswithts.enable-ts-plugin": {
         "type": "boolean",
         "default": false,
-        "title": "Enable TypeScript JSTC plugin",
+        "title": "Enable TypeScript jswithts plugin",
         "description": "Enables a TypeScript plugin which enalbes typescript comments in javascript"
       },
-      "jstc.ask-to-enable-ts-plugin": {
+      "jswithts.ask-to-enable-ts-plugin": {
         "type": "boolean",
         "default": true,
-        "title": "Ask to enable TypeScript JSTC plugin",
+        "title": "Ask to enable TypeScript jswithts plugin",
         "description": "Ask on startup to enable the TypeScript plugin."
       }
     },
     "grammars": [
       {
         "path": "./src/grammar.json",
-        "scopeName": "jstc.injection",
+        "scopeName": "jswithts.injection",
         "injectTo": [
           "source.js"
         ],
@@ -85,7 +85,7 @@
     "vscode-tmgrammar-test": "^0.0.11"
   },
   "dependencies": {
-    "jstc-typescript-plugin": "workspace:*",
+    "jswithts-typescript-plugin": "workspace:*",
     "lodash": "^4.17.21",
     "vscode-languageclient": "^8.0.0"
   }

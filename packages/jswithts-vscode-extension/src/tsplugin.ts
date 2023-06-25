@@ -26,7 +26,7 @@ export class TsPlugin {
 
   static isEnabled(): boolean {
     return (
-      workspace.getConfiguration("jstc").get<boolean>("enable-ts-plugin") ??
+      workspace.getConfiguration("jswithts").get<boolean>("enable-ts-plugin") ??
       false
     );
   }
@@ -46,7 +46,7 @@ export class TsPlugin {
     // and without having to do hacks like updating the extension's package.json.
     commands.executeCommand(
       "_typescript.configurePlugin",
-      "jstc-typescript-plugin",
+      "jswithts-typescript-plugin",
       {
         enable,
       }
@@ -55,7 +55,7 @@ export class TsPlugin {
 
   async askToEnable() {
     const shouldAsk = workspace
-      .getConfiguration("jstc")
+      .getConfiguration("jswithts")
       .get<boolean>("ask-to-enable-ts-plugin");
     if (this.enabled || !shouldAsk) {
       return;
@@ -67,7 +67,7 @@ export class TsPlugin {
       "Enable Plugin",
     ];
     const response = await window.showInformationMessage(
-      "The JSTC for VS Code extension now contains a TypeScript plugin. " +
+      "The jswithts for VS Code extension now contains a TypeScript plugin. " +
         "Enabling it will provide intellisense for JS files that contain typescript as comments. " +
         "Would you like to enable it? " +
         "You can always enable/disable it later on through the extension settings.",
@@ -75,10 +75,10 @@ export class TsPlugin {
     );
 
     if (response === answers[2]) {
-      workspace.getConfiguration("jstc").update("enable-ts-plugin", true, true);
+      workspace.getConfiguration("jswithts").update("enable-ts-plugin", true, true);
     } else if (response === answers[1]) {
       workspace
-        .getConfiguration("jstc")
+        .getConfiguration("jswithts")
         .update("ask-to-enable-ts-plugin", false, true);
     }
   }

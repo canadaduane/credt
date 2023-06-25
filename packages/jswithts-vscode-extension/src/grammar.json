@@ -1,6 +1,6 @@
 {
   "fileTypes": [],
-  "scopeName": "jstc.injection",
+  "scopeName": "jswithts.injection",
   "injectionSelector": "L:source.js",
   "patterns": [
     {

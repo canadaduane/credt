@@ -4,7 +4,7 @@ function printHelp() {
   console.log(`
 This program replaces multiline typescript comments with just the typescript.
 
-Usage: jstc [--spaces] [-h | --help]
+Usage: jswithts [--spaces] [-h | --help]
 
 Options:
   --spaces    Add spaces in place of block comment markers /* and */

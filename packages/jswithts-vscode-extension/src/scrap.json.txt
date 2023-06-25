@@ -23,7 +23,7 @@
         "fileTypes": ["js"],
         "patterns": [
           {
-            "name": "jstc",
+            "name": "jswithts",
             "contentName": "meta.embedded.block.ts",
             "begin": "(?x)(/\\*\\+)",
             "beginCaptures": {
@@ -56,11 +56,11 @@
   "injectionSelector": "L:source comment -meta.embedded.ts",
   "patterns": [
     {
-      "include": "#jstc-block"
+      "include": "#jswithts-block"
     }
   ],
   "repository": {
-    "jstc-block": {
+    "jswithts-block": {
       "begin": "ABC",
       "end": "XYZ",
       "contentName": "meta.embedded.ts"
@@ -91,7 +91,7 @@
 
 
 {
-  "scopeName": "jstc.injection",
+  "scopeName": "jswithts.injection",
   "patterns": [
     {
       "begin": "/\\*",
@@ -114,7 +114,7 @@
 
 
         "path": "./src/grammar.json",
-        "scopeName": "jstc.injection",
+        "scopeName": "jswithts.injection",
         "injectTo": [
           "source.js"
         ],
