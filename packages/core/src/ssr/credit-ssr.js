@@ -1,10 +1,10 @@
 /*+ import type { JSDOM } from "jsdom"; */
+/*+ import type { MountPayload } from "../types.ts"; */
 import path from "node:path";
 import { html as chtml } from "sinuous";
 
 import { readFile } from "./readFile.js";
 import { registerPrintOnExit } from "./printDom.js";
-import { MountPayload } from "../types.ts";
 
 export async function mount({ rootImports, head, body } /*: MountPayload*/) {
   // SSR needs a DOM
