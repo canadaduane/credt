@@ -1,12 +1,14 @@
 {
-  "name": "@credit/jstc-vscode",
+  "name": "jstc-vscode",
   "version": "0.1.0",
   "description": "Javascript with Typescript Comments (JSTC) support for VSCode",
   "main": "dist/src/extension.js",
   "publisher": "canadaduane",
   "scripts": {
-    "build:ts": "tsc -p ./",
-    "vscode:prepublish": "npm install && npm run build && npm prune --production",
+    "build": "tsc -p ./",
+    "vscode:prepublish": "pnpm install && pnpm run esbuild-base --minify",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+    "package": "vsce package --no-dependencies",
     "watch": "tsc -w -p ./"
   },
   "repository": {
@@ -75,6 +77,8 @@
     "@types/lodash": "^4.14.116",
     "@types/node": "^16.0.0",
     "@types/vscode": "^1.67",
+    "@vscode/vsce": "^2.19.0",
+    "esbuild": "^0.18.7",
     "js-yaml": "^3.14.0",
     "tslib": "^2.4.0",
     "typescript": "*",
