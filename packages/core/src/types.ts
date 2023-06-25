@@ -17,5 +17,3 @@ export type MountPayload = {
   head?: HeadFn;
   body?: BodyFn;
 };
-
-export const Types = {};

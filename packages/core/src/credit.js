@@ -1,4 +1,5 @@
-import * as Types from "./types.ts";
+/*+ import type { VNode } from "sinuous/hydrate" */
+/*+ import type { MountPayload } from "./types.ts" */
 import { html as chtml, svg, h, hs } from "sinuous";
 import { dhtml, hydrate } from "sinuous/hydrate";
 
@@ -8,10 +9,8 @@ export const isServer = typeof global === "object";
 const headEl = globalThis.document?.head.firstElementChild;
 const bodyEl = globalThis.document?.body.firstElementChild;
 
-/**
- * @param {types.MountPayload} options
- */
-export async function mount({ rootImports, head, body }) {
+
+export async function mount({ rootImports, head, body }/*: MountPayload */) {
   if (isServer) {
     (await import("./ssr/credit-ssr.js")).mount({ rootImports, head, body });
   } else {
@@ -22,8 +21,7 @@ export async function mount({ rootImports, head, body }) {
       if (head) {
         const builtins = dhtml``;
         const node = head({ builtins }) ?? builtins;
-        // @ts-expect-error
-        hydrate(node, headEl);
+        hydrate(node/*+ as VNode<{}>*/, headEl);
       }
     } else {
       // This is the client, but the HTML head is missing--not good!
@@ -34,25 +32,17 @@ export async function mount({ rootImports, head, body }) {
       // This is the client, and the HTML body is present, so we hydrate
       if (body) {
         const node = body({}) ?? dhtml``;
-        // @ts-expect-error
-        hydrate(node, bodyEl);
+        hydrate(node/*+ as VNode<{}>*/, bodyEl);
       }
     } else {
       // This is the client, but the HTML body is missing (probably development mode)
       if (body) {
         const builtins = chtml``;
         const node = body({}) ?? builtins;
-        // @ts-expect-error
-        globalThis.document.body.append(node);
+        globalThis.document.body.append(node/*+ as Node*/);
       }
     }
   }
 }
 
-/**
- *
- * @param {TemplateStringsArray} strings
- * @param  {...any[]} values
- * @returns {credit.NodeType}
- */
-export const html = isServer || !bodyEl ? chtml : dhtml;
+export const html/*: typeof chtml | typeof dhtml*/ = isServer || !bodyEl ? chtml : dhtml;

@@ -1,14 +1,12 @@
-import url from "node:url";
+/*+ import type { JSDOM } from "jsdom"; */
 import path from "node:path";
 import { html as chtml } from "sinuous";
 
 import { readFile } from "./readFile.js";
 import { registerPrintOnExit } from "./printDom.js";
+import { MountPayload } from "../types.ts";
 
-/**
- * @param {credit.MountPayload} options
- */
-export async function mount({ rootImports, head, body }) {
+export async function mount({ rootImports, head, body }/*: MountPayload*/) {
   // SSR needs a DOM
   if (!globalThis.document) {
     const dom = await createServerSideDom();
@@ -31,34 +29,25 @@ export async function mount({ rootImports, head, body }) {
 
   if (head) {
     const node = head({ builtins }) ?? builtins;
-    // @ts-expect-error
-    globalThis.document.head.append(node);
+    globalThis.document.head.append(node/*+ as Node*/);
   }
 
   if (body && process.env.NODE_ENV !== "development") {
     const node = body({}) ?? chtml``;
-    // @ts-expect-error
-    globalThis.document.body.append(node);
+    globalThis.document.body.append(node/*+ as Node*/);
   }
 }
 
 /**
  * Returns the relative path of the **javascript module that called Credit**
  * suitable to be inserted as a script into the dom.
- *
- * @param {string} module The top-level JS file:// import.meta.url
- * @returns {string}
  */
-function scriptModuleSrc(module) {
+function scriptModuleSrc(module/*: string*/) {
   return path.basename(module);
 }
 
-/**
- * One-time setup of server-side DOM object.
- *
- * @returns {Promise<credit.JSDOM>}
- */
-async function createServerSideDom() {
+// One-time setup of server-side DOM object.
+async function createServerSideDom()/*: Promise<JSDOM>*/ {
   if (globalThis.document) throw Error("dom already exists");
 
   // Create a virtual server-side DOM

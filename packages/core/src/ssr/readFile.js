@@ -3,12 +3,12 @@ import url from "node:url";
 import { readFile as _readFile } from "node:fs/promises";
 
 /**
- *
- * @param {string} filename
- * @param {string | null} relativeUrl Can be used to pass `import.meta.url` of calling file
- * @returns {Promise<string>}
+ * @param relativeUrl Can be used to pass `import.meta.url` of calling file
  */
-export async function readFile(filename, relativeUrl = null) {
+export async function readFile(
+  filename/*: string*/,
+  relativeUrl/*: string | null*/ = null
+) /*: Promise<string>*/ {
   // Determine the directory of the current module
   const dirname = path.dirname(
     url.fileURLToPath(relativeUrl ?? import.meta.url)
