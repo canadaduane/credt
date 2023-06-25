@@ -3,14 +3,11 @@ import { html as chtml } from "sinuous";
 import { dhtml } from "sinuous/hydrate";
 export { VNode } from "sinuous/hydrate";
 
-export type NodeType = ReturnType<typeof chtml> | ReturnType<typeof dhtml>;
-export type HtmlFn = typeof chtml;
-export type DhtmlFn = typeof dhtml;
-export type HtmlOrDhtmlFn = HtmlFn | DhtmlFn;
+type NodeType = ReturnType<typeof chtml> | ReturnType<typeof dhtml>;
 
-export type HeadFn = ({ builtins }: { builtins: NodeType }) => NodeType;
+type HeadFn = ({ builtins }: { builtins: NodeType }) => NodeType;
 
-export type BodyFn = ({}: {}) => NodeType;
+type BodyFn = ({}: {}) => NodeType;
 
 export type MountPayload = {
   rootImports: string[];
