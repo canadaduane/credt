@@ -4,11 +4,8 @@ import { TodoList } from "./TodoList.js";
 
 await mount({
   rootImports: [import.meta.url],
-  head: ({ builtins }) => {
-    return html`
-      ${builtins}
-      <link rel="stylesheet" href="/sakura-dark.css" />
-    `;
+  head: () => {
+    return html`<link rel="stylesheet" href="/sakura-dark.css" />`;
   },
   body: () => {
     const items = o/*+<Item[]>*/([]);

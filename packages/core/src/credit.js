@@ -19,7 +19,7 @@ export async function mount({ rootImports, head, body } /*: MountPayload */) {
       // This is the client, and the HTML head is present, so we hydrate
       if (head) {
         const builtins = dhtml``;
-        const node = head({ builtins }) ?? builtins;
+        const node = head({ builtins: (b) => b }) ?? builtins;
         hydrate(node /*+ as VNode<{}>*/, headEl);
       }
     } else {

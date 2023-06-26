@@ -5,7 +5,13 @@ export { VNode } from "sinuous/hydrate";
 
 type NodeType = ReturnType<typeof chtml> | ReturnType<typeof dhtml>;
 
-type HeadFn = ({ builtins }: { builtins: NodeType }) => NodeType;
+export type BuiltinMapper = (original: NodeType) => NodeType;
+
+type HeadFn = ({
+  builtins,
+}: {
+  builtins: (map: BuiltinMapper) => void;
+}) => NodeType;
 
 type BodyFn = ({}: {}) => NodeType;
 

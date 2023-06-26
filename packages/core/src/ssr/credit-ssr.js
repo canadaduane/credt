@@ -1,5 +1,5 @@
 /*+ import type { JSDOM } from "jsdom"; */
-/*+ import type { MountPayload } from "../types.ts"; */
+/*+ import type { BuiltinMapper, MountPayload } from "../types.ts"; */
 import path from "node:path";
 import { html as chtml } from "sinuous";
 
@@ -27,8 +27,18 @@ export async function mount({ rootImports, head, body } /*: MountPayload*/) {
       )}
     `;
 
-  const node = head?.({ builtins }) ?? builtins;
-  globalThis.document.head.append(node /*+ as Node*/);
+  // BuiltinMapper is an advanced function that probably won't be used often--it's an
+  // escape hatch that allows the caller to modify the built-in <head /> tag contents.
+  let map /*: BuiltinMapper*/ = (builtins) => builtins;
+  let node = head?.({
+    builtins: (m) => {
+      if (!m)
+        throw Error("`builtins(m)` must return a mapper that returns html");
+      map = m;
+    },
+  });
+  builtins = map(builtins);
+  globalThis.document.head.append(chtml`${builtins}\n${node}`);
 
   if (body && process.env.NODE_ENV === "production") {
     const node = body({}) ?? chtml``;
