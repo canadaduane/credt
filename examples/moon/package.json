@@ -1,0 +1,16 @@
+{
+  "name": "moon",
+  "version": "1.0.0",
+  "description": "Example scrolling moon app for the Credit framework",
+  "type": "module",
+  "scripts": {
+    "dev": "node public/index.html.js >public/index.html && sirv --dev public/"
+  },
+  "dependencies": {
+    "@credit/core": "workspace:*"
+  },
+  "devDependencies": {
+    "sirv-cli": "^2.0.2",
+    "tsconfig": "workspace:*"
+  }
+}
