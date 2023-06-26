@@ -12,7 +12,6 @@ run = "cp -r src/ .js-with-ts/"
 [[task]]
 name = "make-ts"
 deps = ["copy-js", ".js-with-ts/##.js"]
-target = ".js-with-ts/##.ts"
 run = "js-with-ts $DEP"
 
 [[task]]
