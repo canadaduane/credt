@@ -27,10 +27,8 @@ export async function mount({ rootImports, head, body } /*: MountPayload*/) {
       )}
     `;
 
-  if (head) {
-    const node = head({ builtins }) ?? builtins;
-    globalThis.document.head.append(node /*+ as Node*/);
-  }
+  const node = head?.({ builtins }) ?? builtins;
+  globalThis.document.head.append(node /*+ as Node*/);
 
   if (body && process.env.NODE_ENV === "production") {
     const node = body({}) ?? chtml``;

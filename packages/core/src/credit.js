@@ -44,5 +44,4 @@ export async function mount({ rootImports, head, body } /*: MountPayload */) {
   }
 }
 
-export const html /*: typeof chtml | typeof dhtml*/ =
-  isServer || !bodyEl ? chtml : dhtml;
+export const html = isServer || !bodyEl ? chtml : dhtml;
