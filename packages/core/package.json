@@ -6,7 +6,7 @@
   "types": "dist/credit.d.ts",
   "type": "module",
   "scripts": {
-    "dev": "sirv src --port 9000 --cors",
+    "dev": "sirv src --dev --cors --port 9000",
     "build": "chomp build"
   },
   "dependencies": {
