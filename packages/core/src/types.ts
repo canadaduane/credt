@@ -1,4 +1,3 @@
-export { JSDOM } from "jsdom";
 import { html as chtml } from "sinuous";
 import { dhtml } from "sinuous/hydrate";
 export { VNode } from "sinuous/hydrate";

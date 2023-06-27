@@ -6,20 +6,15 @@
   "types": "dist/credit.d.ts",
   "type": "module",
   "scripts": {
-    "dev": "sirv src --dev --cors --port 9000",
+    "dev": "sirv . --dev --cors --port 9000",
     "build": "chomp build"
   },
   "dependencies": {
-    "jsdom": "^22.1.0",
-    "rehype-format": "^4.0.1",
-    "rehype-parse": "^8.0.4",
-    "rehype-stringify": "^9.0.3",
-    "sinuous": "github:canadaduane/sinuous#434f93f9",
-    "unified": "^10.1.2"
+    "linkedom": "^0.14.26",
+    "sinuous": "github:canadaduane/sinuous#434f93f9"
   },
   "devDependencies": {
     "@credit/js-with-ts": "workspace:*",
-    "@types/jsdom": "^21.1.1",
     "@types/node": "^20.3.1",
     "chomp": "^0.2.17",
     "rimraf": "^5.0.1",

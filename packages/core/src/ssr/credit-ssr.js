@@ -1,7 +1,7 @@
-/*+ import type { JSDOM } from "jsdom"; */
 /*+ import type { BuiltinMapper, MountPayload } from "../types.ts"; */
 import path from "node:path";
 import { html as chtml } from "sinuous";
+import { parseHTML } from "linkedom";
 
 import { readFile } from "./readFile.js";
 import { registerPrintOnExit } from "./printDom.js";
@@ -9,8 +9,8 @@ import { registerPrintOnExit } from "./printDom.js";
 export async function mount({ rootImports, head, body } /*: MountPayload*/) {
   // SSR needs a DOM
   if (!globalThis.document) {
-    const dom = await createServerSideDom();
-    await registerPrintOnExit(dom);
+    const document = await createServerSideDom();
+    await registerPrintOnExit(document);
   }
   let builtins;
 
@@ -54,17 +54,17 @@ function scriptModuleSrc(module /*: string*/) {
   return path.basename(module);
 }
 
-// One-time setup of server-side DOM object.
-async function createServerSideDom() /*: Promise<JSDOM>*/ {
+async function createServerSideDom() {
   if (globalThis.document) throw Error("dom already exists");
 
   // Create a virtual server-side DOM
-  const { JSDOM } = await import("jsdom");
-  const dom = new JSDOM();
+  const { document, Node } = parseHTML(
+    "<!doctype html><html><head/><body/></html>"
+  );
 
-  // Prepare globals necessary for server-side rendering via jsdom
-  globalThis.document = dom.window.document;
-  globalThis.Node = dom.window.Node;
+  // Prepare globals necessary for server-side rendering
+  globalThis.document = document;
+  globalThis.Node = Node;
 
-  return dom;
+  return document;
 }
