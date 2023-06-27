@@ -1,5 +1,5 @@
 /*+ import type { Observable } from "sinuous/observable"; */
-import { mount, html, observable as o, isServer } from "@credit/core";
+import { mount, html, observable as o, isServer } from "@credt/core";
 
 function FullPageGradientDown(
   { color1, color2 } /*: { color1: string, color2: string }*/,
@@ -85,7 +85,7 @@ await mount({
         gap: 20px;
       ">
         <h1>The End of the Moon</h1>
-        <h3 style="color: #2f4157">Credit Framework Example</h3>
+        <h3 style="color: #2f4157">Credt Framework Example</h3>
       </div>
     `;
   },

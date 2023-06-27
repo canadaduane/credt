@@ -1,4 +1,4 @@
-# Credit - A web framework experiment
+# Credt - A web framework experiment
 
 An unconventional, small+fast web framework that uses a CRDT to sync server and client.
 
@@ -8,7 +8,7 @@ Thank you to each innovator who has gone before. You are a credit to us all.
 
 - minimal compilation steps
   - use plain es2022 javascript on both client & server
-  - type safety via ~~jsdoc comments~~ jswithts (javascript with typescript in comments)
+  - type safety via ~~jsdoc comments~~ js-with-ts (javascript with typescript in comments)
 - no API--state sync takes care of variables
 - extremely fast load time and render time (SSR, small deps)
 - server is just another peer
@@ -57,6 +57,10 @@ Thank you to each innovator who has gone before. You are a credit to us all.
 [Chomp](https://github.com/guybedford/chomp)
 
 - fast, rust-based "make" system for javascript
+
+[Linkedom](https://github.com/WebReflection/linkedom)
+
+- A fast, reasonable server-side DOM
 
 ## Research
 

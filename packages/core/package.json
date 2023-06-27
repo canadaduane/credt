@@ -1,9 +1,9 @@
 {
-  "name": "@credit/core",
+  "name": "@credt/core",
   "version": "0.1.0",
-  "description": "Credit framework",
-  "main": "src/credit.js",
-  "types": "dist/credit.d.ts",
+  "description": "Credt framework",
+  "main": "src/credt.js",
+  "types": "dist/credt.d.ts",
   "type": "module",
   "scripts": {
     "dev": "sirv . --dev --cors --port 9000",
@@ -14,7 +14,7 @@
     "sinuous": "github:canadaduane/sinuous#434f93f9"
   },
   "devDependencies": {
-    "@credit/js-with-ts": "workspace:*",
+    "@credt/js-with-ts": "workspace:*",
     "@types/node": "^20.3.1",
     "chomp": "^0.2.17",
     "rimraf": "^5.0.1",

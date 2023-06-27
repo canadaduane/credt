@@ -51,7 +51,7 @@ export async function mount({ rootImports, head, body } /*: MountPayload*/) {
 }
 
 /**
- * Returns the relative path of the **javascript module that called Credit**
+ * Returns the relative path of the **javascript module that called Credt**
  * suitable to be inserted as a script into the dom.
  */
 function scriptModuleSrc(module /*: string*/) {

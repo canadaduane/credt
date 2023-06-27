@@ -7,6 +7,6 @@ run = "node server.js"
 
 [[task]]
 name = "build"
-deps = ['public/##.html.js', 'public/importmap.json', 'public/credit.js']
+deps = ['public/##.html.js', 'public/importmap.json', 'public/credt.js']
 target = 'public/##.html'
 run = 'node $DEP > $TARGET'

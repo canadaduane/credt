@@ -7,9 +7,12 @@ export { observable, subscribe } from "sinuous/observable";
 export { html as chtml } from "sinuous";
 export { dhtml } from "sinuous/hydrate";
 
-globalThis.chtml = chtml
-globalThis.dhtml = dhtml
-globalThis.hydrate = hydrate
+// @ts-ignore
+globalThis.chtml = chtml;
+// @ts-ignore
+globalThis.dhtml = dhtml;
+// @ts-ignore
+globalThis.hydrate = hydrate;
 
 export const isServer = typeof global === "object";
 const headEl = globalThis.document?.head.firstElementChild;
@@ -17,7 +20,7 @@ const bodyEl = globalThis.document?.body.firstElementChild;
 
 export async function mount({ rootImports, head, body } /*: MountPayload */) {
   if (isServer) {
-    (await import("./ssr/credit-ssr.js")).mount({ rootImports, head, body });
+    (await import("./ssr/credt-ssr.js")).mount({ rootImports, head, body });
   } else {
     // This is the client
 
@@ -25,9 +28,9 @@ export async function mount({ rootImports, head, body } /*: MountPayload */) {
       // This is the client, and the HTML head is present, so we hydrate
       if (head) {
         const builtins = dhtml``;
-        const node = head({ builtins: (b) => b })
+        const node = head({ builtins: (b) => b });
         // TODO(canadaduane): Do vnodes in the head actually work? Seems unlikely...
-        hydrate((node ?? builtins) /*+ as VNode<{}>*/, headEl);
+        hydrate(node ?? builtins /*+ as VNode<{}>*/, headEl);
       }
     } else {
       // This is the client, but the HTML head is missing--not good!

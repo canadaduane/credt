@@ -1,5 +1,5 @@
 /*+ import { Item } from "./types.ts" */
-import { mount, html, observable as o } from "@credit/core";
+import { mount, html, observable as o } from "@credt/core";
 import { TodoList } from "./TodoList.js";
 
 await mount({

@@ -1,6 +1,6 @@
 /*+ import type { Item } from "./types.ts"; */
 /*+ import type { Observable } from "sinuous/observable"; */
-import { html } from "@credit/core";
+import { html } from "@credt/core";
 
 export const TodoList = ({ items }/*: { items: Observable<Item[]> }*/) => {
   return html`

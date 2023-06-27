@@ -1,14 +1,14 @@
 {
   "name": "todo",
   "version": "1.0.0",
-  "description": "Example todo app for Credit framework",
+  "description": "Example todo app for Credt framework",
   "type": "module",
   "scripts": {
     "dev": "node src/index.html.js >src/index.html && sirv src/",
     "build": "NODE_ENV=production node src/index.html.js >src/index.html"
   },
   "dependencies": {
-    "@credit/core": "workspace:*"
+    "@credt/core": "workspace:*"
   },
   "devDependencies": {
     "sirv-cli": "^2.0.2",

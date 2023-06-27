@@ -1,5 +1,5 @@
 {
-  "name": "credit",
+  "name": "credt",
   "version": "1.0.0",
   "description": "An experimental web framework based on CRDTs",
   "type": "module",
@@ -9,7 +9,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/canadaduane/credit.git"
+    "url": "https://github.com/canadaduane/credt.git"
   },
   "scripts": {
     "start": "node server.js"

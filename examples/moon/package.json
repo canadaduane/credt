@@ -1,14 +1,14 @@
 {
   "name": "moon",
   "version": "1.0.0",
-  "description": "Example scrolling moon app for the Credit framework",
+  "description": "Example scrolling moon app for the Credt framework",
   "type": "module",
   "scripts": {
     "dev": "node public/index.html.js >public/index.html && sirv --dev public/",
     "build": "NODE_ENV=production node public/index.html.js >public/index.html"
   },
   "dependencies": {
-    "@credit/core": "workspace:*"
+    "@credt/core": "workspace:*"
   },
   "devDependencies": {
     "sirv-cli": "^2.0.2",
