@@ -1,0 +1,10 @@
+{
+  "env": ["browser", "development", "module"],
+  "imports": {
+    "@credit/core": "http://localhost:9000/src/credit.js",
+    "sinuous": "http://localhost:9000/node_modules/sinuous/src/index.js",
+    "sinuous/hydrate": "http://localhost:9000/node_modules/sinuous/src/hydrate.js",
+    "sinuous/map": "http://localhost:9000/node_modules/sinuous/src/map.js",
+    "sinuous/observable": "http://localhost:9000/node_modules/sinuous/src/observable.js"
+  }
+}

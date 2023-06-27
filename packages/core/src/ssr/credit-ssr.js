@@ -14,9 +14,13 @@ export async function mount({ rootImports, head, body } /*: MountPayload*/) {
   }
   let builtins;
 
+  const importmapFile =
+    process.env.NODE_ENV === "production"
+      ? "importmap.json"
+      : "importmap.dev.json";
   builtins = chtml`
       <script type="importmap">
-        ${await readFile("importmap.json")}
+        ${await readFile(importmapFile)}
       </script>
       ${rootImports.map(
         (r) =>
@@ -54,6 +58,7 @@ function scriptModuleSrc(module /*: string*/) {
   return path.basename(module);
 }
 
+function createServerSideDom() /*: Document */ {
   if (globalThis.document) throw Error("dom already exists");
 
   // Create a virtual server-side DOM
