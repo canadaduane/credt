@@ -27,7 +27,7 @@ importers:
 
   examples/moon:
     dependencies:
-      '@credit/core':
+      '@credt/core':
         specifier: workspace:*
         version: link:../../packages/core
     devDependencies:
@@ -40,7 +40,7 @@ importers:
 
   examples/todo:
     dependencies:
-      '@credit/core':
+      '@credt/core':
         specifier: workspace:*
         version: link:../../packages/core
     devDependencies:
@@ -60,7 +60,7 @@ importers:
         specifier: github:canadaduane/sinuous#434f93f9
         version: github.com/canadaduane/sinuous/434f93f9
     devDependencies:
-      '@credit/js-with-ts':
+      '@credt/js-with-ts':
         specifier: workspace:*
         version: link:../js-with-ts/cli
       '@types/node':
