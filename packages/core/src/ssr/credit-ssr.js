@@ -54,7 +54,6 @@ function scriptModuleSrc(module /*: string*/) {
   return path.basename(module);
 }
 
-async function createServerSideDom() {
   if (globalThis.document) throw Error("dom already exists");
 
   // Create a virtual server-side DOM
