@@ -4,13 +4,14 @@
   "description": "Example scrolling moon app for the Credt framework",
   "type": "module",
   "scripts": {
-    "dev": "node public/index.html.js >public/index.html && sirv --dev public/",
-    "build": "NODE_ENV=production node public/index.html.js >public/index.html"
+    "dev": "node public/index.html.js >public/index.html && clean-html public/index.html --in-place && sirv --dev public/",
+    "build": "NODE_ENV=production node public/index.html.js >public/index.html && clean-html public/index.html --in-place"
   },
   "dependencies": {
     "@credt/core": "workspace:*"
   },
   "devDependencies": {
+    "clean-html": "^2.0.1",
     "sirv-cli": "^2.0.2",
     "tsconfig": "workspace:*"
   }

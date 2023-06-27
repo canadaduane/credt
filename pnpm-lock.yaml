@@ -31,6 +31,9 @@ importers:
         specifier: workspace:*
         version: link:../../packages/core
     devDependencies:
+      clean-html:
+        specifier: ^2.0.1
+        version: 2.0.1
       sirv-cli:
         specifier: ^2.0.2
         version: 2.0.2
@@ -432,6 +435,14 @@ packages:
     resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
     dev: true
     optional: true
+
+  /clean-html@2.0.1:
+    resolution: {integrity: sha512-8nqCWku8DLhZfDAtb6QRoRvT2o5BOW9nh8QlmpS2ujkyEz5TBDHNIAvL4PK+mNp52ir6zm5pAJJ3XOYtBe4mqw==}
+    hasBin: true
+    dependencies:
+      htmlparser2: 8.0.2
+      minimist: 1.2.8
+    dev: true
 
   /clone-response@1.0.2:
     resolution: {integrity: sha512-yjLXh88P599UOyPTFX0POsd7WxnbsVsGohcwzHOLspIhhpalPw1BcqED8NblyZLKcGrL8dTgMlcaZxV2jAD41Q==}
@@ -1216,7 +1227,6 @@ packages:
   /minimist@1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
     dev: true
-    optional: true
 
   /minipass@6.0.2:
     resolution: {integrity: sha512-MzWSV5nYVT7mVyWCwn2o7JH13w2TBRmmSqSRCKzTw+lmft9X4z+3wjvs06Tzijo5z4W/kahUCDpRXTF+ZrmF/w==}
