@@ -39,10 +39,20 @@ function FullPageBackground({ url } /*: { url: string }*/) {
 
 function Moon({ y } /*: { y : Observable<number> }*/) {
   return html`<div
-    style="position: absolute; left: 50%; transform: translateX(-50%); top: ${() =>
-      50 + y() / 1.4}px"
+    style="
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: ${() => 50 + y() / 1.4}px
+      "
   >
-    <img src="./moon.svg" width="200" />
+    <img
+      style="
+        width: 50vw;
+        max-width: 25vh;
+        "
+      src="./moon.svg"
+    />
   </div>`;
 }
 
