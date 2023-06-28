@@ -1,6 +1,6 @@
 node_modules/
-sinuous/
 examples/**/*.html
 vendor/
-.js-with-ts/
 dist/
+build/
+.js-with-ts/

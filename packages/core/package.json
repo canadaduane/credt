@@ -7,6 +7,7 @@
   "type": "module",
   "scripts": {
     "dev": "sirv . --dev --cors --port 9000",
+    "chomp": "chomp",
     "build": "chomp build"
   },
   "dependencies": {

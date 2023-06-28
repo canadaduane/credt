@@ -62,6 +62,12 @@ importers:
       sinuous:
         specifier: github:canadaduane/sinuous#434f93f9
         version: github.com/canadaduane/sinuous/434f93f9
+      sinuous-lifecycle:
+        specifier: ^2.1.0
+        version: 2.1.0(sinuous-trace@2.3.0)
+      sinuous-trace:
+        specifier: ^2.3.0
+        version: 2.3.0
     devDependencies:
       '@credt/js-with-ts':
         specifier: workspace:*
@@ -1658,6 +1664,18 @@ packages:
       simple-concat: 1.0.1
     dev: true
     optional: true
+
+  /sinuous-lifecycle@2.1.0(sinuous-trace@2.3.0):
+    resolution: {integrity: sha512-bWCzlXrsEafx2cfj9UQZ2rTraqVjROIitgVBA0O/9bGQhLWdD4C5U9Cb7NwceSCxgucEFX2s/LiQQTuwohzfNw==}
+    peerDependencies:
+      sinuous-trace: ^2.0.0
+    dependencies:
+      sinuous-trace: 2.3.0
+    dev: false
+
+  /sinuous-trace@2.3.0:
+    resolution: {integrity: sha512-J4+/eu+3M6n63V/1oAtuxthzbUE21CEK0p6WQXAijcp+E0KFQRhpMgpT1ObnGiJFRrJKkRIZp0xaxUEknnn5sA==}
+    dev: false
 
   /sirv-cli@2.0.2:
     resolution: {integrity: sha512-OtSJDwxsF1NWHc7ps3Sa0s+dPtP15iQNJzfKVz+MxkEo3z72mCD+yu30ct79rPr0CaV1HXSOBp+MIY5uIhHZ1A==}

@@ -2,19 +2,38 @@ version = 0.1
 
 [[task]]
 name = "clean"
-run = "rimraf .js-with-ts/ dist/"
+run = "rimraf build/ dist/"
 
 [[task]]
 name = "copy-js"
 dep = "clean"
-run = "cp -r src/ .js-with-ts/"
+run = "mkdir -p build; cp -r src/ build/js-with-ts/"
 
 [[task]]
 name = "make-ts"
-deps = ["copy-js", ".js-with-ts/##.js"]
+deps = ["copy-js", "build/js-with-ts/##.js"]
 run = "js-with-ts $DEP"
 
 [[task]]
-name = "build"
+name = "build-unminified"
+deps = ["clean"]
+run = "esbuild --bundle --format=esm --external:linkedom --external:node:* --outfile=dist/index.js src/credt.js"
+
+[[task]]
+name = "build-minified"
+deps = ["clean"]
+run = "esbuild --bundle --format=esm --external:linkedom --external:node:* --outfile=dist/index.min.js --minify src/credt.js"
+
+[[task]]
+name = "build-minified-compressed"
+deps = ["build-minified"]
+run = "brotli dist/index.min.js"
+
+[[task]]
+name = "build-types"
 deps = ["make-ts"]
 run = "tsc -p tsconfig.build.json"
+
+[[task]]
+name = "build"
+deps = ["build-types", "build-unminified", "build-minified-compressed"]
