@@ -1,0 +1,11 @@
+I learned that it doesn't make much sense to create a sinuous-specific
+bundle, for a couple of reasons:
+
+1. The size of sinuous alone is 5k, and credt is about 1k. We might as
+   well combine these two, if we're going to take advantage of any
+   kind of latency (bandwidth is not a concern at these sizes).
+
+2. There are a lot of moving parts involved, and if we're going to
+   bundle at all, we might as well move the parts just once. For
+   example, patch, chomp, esbuild, and a custom js file to bring it
+   all together.
