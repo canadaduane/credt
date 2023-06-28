@@ -3,9 +3,12 @@
 import { html as chtml } from "sinuous";
 import { dhtml, hydrate } from "sinuous/hydrate";
 
-export { observable, subscribe } from "sinuous/observable";
-export { html as chtml } from "sinuous";
-export { dhtml } from "sinuous/hydrate";
+export { h, hs, html as chtml, svg } from "sinuous";
+export * from "sinuous/observable";
+export * from "sinuous/hydrate";
+export { t, template } from "sinuous/template";
+export * from "sinuous-trace"
+export * from "sinuous-lifecycle"
 
 // @ts-ignore
 globalThis.chtml = chtml;
@@ -30,7 +33,7 @@ export async function mount({ rootImports, head, body } /*: MountPayload */) {
         const builtins = dhtml``;
         const node = head({ builtins: (b) => b });
         // TODO(canadaduane): Do vnodes in the head actually work? Seems unlikely...
-        hydrate(node ?? builtins /*+ as VNode<{}>*/, headEl);
+        hydrate((node ?? builtins) /*+ as VNode<{}>*/, headEl);
       }
     } else {
       // This is the client, but the HTML head is missing--not good!
