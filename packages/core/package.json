@@ -2,8 +2,8 @@
   "name": "@credt/core",
   "version": "0.1.0",
   "description": "Credt framework",
-  "main": "src/credt.js",
-  "types": "dist/credt.d.ts",
+  "main": "src/index.js",
+  "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
     "dev": "sirv . --dev --cors --port 9000",

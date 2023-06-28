@@ -17,12 +17,12 @@ run = "js-with-ts $DEP"
 [[task]]
 name = "build-unminified"
 deps = ["clean"]
-run = "esbuild --bundle --format=esm --external:linkedom --external:./ssr/credt-ssr.js --external:node:* --outfile=dist/index.js src/credt.js"
+run = "esbuild --bundle --format=esm --external:linkedom --external:./ssr/index.js --external:node:* --outfile=dist/index.js src/index.js"
 
 [[task]]
 name = "build-minified"
 deps = ["clean"]
-run = "esbuild --bundle --format=esm --external:linkedom --external:./ssr/credt-ssr.js --external:node:* --outfile=dist/index.min.js --minify src/credt.js"
+run = "esbuild --bundle --format=esm --external:linkedom --external:./ssr/index.js --external:node:* --outfile=dist/index.min.js --minify src/index.js"
 
 [[task]]
 name = "build-minified-compressed"

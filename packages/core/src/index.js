@@ -23,7 +23,7 @@ const bodyEl = globalThis.document?.body.firstElementChild;
 
 export async function mount({ rootImports, head, body } /*: MountPayload */) {
   if (isServer) {
-    (await import("./ssr/credt-ssr.js")).mount({ rootImports, head, body });
+    (await import("./ssr/index.js")).mount({ rootImports, head, body });
   } else {
     // This is the client
 
