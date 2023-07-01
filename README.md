@@ -63,6 +63,7 @@ CRDT Library (see below for ongoing research)
 
 - jsdelivr seems to offer best CDN for js--fast, and brotli compressed
 - animejs 6.5kb
+- bsonfy 2.7kb - serialize/deserialize json-like objects in binary format over the wire
 
 ### CRDTs
 
@@ -74,3 +75,5 @@ CRDT Library (see below for ongoing research)
 | Antimatter   | 7kb   | 2           | 7    | Experimental but very promising CRDT with deletions. |
 | causal-trees | 122kb |             |      | Too big                                              |
 | js-crdt      | 3kb   | 4           | 5    | Old, but worth investigating due to tiny size        |
+
+See [notepad-app](https://github.com/widmogrod/notepad-app/tree/master/src) for example app using js-crdt.
