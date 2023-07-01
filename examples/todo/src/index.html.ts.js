@@ -1,6 +1,6 @@
 /*+ import { Item } from "./types.ts" */
 import { mount, html, observable as o } from "@credt/core";
-import { TodoList } from "./TodoList.js";
+import { TodoList } from "./TodoList.ts.js";
 
 await mount({
   rootImports: [import.meta.url],
