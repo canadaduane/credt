@@ -2,7 +2,7 @@
 
 This extension provides syntax highlighting and language server support for plain javascript files, with **comments that include typescript** annotations.
 
-For example, the following is a valid Javascript file that can run in node or the browser:
+For example, the following is a valid Javascript file that can run in node or the browser, without a compile step:
 
 ```js
 /*+
