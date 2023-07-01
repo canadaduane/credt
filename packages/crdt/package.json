@@ -2,13 +2,14 @@
   "name": "js-crdt",
   "version": "1.7.1",
   "description": "CRDT Conflict-free Replication Data Type",
-  "main": "build/index.js",
+  "main": "dist/index.js",
   "type": "module",
-  "types": "build/index.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "tsc && mocha",
+    "test": "mocha --recursive test",
     "typecheck": "tsc",
-    "build": "esbuild --bundle --platform=neutral --format=esm --minify --outdir=dist src/index.ts"
+    "bundle": "esbuild --bundle --platform=neutral --format=esm --minify --outdir=dist src/index.ts",
+    "build": "pnpm typecheck && pnpm bundle"
   },
   "repository": {
     "type": "git",

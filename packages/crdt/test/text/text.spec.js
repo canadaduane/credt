@@ -52,16 +52,16 @@ describe("text.Text", () => {
 
     beforeEach(() => {
       a = createFromOrderer(createOrderer("a", origin.vector));
-      a.apply(new Insert(0, "abc"));
-      a.apply(new Delete(0, 1));
+      a.apply(new Insert(0, "abc")); // abc
+      a.apply(new Delete(0, 1)); // bc
 
       b = createFromOrderer(createOrderer("b", origin.vector));
-      b.apply(new Insert(0, "def"));
-      b.apply(new Delete(0, 1));
+      b.apply(new Insert(0, "def")); // def
+      b.apply(new Delete(0, 1)); // ef
 
       c = createFromOrderer(createOrderer("c", origin.vector));
-      c.apply(new Insert(0, "ghi"));
-      c.apply(new Delete(0, 1));
+      c.apply(new Insert(0, "ghi")); // ghi
+      c.apply(new Delete(0, 1)); // hi
     });
 
     it("should obey CRDT axioms", () => {
@@ -69,6 +69,10 @@ describe("text.Text", () => {
     });
 
     it("should converge to text", () => {
+      assert.equal(renderString(a), "bc");
+      assert.equal(renderString(b), "ef");
+      assert.equal(renderString(c), "hi");
+
       const merged = merge(merge(a, b), c);
 
       assert.equal(renderString(merged), "hiefbc");
