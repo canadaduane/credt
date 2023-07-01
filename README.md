@@ -30,10 +30,7 @@ Thank you to each innovator who has gone before. You are a credit to us all.
 
 ### Client
 
-[Antimatter](https://braid.org/antimatter)
-
-- JSON CRDT with non-tombstone deletion
-- size: 17.5kb / 6.6kb brotli
+CRDT Library (see below for ongoing research)
 
 [Sinuous](https://sinuous.netlify.app/)
 
