@@ -1,3 +1,3 @@
-export * from "./vector-clock";
-export * from "./factory";
-export * from "./orderer";
+export * from "./vector-clock.ts";
+export * from "./factory.ts";
+export * from "./orderer.ts";

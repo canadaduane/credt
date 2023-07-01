@@ -6,13 +6,13 @@ export class NaiveImmutableMap<V> {
   }
 
   public set(key: Key, value: V): NaiveImmutableMap<V> {
-    const clone = Object
-    .keys(this.data)
-    .reduce((clone, k: Key) => {
+    const clone = Object.keys(this.data).reduce((clone, k: Key) => {
+      // @ts-ignore
       clone[k] = this.data[k];
       return clone;
     }, {});
 
+    // @ts-ignore
     clone[key] = value;
 
     return new NaiveImmutableMap(clone);
@@ -22,7 +22,10 @@ export class NaiveImmutableMap<V> {
     return this.data[key];
   }
 
-  public reduce<R>(fn: (aggregator: R, values: V, key: string) => R, aggregator: R): R {
+  public reduce<R>(
+    fn: (aggregator: R, values: V, key: string) => R,
+    aggregator: R
+  ): R {
     return Object.keys(this.data).reduce((aggregator: R, key: string) => {
       return fn(aggregator, this.data[key], key);
     }, aggregator);

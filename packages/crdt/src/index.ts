@@ -1,13 +1,7 @@
-import * as functions from "./functions";
-import * as increment from "./increment";
-import * as order from "./order";
-import * as structures from "./structures";
-import * as text from "./text";
+import * as functions from "./functions.ts";
+import * as increment from "./increment.ts";
+import * as order from "./order/index.ts";
+import * as structures from "./structures/index.ts";
+import * as text from "./text/index.ts";
 
-export default {
-  functions,
-  increment,
-  order,
-  structures,
-  text,
-};
+export { functions, increment, order, structures, text };

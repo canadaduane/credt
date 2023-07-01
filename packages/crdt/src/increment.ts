@@ -1,4 +1,4 @@
-import {CRDT} from "./functions";
+import { CRDT } from "./functions.ts";
 
 export class Increment implements CRDT<Increment> {
   constructor(public value: number) {

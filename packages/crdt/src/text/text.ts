@@ -1,6 +1,6 @@
-import {equal, merge} from "../functions";
-import {Orderer} from "./orderer";
-import {Operation} from "./operation";
+import {equal, merge} from "../functions.ts";
+import {Orderer} from "./orderer.ts";
+import {Operation} from "./operation.ts";
 
 export interface OrderedMap<K, V> {
   set(key: K, value: V): OrderedMap<K, V>;
@@ -61,7 +61,7 @@ export class Text {
     return equal(this.order, b.order);
   }
 
-  public reduce<R>(fn: (aggregator: R, item: OrderedOperations) => R, accumulator): R {
+  public reduce<R>(fn: (aggregator: R, item: OrderedOperations) => R, accumulator: any): R {
     return this.map.reduce((accumulator, operations, order) => {
       return fn(accumulator, {operations, order});
     }, accumulator);

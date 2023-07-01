@@ -40,26 +40,25 @@ export function between(value: number, min: number, max: number): boolean {
   return true;
 }
 
-export interface CRDT<T> extends Merger<T>, Equaler<T> { }
+export interface CRDT<T> extends Merger<T>, Equaler<T> {}
 
 export type AssertFunc = (assertion: boolean, message: string) => void;
 
-export function axioms<T extends CRDT<any>>(assert: AssertFunc, a: T, b: T, c: T): void {
+export function axioms<T extends CRDT<any>>(
+  assert: AssertFunc,
+  a: T,
+  b: T,
+  c: T
+): void {
   // commutative   a + c = c + a                i.e: 1 + 2 = 2 + 1
-  assert(
-    equal(merge(a, b), merge(b, a)),
-    "is not commutative",
-  );
+  assert(equal(merge(a, b), merge(b, a)), "is not commutative");
 
   // associative   a + (b + c) = (a + b) + c    i.e: 1 + (2 + 3) = (1 + 2) + 3
   assert(
     equal(merge(a, merge(b, c)), merge(merge(a, b), c)),
-    "is not associative",
+    "is not associative"
   );
 
   // idempotent    f(f(a)) = f(a)               i.e: ||a|| = |a|
-  assert(
-    equal(merge(a, a), a),
-    "is not idempotent",
-  );
+  assert(equal(merge(a, a), a), "is not idempotent");
 }

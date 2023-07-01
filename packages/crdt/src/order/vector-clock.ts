@@ -1,4 +1,4 @@
-import {Orderer} from "./orderer";
+import { Orderer } from "./orderer.ts";
 
 export type VectorSortedSetReduceFunc<R, T> = (aggregator: R, item: T) => R;
 
@@ -28,10 +28,7 @@ export class Id {
   }
 
   public next(): Id {
-    return new Id(
-      this.node,
-      this.version + 1,
-    );
+    return new Id(this.node, this.version + 1);
   }
 
   public compare(b: Id): number {
@@ -47,7 +44,7 @@ export class VectorClock implements Orderer<VectorClock> {
   constructor(public id: Id, public vector: VectorSortedSet<Id>) {
     this.id = id;
     /* tslint:disable: prefer-const */
-    let {result, value} = vector.add(id);
+    let { result, value } = vector.add(id);
 
     if (result === vector) {
       if (id.version > value.version) {
@@ -66,7 +63,7 @@ export class VectorClock implements Orderer<VectorClock> {
   public next(): VectorClock {
     return new VectorClock(
       this.id.next(),
-      this.vector.remove(this.id).result.add(this.id.next()).result,
+      this.vector.remove(this.id).result.add(this.id.next()).result
     );
   }
 
@@ -77,7 +74,7 @@ export class VectorClock implements Orderer<VectorClock> {
 
     return this.vector.reduce((eq, item) => {
       if (eq) {
-        const {result, value} = b.vector.add(item);
+        const { result, value } = b.vector.add(item);
         if (result === b.vector) {
           return value.version === item.version;
         }
@@ -110,27 +107,28 @@ export class VectorClock implements Orderer<VectorClock> {
     // VC(a) < VC(b) IF
     //   forall VC(a)[i] <= VC(b)[i]
     //   and exists VC(a)[i] < VC(b)[i]]
-    const {everyLEQ, anyLT} = this.vector
-      .intersect(b.vector)
-      .reduce(({everyLEQ, anyLT}, item) => {
+    const { everyLEQ, anyLT } = this.vector.intersect(b.vector).reduce(
+      ({ everyLEQ, anyLT }, item) => {
         const rA = this.vector.add(item).value;
         const rB = b.vector.add(item).value;
 
         anyLT = anyLT ? anyLT : rA.version < rB.version;
         everyLEQ = everyLEQ ? rA.version <= rB.version : everyLEQ;
 
-        return {everyLEQ, anyLT};
-      }, {
+        return { everyLEQ, anyLT };
+      },
+      {
         anyLT: false,
         everyLEQ: true,
-      });
+      }
+    );
 
-    return everyLEQ && (anyLT || (this.vector.size() < b.vector.size()));
+    return everyLEQ && (anyLT || this.vector.size() < b.vector.size());
   }
 
   public merge(b: VectorClock): VectorClock {
     const vector = this.vector.reduce((vector, item) => {
-      const {result, value} = b.vector.add(item);
+      const { result, value } = b.vector.add(item);
       if (result === b.vector) {
         if (value.version > item.version) {
           return vector.add(value).result;
@@ -142,9 +140,6 @@ export class VectorClock implements Orderer<VectorClock> {
       return vector.add(item).result;
     }, this.vector.mempty());
 
-    return new VectorClock(
-      this.id,
-      vector.union(b.vector),
-    );
+    return new VectorClock(this.id, vector.union(b.vector));
   }
 }

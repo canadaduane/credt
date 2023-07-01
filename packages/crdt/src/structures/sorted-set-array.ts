@@ -21,9 +21,9 @@ export function divide<T extends Item<T>, R>(
   elements: List<T>,
   item: T,
   onNew: (item: T, elements: List<T>, lower: number) => R,
-  onExists: (item: T, elements: List<T>, index: number) => R,
+  onExists: (item: T, elements: List<T>, index: number) => R
 ): R {
-  const step = (upper - lower);
+  const step = upper - lower;
   if (step < 1) {
     return onNew(item, elements, lower);
   }
@@ -34,11 +34,25 @@ export function divide<T extends Item<T>, R>(
   const cmp = elm.compare(item);
 
   if (cmp < 0) {
-    return divide(half ? (lower + half) : upper, upper, elements, item, onNew, onExists);
+    return divide(
+      half ? lower + half : upper,
+      upper,
+      elements,
+      item,
+      onNew,
+      onExists
+    );
   }
 
   if (cmp > 0) {
-    return divide(lower, half ? (upper - half) : lower, elements, item, onNew, onExists);
+    return divide(
+      lower,
+      half ? upper - half : lower,
+      elements,
+      item,
+      onNew,
+      onExists
+    );
   }
 
   return onExists(elm, elements, idx);
@@ -65,25 +79,36 @@ export class SortedSetArray<T extends Item<T>> {
 
   public add(value: T): Tuple<SortedSetArray<T>, T> {
     return divide(
-      0, this.elements.size(), this.elements, value,
-      (item, elements, lower) => new Tuple(new SortedSetArray(elements.insert(lower, item)), item),
-      (item, elements) => new Tuple(this, item),
+      0,
+      this.elements.size(),
+      this.elements,
+      value,
+      (item, elements, lower) =>
+        new Tuple(new SortedSetArray(elements.insert(lower, item)), item),
+      (item, elements) => new Tuple(this, item)
     );
   }
 
   public remove(value: T): Tuple<SortedSetArray<T>, T> {
     return divide(
-      0, this.elements.size(), this.elements, value,
+      0,
+      this.elements.size(),
+      this.elements,
+      value,
       (item, elements, lower) => new Tuple(this, value),
-      (item, elements, index) => new Tuple(new SortedSetArray(elements.remove(index)), item),
+      (item, elements, index) =>
+        new Tuple(new SortedSetArray(elements.remove(index)), item)
     );
   }
 
   public has(value: T): boolean {
     return divide(
-      0, this.elements.size(), this.elements, value,
+      0,
+      this.elements.size(),
+      this.elements,
+      value,
       () => false,
-      () => true,
+      () => true
     );
   }
 
@@ -94,15 +119,21 @@ export class SortedSetArray<T extends Item<T>> {
   }
 
   public intersect(b: SortedSetArray<T>): SortedSetArray<T> {
-    return this.reduce((result: SortedSetArray<T>, item: T): SortedSetArray<T> => {
-      return b.has(item) ? result.add(item).result : result;
-    }, this.mempty());
+    return this.reduce(
+      (result: SortedSetArray<T>, item: T): SortedSetArray<T> => {
+        return b.has(item) ? result.add(item).result : result;
+      },
+      this.mempty()
+    );
   }
 
   public difference(b: SortedSetArray<T>): SortedSetArray<T> {
-    return this.reduce((result: SortedSetArray<T>, item: T): SortedSetArray<T> => {
-      return b.has(item) ? result : result.add(item).result;
-    }, this.mempty());
+    return this.reduce(
+      (result: SortedSetArray<T>, item: T): SortedSetArray<T> => {
+        return b.has(item) ? result : result.add(item).result;
+      },
+      this.mempty()
+    );
   }
 
   public equal(b: SortedSetArray<T>): boolean {
@@ -122,17 +153,27 @@ export class SortedSetArray<T extends Item<T>> {
 
   public from(value: T, inclusive: boolean = true): SortedSetArray<T> {
     return divide(
-      0, this.elements.size(), this.elements, value,
-      (item, elements, lower) => new SortedSetArray(this.elements.from(lower, inclusive)),
-      (item, elements, index) => new SortedSetArray(this.elements.from(index, inclusive)),
+      0,
+      this.elements.size(),
+      this.elements,
+      value,
+      (item, elements, lower) =>
+        new SortedSetArray(this.elements.from(lower, inclusive)),
+      (item, elements, index) =>
+        new SortedSetArray(this.elements.from(index, inclusive))
     );
   }
 
   public to(value: T, inclusive: boolean = true): SortedSetArray<T> {
     return divide(
-      0, this.elements.size(), this.elements, value,
-      (item, elements, lower) => new SortedSetArray(this.elements.to(lower, inclusive)),
-      (item, elements, index) => new SortedSetArray(this.elements.to(index, inclusive)),
+      0,
+      this.elements.size(),
+      this.elements,
+      value,
+      (item, elements, lower) =>
+        new SortedSetArray(this.elements.to(lower, inclusive)),
+      (item, elements, index) =>
+        new SortedSetArray(this.elements.to(index, inclusive))
     );
   }
 }

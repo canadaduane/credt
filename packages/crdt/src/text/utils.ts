@@ -1,9 +1,9 @@
-import {Delete} from "./delete";
-import {Insert} from "./insert";
-import {Selection} from "./selection";
-import {Operation} from "./operation";
-import {OrderedOperations, Text} from "./text";
-import {NaiveImmutableMap} from "../structures/naive-immutable-map";
+import { Delete } from "./delete.ts";
+import { Insert } from "./insert.ts";
+import { Selection } from "./selection.ts";
+import { Operation } from "./operation.ts";
+import { OrderedOperations, Text } from "./text.ts";
+import { NaiveImmutableMap } from "../structures/naive-immutable-map.ts";
 
 export function snapshot(text: Text): Text {
   return text.next();
@@ -49,7 +49,7 @@ export function toString(value: string[]): string {
   let result = "";
   for (let i = 0, len = value.length; i < len; i++) {
     const item = value[i];
-    result += ((typeof item === "undefined") ? " " : item);
+    result += typeof item === "undefined" ? " " : item;
   }
   return result;
 }
@@ -70,24 +70,46 @@ export interface SelectionMap<K, V> {
   reduce<R>(fn: (aggregator: R, values: V, key: K) => R, aggregator: R): R;
 }
 
-export function getSelections(text: Text, fallback: Selection): SelectionMap<string, Selection> {
-  return text.reduce((map: SelectionMap<string, Selection>, oo: OrderedOperations): SelectionMap<string, Selection> => {
-    return oo.operations.reduce((map: SelectionMap<string, Selection>, o: Operation) => {
-      return map.reduce((map: SelectionMap<string, Selection>, s: Selection, key: string) => {
-        if (o instanceof Selection) {
-          if (!map.get(o.origin)) {
-            return map.set(o.origin, o);
-          }
-        }
+export function getSelections(
+  text: Text,
+  fallback: Selection
+): SelectionMap<string, Selection> {
+  return text.reduce(
+    (
+      map: SelectionMap<string, Selection>,
+      oo: OrderedOperations
+    ): SelectionMap<string, Selection> => {
+      return oo.operations.reduce(
+        (map: SelectionMap<string, Selection>, o: Operation) => {
+          return map.reduce(
+            (
+              map: SelectionMap<string, Selection>,
+              s: Selection,
+              key: string
+            ) => {
+              if (o instanceof Selection) {
+                if (!map.get(o.origin)) {
+                  return map.set(o.origin, o);
+                }
+              }
 
-        const next = selectionUpdate(s, o);
-        return map.set(next.origin, next);
-      }, map);
-    }, map);
-  }, new NaiveImmutableMap().set(fallback.origin, fallback));
+              const next = selectionUpdate(s, o);
+              return map.set(next.origin, next);
+            },
+            map
+          );
+        },
+        map
+      );
+    },
+    new NaiveImmutableMap().set(fallback.origin, fallback)
+  );
 }
 
-export function selectionUpdate(selection: Selection, op: Operation): Selection {
+export function selectionUpdate(
+  selection: Selection,
+  op: Operation
+): Selection {
   if (op instanceof Selection) {
     if (op.hasSameOrgin(selection)) {
       return op;
@@ -155,7 +177,9 @@ export function selectionUpdate(selection: Selection, op: Operation): Selection 
     //       ssssss
     //     dddd
     //   dddddddd
-    return selection.expandBy(selection.at - op.endsAt).moveRightBy(op.at - selection.at);
+    return selection
+      .expandBy(selection.at - op.endsAt)
+      .moveRightBy(op.at - selection.at);
   }
 
   return selection;

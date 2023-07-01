@@ -1,11 +1,13 @@
-'use strict';
+"use strict";
 
-const {Increment} = require('../build/increment');
-const {axioms} = require('../build/functions');
-const assert = require('assert');
+import assert from "assert";
+import { increment, functions } from "../dist/index.js";
 
-describe('Increment', () => {
-  let a,b,c;
+const { Increment } = increment;
+const { axioms } = functions;
+
+describe("Increment", () => {
+  let a, b, c;
 
   beforeEach(() => {
     a = new Increment(1);
@@ -13,7 +15,7 @@ describe('Increment', () => {
     c = new Increment(7);
   });
 
-  it('should obey CRDT axioms', function() {
+  it("should obey CRDT axioms", function () {
     axioms(assert, a, b, c);
   });
 });

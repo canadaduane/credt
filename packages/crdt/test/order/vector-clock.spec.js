@@ -1,13 +1,13 @@
-'use strict';
+"use strict";
 
-const {createVectorClock} = require('../../build/order');
-const {compare, axioms} = require('../../build/functions');
-const assert = require('assert');
+import assert from "assert";
+import { createVectorClock } from "../../build/order.js";
+import { compare, axioms } from "../../build/functions.js";
 
-describe('order/VectorClock', () => {
-  const a0 = createVectorClock('a', 0);
-  const b0 = createVectorClock('b', 0);
-  const c0 = createVectorClock('c', 0);
+describe("order/VectorClock", () => {
+  const a0 = createVectorClock("a", 0);
+  const b0 = createVectorClock("b", 0);
+  const c0 = createVectorClock("c", 0);
 
   // Actor A do work
   const a1 = a0.next();
@@ -22,64 +22,58 @@ describe('order/VectorClock', () => {
   // Actor C start geting new messages
   const c2a3b2 = c0.next().merge(a3b2).next().merge(b2a1);
 
-  describe('deterministic order', () => {
-    const rand = () => Math.random() > 0.5 ? -1 : 1;
+  describe("deterministic order", () => {
+    const rand = () => (Math.random() > 0.5 ? -1 : 1);
     const useCases = {
-      'should existit for actor A':  {
+      "should existit for actor A": {
         in: [a0, a1, a2b2, a3b2].sort(rand),
-        out: [a0, a1, a2b2, a3b2]
+        out: [a0, a1, a2b2, a3b2],
       },
-      'should existit for actor B':  {
+      "should existit for actor B": {
         in: [b0, b1a1, b2a1].sort(rand),
-        out: [b0, b1a1, b2a1]
+        out: [b0, b1a1, b2a1],
       },
-      'should existit for actor C':  {
+      "should existit for actor C": {
         in: [c0, c2a3b2].sort(rand),
-        out: [c0, c2a3b2]
+        out: [c0, c2a3b2],
       },
     };
 
-    Object.keys(useCases).forEach(name => {
+    Object.keys(useCases).forEach((name) => {
       const useCase = useCases[name];
       it(name, () => {
-        assert.deepEqual(
-          useCase.in.sort(compare),
-          useCase.out
-        );
+        assert.deepEqual(useCase.in.sort(compare), useCase.out);
       });
     });
   });
 
   const useCases = {
-    'same version should be equal': {
+    "same version should be equal": {
       a: a1,
       b: a1,
-      expected: 0
+      expected: 0,
     },
-    'previous version should be before than next': {
+    "previous version should be before than next": {
       a: a1,
       b: a0,
-      expected: 1
+      expected: 1,
     },
-    'next version should be after than previous': {
+    "next version should be after than previous": {
       a: a0,
       b: a1,
-      expected: -1
+      expected: -1,
     },
   };
 
-  Object.keys(useCases).forEach(name => {
+  Object.keys(useCases).forEach((name) => {
     const useCase = useCases[name];
 
     it(name, () => {
-      assert.deepEqual(
-        compare(useCase.a, useCase.b),
-        useCase.expected
-      );
+      assert.deepEqual(compare(useCase.a, useCase.b), useCase.expected);
     });
   });
 
-  it('should obey CRDTs axioms', () => {
+  it("should obey CRDTs axioms", () => {
     axioms(assert, a0, c0, a3b2);
   });
 });

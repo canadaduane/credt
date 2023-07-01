@@ -31,20 +31,23 @@ export class Indexed<T extends OrderedMapKey<T>> implements OrderedMapKey<T> {
     this.index = index;
   }
 
-  public compare(b: Indexed<T>): number  {
+  public compare(b: Indexed<T>): number {
     return this.value.compare(b.value);
   }
 }
 
 export class OrderedMap<K extends OrderedMapKey<K>, V> {
-  constructor(private keys?: SortedSet<Indexed<K>>, private values?: Map<number, V>) {}
+  constructor(
+    private keys?: SortedSet<Indexed<K>>,
+    private values?: Map<number, V>
+  ) {}
 
   public set(key: K, value: V): OrderedMap<K, V> {
     const result = this.keys.add(new Indexed(key, this.keys.size()));
 
     return new OrderedMap(
       result.result,
-      this.values.set(result.value.index, value),
+      this.values.set(result.value.index, value)
     );
   }
 
@@ -63,7 +66,10 @@ export class OrderedMap<K extends OrderedMapKey<K>, V> {
     }, this);
   }
 
-  public reduce<R>(fn: (aggregator: R, values: V, key: K) => R, aggregator: R): R {
+  public reduce<R>(
+    fn: (aggregator: R, values: V, key: K) => R,
+    aggregator: R
+  ): R {
     return this.keys.reduce((aggregator, key) => {
       return fn(aggregator, this.values.get(key.index), key.value);
     }, aggregator);
@@ -74,7 +80,7 @@ export class OrderedMap<K extends OrderedMapKey<K>, V> {
 
     return new OrderedMap(
       this.keys.from(result.value, inclusive),
-      this.values, // TODO Pass all values since those are immutable...
+      this.values // TODO Pass all values since those are immutable...
     );
   }
 
@@ -83,7 +89,7 @@ export class OrderedMap<K extends OrderedMapKey<K>, V> {
 
     return new OrderedMap(
       this.keys.to(result.value, inclusive),
-      this.values, // TODO Pass all values since those are immutable...
+      this.values // TODO Pass all values since those are immutable...
     );
   }
 }

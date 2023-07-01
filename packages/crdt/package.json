@@ -3,13 +3,12 @@
   "version": "1.7.1",
   "description": "CRDT Conflict-free Replication Data Type",
   "main": "build/index.js",
+  "type": "module",
   "types": "build/index.d.ts",
   "scripts": {
     "test": "tsc && mocha",
     "typecheck": "tsc",
-    "build": "esbuild --bundle --format=esm --minify --outdir=dist src/index.ts",
-    "lint": "tslint src/**/*.ts",
-    "fix": "tslint src/**/*.ts --fix"
+    "build": "esbuild --bundle --platform=neutral --format=esm --minify --outdir=dist src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -29,7 +28,7 @@
   "homepage": "https://github.com/widmogrod/js-crdt#readme",
   "devDependencies": {
     "esbuild": "0.18.10",
-    "mocha": "^3.5.3",
+    "mocha": "^10.2.0",
     "tsconfig": "workspace:*",
     "tsutils": "^2.8.2",
     "typescript": "^5.1.6"
