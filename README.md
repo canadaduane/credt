@@ -24,7 +24,7 @@ Thank you to each innovator who has gone before. You are a credit to us all.
 
 No build step, just javascript--but augmented with type annotations. We provide a VS Code extension called [ts-dot-js](https://github.com/canadaduane/credt/tree/main/packages/ts-dot-js/vscode-extension) for ".ts.js" files:
 
-<img src="./raw/main/packages/ts-dot-js/vscode-extension/docs/language-highlight.png" width="600" alt="javascript with typescript comments">
+<img src="packages/ts-dot-js/vscode-extension/docs/language-highlight.png" width="600" alt="javascript with typescript comments">
 
 Think of it as JSDoc annotations, but easier to learn if you already know typescript--and with the full power of typescript, rather than just the subset supported by JSDoc.
 
