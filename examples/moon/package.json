@@ -11,8 +11,8 @@
     "@credt/core": "workspace:*"
   },
   "devDependencies": {
+    "@credt/tsconfig": "workspace:*",
     "clean-html": "^2.0.1",
-    "sirv-cli": "^2.0.2",
-    "tsconfig": "workspace:*"
+    "sirv-cli": "^2.0.2"
   }
 }

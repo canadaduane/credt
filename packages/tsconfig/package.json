@@ -1,5 +1,5 @@
 {
-  "name": "tsconfig",
+  "name": "@credt/tsconfig",
   "version": "1.0.0",
   "description": "Base typescript config"
 }

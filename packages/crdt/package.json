@@ -1,5 +1,5 @@
 {
-  "name": "js-crdt",
+  "name": "@credt/crdt",
   "version": "1.7.1",
   "description": "CRDT Conflict-free Replication Data Type",
   "main": "dist/index.js",
@@ -28,9 +28,9 @@
   },
   "homepage": "https://github.com/widmogrod/js-crdt#readme",
   "devDependencies": {
+    "@credt/tsconfig": "workspace:*",
     "esbuild": "0.18.10",
     "mocha": "^10.2.0",
-    "tsconfig": "workspace:*",
     "tsutils": "^2.8.2",
     "typescript": "^5.1.6"
   }

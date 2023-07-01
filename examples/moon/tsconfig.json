@@ -1,4 +1,4 @@
 {
-  "extends": "tsconfig/base.json",
+  "extends": "@credt/tsconfig/base.json",
   "include": ["public/**/*.js"]
 }

@@ -8,7 +8,7 @@
   },
   "type": "module",
   "devDependencies": {
-    "tsconfig": "workspace:*"
+    "@credt/tsconfig": "workspace:*"
   },
   "author": "Duane Johnson <duane.johnson@gmail.com>",
   "license": "MIT"
