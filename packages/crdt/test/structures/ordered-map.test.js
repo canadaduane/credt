@@ -1,8 +1,7 @@
 import assert from "assert";
-import { OrderedMap } from "../../src/structures/ordered-map.js";
-import { SortedSetArray } from "../../src/structures/sorted-set-array.js";
-import { NaiveImmutableMap } from "../../src/structures/naive-immutable-map.js";
-import { NaiveArrayList } from "../../src/structures/naive-array-list.js";
+import { structures } from "../../dist/index.js";
+const { OrderedMap, SortedSetArray, NaiveArrayList, NaiveImmutableMap } =
+  structures;
 
 class Cmp {
   constructor(value) {

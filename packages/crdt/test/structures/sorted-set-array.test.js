@@ -1,7 +1,6 @@
 import assert from "assert";
-import { SortedSetArray } from "../../src/structures/sorted-set-array.js";
-import { NaiveArrayList } from "../../src/structures/naive-array-list.js";
-import { axioms } from "../../src/structures/set-axioms.js";
+import { structures } from "../../dist/index.js";
+const { SortedSetArray, NaiveArrayList, axioms } = structures;
 
 class Cmp {
   constructor(value) {

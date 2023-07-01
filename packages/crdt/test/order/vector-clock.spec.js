@@ -1,8 +1,9 @@
 "use strict";
 
 import assert from "assert";
-import { createVectorClock } from "../../build/order.js";
-import { compare, axioms } from "../../build/functions.js";
+import { order, functions } from "../../dist/index.js";
+const { createVectorClock } = order;
+const { compare, axioms } = functions;
 
 describe("order/VectorClock", () => {
   const a0 = createVectorClock("a", 0);

@@ -1,7 +1,8 @@
 "use strict";
 
 import assert from "assert";
-import { Delete, operationToArray } from "../../build/text/index.js";
+import { text } from "../../dist/index.js";
+const { Delete, operationToArray } = text;
 
 describe("text.Delete", () => {
   describe("Delete operation, applied on data", () => {

@@ -1,17 +1,19 @@
 "use strict";
 
 import assert from "assert";
-import {
+import { text, order, functions } from "../../dist/index.js";
+const {
   Insert,
   Delete,
   Selection,
   snapshot,
   renderString,
   createFromOrderer,
-} from "../../build/text.js";
-import { getSelection, getSelections } from "../../build/text.js";
-import { createVectorClock } from "../../build/order.js";
-import { merge, axioms } from "../../build/functions.js";
+  getSelection,
+  getSelections,
+} = text;
+const { createVectorClock } = order;
+const { merge, axioms } = functions;
 
 function createOrderer(id, vector) {
   return createVectorClock(id, 0, vector);

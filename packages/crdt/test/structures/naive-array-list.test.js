@@ -1,5 +1,6 @@
 import assert from "assert";
-import { NaiveArrayList } from "../../src/structures/naive-array-list.js";
+import { structures } from "../../dist/index.js";
+const { NaiveArrayList } = structures;
 
 describe("NaiveArrayList", () => {
   it("should be immutable", () => {

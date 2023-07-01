@@ -1,7 +1,8 @@
 "use strict";
 
 import assert from "assert";
-import { Insert, operationToArray } from "../../build/text/index.js";
+import { text } from "../../dist/index.js";
+const { Insert, operationToArray } = text;
 
 describe("text.Insert", () => {
   describe("Insert operation, applied on data", () => {

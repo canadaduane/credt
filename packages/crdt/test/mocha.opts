@@ -1,4 +1,0 @@
---compilers ts:ts-node/register
---recursive
---reporter dot
---ui bdd
