@@ -1,0 +1,37 @@
+{
+  "name": "js-crdt",
+  "version": "1.7.1",
+  "description": "CRDT Conflict-free Replication Data Type",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "test": "tsc && mocha",
+    "typecheck": "tsc",
+    "build": "esbuild --bundle --format=esm --minify --outdir=dist src/index.ts",
+    "lint": "tslint src/**/*.ts",
+    "fix": "tslint src/**/*.ts --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/widmogrod/js-crdt.git"
+  },
+  "keywords": [
+    "CRDT",
+    "convergent types",
+    "data structures",
+    "collaborative editing"
+  ],
+  "author": "Gabriel Habryn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/widmogrod/js-crdt/issues"
+  },
+  "homepage": "https://github.com/widmogrod/js-crdt#readme",
+  "devDependencies": {
+    "esbuild": "0.18.10",
+    "mocha": "^3.5.3",
+    "tsconfig": "workspace:*",
+    "tsutils": "^2.8.2",
+    "typescript": "^5.1.6"
+  }
+}
