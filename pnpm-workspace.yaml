@@ -1,5 +1,6 @@
 packages:
   - "packages/core"
+  - "packages/crdt"
   - "packages/server"
   - "packages/tsconfig"
   - "packages/js-with-ts/cli"

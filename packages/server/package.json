@@ -1,0 +1,15 @@
+{
+  "name": "@credt/server",
+  "version": "1.0.0",
+  "description": "Experimental server",
+  "type": "module",
+  "scripts": {
+    "dev": "node public/index.html.js >public/index.html && clean-html public/index.html --in-place && sirv --dev public/",
+    "build": "NODE_ENV=production node public/index.html.js >public/index.html && clean-html public/index.html --in-place"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@credt/crdt": "workspace:*",
+    "@credt/tsconfig": "workspace:*"
+  }
+}
