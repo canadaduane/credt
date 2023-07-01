@@ -4,3 +4,4 @@ vendor/
 dist/
 build/
 .ts-dot-js/
+*.vsix
