@@ -1,0 +1,37 @@
+{
+  "fileTypes": [".ts.js"],
+  "scopeName": "ts-dot-js",
+  "injectionSelector": "L:comment.block.ts",
+  "patterns": [
+    {
+      "begin": "(^|\\G)(\\+)",
+      "beginCaptures": {
+        "2": {
+          "name": "constant.character.escape.extend.ts-dot-js"
+        }
+      },
+      "end": "(?=\\*/)",
+      "contentName": "source.ts",
+      "patterns": [
+        {
+          "include": "source.ts"
+        }
+      ]
+    },
+    {
+      "begin": "(^|\\G)(:)",
+      "beginCaptures": {
+        "2": {
+          "name": "keyword.operator.type.annotation.ts.ts-dot-js"
+        }
+      },
+      "end": "(?=\\*/)",
+      "contentName": "source.ts",
+      "patterns": [
+        {
+          "include": "source.ts"
+        }
+      ]
+    }
+  ]
+}

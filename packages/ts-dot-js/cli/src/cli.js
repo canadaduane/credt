@@ -7,7 +7,7 @@ function printHelp() {
   console.log(`
 This program replaces multiline typescript comments with just the typescript.
 
-Usage: js-with-ts [--spaces] [-h | --help] INPUT
+Usage: ts-dot-js [--spaces] [-h | --help] INPUT
 
 Options:
   INPUT                The name of the file to process, or "-" for stdin (default: "-")

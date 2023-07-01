@@ -7,5 +7,5 @@
     "emitDeclarationOnly": true,
     "allowImportingTsExtensions": true
   },
-  "include": ["build/js-with-ts/**/*.ts"]
+  "include": ["build/ts-dot-js/**/*.ts"]
 }

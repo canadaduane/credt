@@ -1,10 +1,10 @@
 {
-  "name": "@credt/js-with-ts",
+  "name": "@credt/ts-dot-js",
   "version": "1.0.0",
   "description": "Javascript with Typescript Comments tools",
   "main": "src/index.js",
   "bin": {
-    "js-with-ts": "src/cli.js"
+    "ts-dot-js": "src/cli.js"
   },
   "type": "module",
   "devDependencies": {

@@ -69,9 +69,9 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0
     devDependencies:
-      '@credt/js-with-ts':
+      '@credt/ts-dot-js':
         specifier: workspace:*
-        version: link:../js-with-ts/cli
+        version: link:../ts-dot-js/cli
       '@credt/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
@@ -109,21 +109,21 @@ importers:
         specifier: ^5.1.6
         version: 5.1.6
 
-  packages/js-with-ts/cli:
+  packages/ts-dot-js/cli:
     devDependencies:
       '@credt/tsconfig':
         specifier: workspace:*
         version: link:../../tsconfig
 
-  packages/js-with-ts/typescript-plugin:
+  packages/ts-dot-js/typescript-plugin:
     dependencies:
       typescript:
         specifier: '*'
         version: 5.1.3
 
-  packages/js-with-ts/vscode-extension:
+  packages/ts-dot-js/vscode-extension:
     dependencies:
-      js-with-ts-typescript-plugin:
+      ts-dot-js-typescript-plugin:
         specifier: 0.1.0
         version: link:../typescript-plugin
     devDependencies:

@@ -5,7 +5,7 @@ const TsPlugin = require("./tsplugin");
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-  console.info("Activate js-with-ts vscode extension");
+  console.info("Activate ts-dot-js vscode extension");
   const tsPlugin = new TsPlugin(context);
 
   if (
@@ -30,7 +30,7 @@ function activate(context) {
 
 // This method is called when your extension is deactivated
 function deactivate() {
-  console.info("Deactivate js-with-ts vscode extension");
+  console.info("Deactivate ts-dot-js vscode extension");
   return stop;
 }
 

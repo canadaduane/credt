@@ -18,7 +18,7 @@ class TsPlugin {
 
   static isEnabled() {
     return (
-      vscode.workspace.getConfiguration("js-with-ts").get("enable-ts-plugin") ??
+      vscode.workspace.getConfiguration("ts-dot-js").get("enable-ts-plugin") ??
       false
     );
   }
@@ -38,7 +38,7 @@ class TsPlugin {
     // and without having to do hacks like updating the extension's package.json.
     vscode.commands.executeCommand(
       "_typescript.configurePlugin",
-      "jswithts-typescript-plugin",
+      "ts-dot-js-typescript-plugin",
       {
         enable,
       }
@@ -47,7 +47,7 @@ class TsPlugin {
 
   async askToEnable() {
     const shouldAsk = vscode.workspace
-      .getConfiguration("jswithts")
+      .getConfiguration("ts-dot-js")
       .get("ask-to-enable-ts-plugin");
     if (this.enabled || !shouldAsk) {
       return;
@@ -59,7 +59,7 @@ class TsPlugin {
       "Enable Plugin",
     ];
     const response = await vscode.window.showInformationMessage(
-      "The jswithts for VS Code extension now contains a TypeScript plugin. " +
+      "The ts.js (ts-dot-js) for VS Code extension now contains a TypeScript plugin. " +
         "Enabling it will provide intellisense for JS files that contain typescript as comments. " +
         "Would you like to enable it? " +
         "You can always enable/disable it later on through the extension settings.",
@@ -68,11 +68,11 @@ class TsPlugin {
 
     if (response === answers[2]) {
       vscode.workspace
-        .getConfiguration("jswithts")
+        .getConfiguration("ts-dot-js")
         .update("enable-ts-plugin", true, true);
     } else if (response === answers[1]) {
       vscode.workspace
-        .getConfiguration("jswithts")
+        .getConfiguration("ts-dot-js")
         .update("ask-to-enable-ts-plugin", false, true);
     }
   }

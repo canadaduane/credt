@@ -12,7 +12,7 @@
     "strict": true,
     "noEmit": true,
 
-    // This allows js-with-ts comments to import types from type-only .ts files
+    // This allows ts-dot-js comments to import types from type-only .ts files
     "allowImportingTsExtensions": true,
 
     // Don't check libraries, e.g. since they may not support nodenex module resolution

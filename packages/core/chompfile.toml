@@ -7,12 +7,12 @@ run = "rimraf build/ dist/"
 [[task]]
 name = "copy-js"
 dep = "clean"
-run = "mkdir -p build; cp -r src/ build/js-with-ts/"
+run = "mkdir -p build; cp -r src/ build/ts-dot-js/"
 
 [[task]]
 name = "make-ts"
-deps = ["copy-js", "build/js-with-ts/##.js"]
-run = "js-with-ts $DEP"
+deps = ["copy-js", "build/ts-dot-js/##.js"]
+run = "ts-dot-js $DEP"
 
 [[task]]
 name = "build-unminified"

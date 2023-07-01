@@ -8,7 +8,7 @@ Thank you to each innovator who has gone before. You are a credit to us all.
 
 - minimal compilation steps
   - use plain es2022 javascript on both client & server
-  - type safety via ~~jsdoc comments~~ js-with-ts (javascript with typescript in comments)
+  - type safety via ts-dot-js (javascript with typescript in comments)
 - no API--state sync takes care of variables
 - extremely fast load time and render time (SSR, small deps)
 - server is just another peer

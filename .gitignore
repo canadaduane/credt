@@ -3,4 +3,4 @@ examples/**/*.html
 vendor/
 dist/
 build/
-.js-with-ts/
+.ts-dot-js/

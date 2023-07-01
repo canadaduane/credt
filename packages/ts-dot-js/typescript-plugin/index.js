@@ -21,9 +21,9 @@ module.exports = function ({
 
       configManager.updateConfigFromPluginConfig(info.config);
       if (configManager.getConfig().enable) {
-        logger.log("Starting js-with-ts plugin");
+        logger.log("Starting ts-dot-js plugin");
       } else {
-        logger.log("js-with-ts plugin disabled");
+        logger.log("ts-dot-js plugin disabled");
         logger.log(info.config);
       }
 
@@ -44,8 +44,7 @@ module.exports = function ({
         const snapshot = getScriptSnapshot(fileName);
 
         if (!scriptInfo || !snapshot) return snapshot;
-
-        // const isJs = scriptInfo.scriptKind === typescript.ScriptKind.JS;
+        if (!fileName.endsWith(".ts.js")) return snapshot;
 
         // @ts-expect-error
         scriptInfo.scriptKind = typescript.ScriptKind.TS;

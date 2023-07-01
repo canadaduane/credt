@@ -1,8 +1,8 @@
 {
-  "name": "js-with-ts",
-  "displayName": "JS with TS",
-  "description": "Javascript with Typescript types as comments",
-  "version": "0.0.1",
+  "name": "ts-dot-js",
+  "displayName": "ts-dot-js (.ts.js)",
+  "description": "Javascript with Typescript types as comments; support for .ts.js files.",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.79.0"
   },
@@ -18,7 +18,7 @@
     "type": "git",
     "url": "https://github.com/canadaduane/credt.git"
   },
-  "homepage": "https://github.com/canadaduane/credt#readme",
+  "homepage": "https://github.com/canadaduane/credt/packages/ts-dot-js",
   "activationEvents": [
     "onLanguage:javascript"
   ],
@@ -31,34 +31,49 @@
   "contributes": {
     "commands": [],
     "configuration": {
-      "jswithts.enable-ts-plugin": {
+      "ts-dot-js.enable-ts-plugin": {
         "type": "boolean",
         "default": false,
-        "title": "Enable TypeScript jswithts plugin",
+        "title": "Enable TypeScript ts-dot-js plugin",
         "description": "Enables a TypeScript plugin which enalbes typescript comments in javascript"
       },
-      "jswithts.ask-to-enable-ts-plugin": {
+      "ts-dot-js.ask-to-enable-ts-plugin": {
         "type": "boolean",
         "default": true,
-        "title": "Ask to enable TypeScript jswithts plugin",
+        "title": "Ask to enable TypeScript ts-dot-js plugin",
         "description": "Ask on startup to enable the TypeScript plugin."
       }
     },
+    "languages": [
+      {
+        "id": "typescript",
+        "aliases": [
+          "ts-dot-js"
+        ],
+        "extensions": [
+          ".ts.js"
+        ]
+      }
+    ],
     "grammars": [
       {
-        "path": "./grammars/js-with-ts.json",
-        "scopeName": "js-with-ts.injection",
+        "path": "./grammars/typescript.injection.json",
         "injectTo": [
-          "source.js"
+          "source.ts"
         ],
+        "scopeName": "ts-dot-js",
         "embeddedLanguages": {
-          "meta.embedded.ts": "typescriptreact"
+          "meta.embedded.ts": "typescript",
+          "source.ts": "typescript"
+        },
+        "tokenTypes": {
+          "meta.embedded.ts": "other"
         }
       }
     ],
     "typescriptServerPlugins": [
       {
-        "name": "js-with-ts-typescript-plugin",
+        "name": "ts-dot-js-typescript-plugin",
         "enableForWorkspaceTypeScriptVersions": true
       }
     ]
@@ -68,7 +83,7 @@
     "package": "vsce package"
   },
   "dependencies": {
-    "js-with-ts-typescript-plugin": "0.1.0"
+    "ts-dot-js-typescript-plugin": "0.1.0"
   },
   "devDependencies": {
     "@types/node": "20.2.5",
