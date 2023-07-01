@@ -22,7 +22,7 @@ greet(firstname, "yo")
 
 The typescript annotations in the javascript file above are ignored completely by the javascript interpreter. But what if they could be used by VSCode to augment a javascript file to be more like a typescript coding experience?
 
-<img src="./docs/language-highlight.png" width="400" alt="javascript with typescript comments">
+<img src="./docs/language-highlight.png" width="600" alt="javascript with typescript comments">
 
 This is similar to the intent behind jsdoc annotations in Javascript files, but is easier to use and more comprehensive, because it does not require special syntax other than typescript and `/*+ */` or `/*: */`.
 
