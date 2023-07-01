@@ -66,3 +66,14 @@ Thank you to each innovator who has gone before. You are a credit to us all.
 
 - jsdelivr seems to offer best CDN for js--fast, and brotli compressed
 - animejs 6.5kb
+
+### CRDTs
+
+| Name         | Size  | Reliability | Work | Description                                          |
+| ------------ | ----- | ----------- | ---- | ---------------------------------------------------- |
+| Yjs          | 37kb  | 10          | 3    | An excellent, reliable CRDT in javascript, but large |
+| Automerge 2  |       |             |      | Requires wasm, which adds latency at load time       |
+| mute-structs | 14kb  |             |      | Probably too large                                   |
+| Antimatter   | 7kb   | 2           | 7    | Experimental but very promising CRDT with deletions. |
+| causal-trees | 122kb |             |      | Too big                                              |
+| js-crdt      | 3kb   | 4           | 5    | Old, but worth investigating due to tiny size        |
