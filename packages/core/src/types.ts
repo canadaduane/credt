@@ -10,9 +10,9 @@ type HeadFn = ({
   builtins,
 }: {
   builtins: (map: BuiltinMapper) => void;
-}) => NodeType;
+}) => Promise<NodeType>;
 
-type BodyFn = ({}: {}) => NodeType;
+type BodyFn = ({}: {}) => Promise<NodeType>;
 
 export type MountPayload = {
   rootImports: string[];

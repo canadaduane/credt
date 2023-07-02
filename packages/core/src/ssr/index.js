@@ -34,7 +34,7 @@ export async function mount({ rootImports, head, body } /*: MountPayload*/) {
   // BuiltinMapper is an advanced function that probably won't be used often--it's an
   // escape hatch that allows the caller to modify the built-in <head /> tag contents.
   let map /*: BuiltinMapper*/ = (builtins) => builtins;
-  let node = head?.({
+  let node = await head?.({
     builtins: (m) => {
       if (!m)
         throw Error("`builtins(m)` must return a mapper that returns html");
@@ -45,7 +45,7 @@ export async function mount({ rootImports, head, body } /*: MountPayload*/) {
   globalThis.document.head.append(chtml`${builtins}\n${node}`);
 
   if (body && process.env.NODE_ENV === "production") {
-    const node = body({}) ?? chtml``;
+    const node = (await body({})) ?? chtml``;
     globalThis.document.body.append(node /*+ as Node*/);
   }
 }
