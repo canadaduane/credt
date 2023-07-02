@@ -20,13 +20,6 @@ Thank you to each innovator who has gone before. You are a credit to us all.
 - backwards compat with non-modern browsers
 - similarity to React development
 
-## ts-dot-js
-
-No build step, just javascript--but augmented with type annotations. We provide a VS Code extension called [ts-dot-js](https://github.com/canadaduane/credt/tree/main/packages/ts-dot-js/vscode-extension) for ".ts.js" files:
-
-<img src="packages/ts-dot-js/vscode-extension/docs/language-highlight.png" width="600" alt="javascript with typescript comments">
-
-Think of it as JSDoc annotations, but easier to learn if you already know typescript--and with the full power of typescript, rather than just the subset supported by JSDoc.
 
 ## Questions
 
@@ -66,6 +59,26 @@ CRDT Library (see below for ongoing research)
 [Linkedom](https://github.com/WebReflection/linkedom)
 
 - A fast, reasonable server-side DOM
+
+## Features
+
+### Server-Side Rendering (SSR)
+
+A `credt` web page is a `[file].html.ts.js` file. It runs on both the client and the server. It has 2 ways that it can run on the server:
+
+1. If you run it via nodejs (e.g. `node index.html.ts.js > index.html`), it will print an HTML file to stdout that can be loaded in the browser. This HTML file is suitable for development mode--once created, you don't need to create it again. As you develop your `[file].html.ts.js` javascript and its dependencies, you can just reload the HTML page in the browser and it will include your new javascript code automatically.
+
+2. If you add `NODE_ENV=production` to the environment, your `[file].html.ts.js` file will print an HTML file to stdout that includes a snapshot of the initial app state (HTML) for SSR (e.g. `NODE_ENV=production node index.html.ts.js > index.html`). When a user loads this production file, they won't see a blank page flash. In addition, the javascript will be loaded into the browser and hydrate the app and continue where the raw HTML left off, making it an SPA if desired.
+
+All `credt` javascript code must be contained within isomorphic ES modules (i.e. the modules can run in node 18.0+ or the browser). NPM modules can be installed like usual via, e.g. `pnpm` for the server side. You maintain an `importmap` of modules and their online sources for the browser-side using the `jspm` CLI.
+
+### ts-dot-js
+
+`credt` provides a VS Code extension called [ts-dot-js](https://github.com/canadaduane/credt/tree/main/packages/ts-dot-js/vscode-extension) for ".ts.js". There is no build step (it's just javascript!), augmented with type annotations:
+
+<img src="packages/ts-dot-js/vscode-extension/docs/language-highlight.png" width="600" alt="javascript with typescript comments">
+
+Think of it as JSDoc annotations, but easier to learn if you already know typescript--and with the full power of typescript, rather than just the subset supported by JSDoc.
 
 ## Research
 
