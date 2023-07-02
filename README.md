@@ -74,7 +74,7 @@ All `credt` javascript code must be contained within isomorphic ES modules (i.e.
 
 ### ts-dot-js
 
-`credt` provides a VS Code extension called [ts-dot-js](https://github.com/canadaduane/credt/tree/main/packages/ts-dot-js/vscode-extension) for ".ts.js". There is no build step (it's just javascript!), augmented with type annotations:
+`credt` provides a VS Code extension called [ts-dot-js](https://github.com/canadaduane/credt/tree/main/packages/ts-dot-js/vscode-extension) for ".ts.js" files. There is no build step for these files (they're just javascript, augmented with type annotations!)
 
 <img src="packages/ts-dot-js/vscode-extension/docs/language-highlight.png" width="600" alt="javascript with typescript comments">
 
