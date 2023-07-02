@@ -1,6 +1,6 @@
 import { readFileSync } from "fs";
-import { replaceMultilineComments } from "./comments.js";
-import { changeExtension, write } from "./utils.js";
+import { replaceMultilineComments } from "./comments.ts.js";
+import { changeExtension, removeExtension, write } from "./utils.ts.js";
 import assert from "assert";
 
 function printHelp() {
@@ -62,11 +62,13 @@ if (outPath == null) {
   if (inPath === "-") {
     outPath = "-";
   } else {
-    outPath = changeExtension(inPath, ".ts");
+    if (inPath.endsWith(".ts.js")) outPath = removeExtension(inPath, ".js");
+    else if (inPath.endsWith(".js")) outPath = changeExtension(inPath, ".ts");
+    else throw Error(`Unknown extension: ${inPath}`);
   }
 }
 
-function transform(input, ws = true) {
+function transform(input /*:string*/, ws = true) {
   return replaceMultilineComments(input, (s /*: string*/) => {
     if (s.startsWith("/*:")) {
       return (ws ? "  " : "") + s.slice(2, s.length - 2) + (ws ? "  " : "");

@@ -1,9 +1,15 @@
-import { readFileSync, writeFileSync, existsSync } from "fs";
+import { writeFileSync, existsSync } from "fs";
 import path from "path";
 
 export function changeExtension(filePath, newExt) {
   let baseName = path.basename(filePath, path.extname(filePath));
   return path.join(path.dirname(filePath), baseName + newExt);
+}
+
+export function removeExtension(filePath /*: string */, ext /*: string */) {
+  if (filePath.endsWith(ext))
+    return filePath.slice(0, filePath.length - ext.length);
+  else return filePath;
 }
 
 export function write(

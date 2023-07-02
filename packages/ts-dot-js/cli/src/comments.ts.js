@@ -2,8 +2,22 @@
 
 // Credit goes to https://github.com/DrewML/es-comments
 
+/*+
+type Comment = {
+  value: string
+  start: number
+  end: number
+}
+*/
+
 export class ESCommentsParser {
-  constructor(input) {
+  /*+
+  input: string
+  position: number 
+  comments: Comment[]
+  */
+
+  constructor(input /*: string*/) {
     this.input = input;
     this.position = 0;
     this.comments = [];
@@ -39,7 +53,7 @@ export class ESCommentsParser {
     }
   }
 
-  parse() {
+  parse() /*: ESCommentsParser */ {
     while (true) {
       if (this.isDone()) break;
 
@@ -91,12 +105,10 @@ export class ESCommentsParser {
   }
 }
 
-/**
- *
- * @param {string} input
- * @param {(string) => string} fn
- */
-export function replaceMultilineComments(input, fn) {
+export function replaceMultilineComments(
+  input /*: string */,
+  fn /*: (comment: string) => string */
+) {
   const parser = new ESCommentsParser(input);
   let start = 0;
   let output = "";

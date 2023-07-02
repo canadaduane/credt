@@ -2,13 +2,14 @@
   "name": "@credt/ts-dot-js",
   "version": "1.0.0",
   "description": "Javascript with Typescript Comments tools",
-  "main": "src/index.js",
+  "main": "src/index.ts.js",
   "bin": {
-    "ts-dot-js": "src/cli.js"
+    "ts-dot-js": "src/cli.ts.js"
   },
   "type": "module",
   "devDependencies": {
-    "@credt/tsconfig": "workspace:*"
+    "@credt/tsconfig": "workspace:*",
+    "@types/node": "^20.3.3"
   },
   "author": "Duane Johnson <duane.johnson@gmail.com>",
   "license": "MIT"
