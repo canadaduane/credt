@@ -5,13 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "node public/index.html.ts.js >public/index.html && clean-html public/index.html --in-place && sirv --dev public/",
-    "build": "NODE_ENV=production node public/index.html.ts.js >public/index.html && clean-html public/index.html --in-place"
+    "build": "NODE_ENV=production node public/index.html.ts.js >public/index.html && clean-html public/index.html --in-place",
+    "build:serve": "pnpm build && sirv public/"
   },
   "dependencies": {
     "@credt/core": "workspace:*"
   },
   "devDependencies": {
     "@credt/tsconfig": "workspace:*",
+    "@types/node": "^20.3.3",
     "clean-html": "^2.0.1",
     "sirv-cli": "^2.0.2"
   }

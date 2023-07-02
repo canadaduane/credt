@@ -1,4 +1,4 @@
-/*+ import type { Observable } from "sinuous/observable"; */
+/*+ import type { Observable } from "@credt/core"; */
 import { mount, html, observable as o, isServer } from "@credt/core";
 
 function FullPageGradientDown(
@@ -59,7 +59,7 @@ function Moon({ y } /*: { y : Observable<number> }*/) {
 await mount({
   rootImports: [import.meta.url],
 
-  head() {
+  async head() {
     return html`
       <style>
         html,
@@ -71,10 +71,13 @@ await mount({
     `;
   },
 
-  body() {
+  async body() {
     const scrollY = o(0);
 
-    if (!isServer) {
+    let moonFacts = {};
+    if (isServer) {
+      moonFacts = (await import("../private/moonFacts.ts.js")).moonFacts;
+    } else {
       window.onscroll = (_ev) => scrollY(window.scrollY);
     }
 
@@ -94,7 +97,11 @@ await mount({
         background-color: #d0b641;
         gap: 20px;
       ">
-        <h1>The End of the Moon</h1>
+        ${Object.entries(moonFacts).map(
+          ([title, body]) =>
+            html`<h2>${title}</h2>
+              <div>${body}</div>`
+        )} 
         <h3 style="color: #2f4157">Credt Framework Example</h3>
       </div>
     `;
