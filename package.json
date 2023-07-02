@@ -1,26 +1,9 @@
 {
-  "name": "credt",
-  "version": "1.0.0",
-  "description": "An experimental web framework based on CRDTs",
   "type": "module",
-  "main": "src/index.js",
-  "types": "src/index.d.ts",
   "author": "Duane Johnson",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/canadaduane/credt.git"
-  },
-  "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "mrmime": "^1.0.1",
-    "sinuous": "github:canadaduane/sinuous#434f93f9",
-    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.30.0"
-  },
-  "devDependencies": {
-    "@types/node": "^20.3.1",
-    "chomp": "^0.2.14"
   }
 }

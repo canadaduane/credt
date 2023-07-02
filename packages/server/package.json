@@ -7,9 +7,15 @@
     "dev": "node public/index.html.js >public/index.html && clean-html public/index.html --in-place && sirv --dev public/",
     "build": "NODE_ENV=production node public/index.html.js >public/index.html && clean-html public/index.html --in-place"
   },
-  "dependencies": {},
+  "dependencies": {
+    "mrmime": "^1.0.1",
+    "sinuous": "github:canadaduane/sinuous#434f93f9",
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.30.0"
+  },
   "devDependencies": {
     "@credt/crdt": "workspace:*",
-    "@credt/tsconfig": "workspace:*"
+    "@credt/tsconfig": "workspace:*",
+    "@types/node": "^20.3.1",
+    "chomp": "^0.2.14"
   }
 }
