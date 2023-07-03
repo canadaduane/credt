@@ -1,4 +1,7 @@
 {
   "extends": "@credt/tsconfig/base.json",
+  "compilerOptions": {
+    "customConditions": ["ts-dot-js"]
+  },
   "include": ["public/**/*.js", "private/**/*.js"]
 }
