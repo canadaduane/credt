@@ -47,9 +47,6 @@
     "languages": [
       {
         "id": "typescript",
-        "aliases": [
-          "ts-dot-js"
-        ],
         "extensions": [
           ".ts.js"
         ]
