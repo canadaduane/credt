@@ -2,7 +2,7 @@
   "name": "ts-dot-js",
   "displayName": "ts-dot-js (.ts.js)",
   "description": "Javascript with Typescript types as comments; support for .ts.js files.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "engines": {
     "vscode": "^1.79.0"
   },
@@ -83,7 +83,7 @@
     "package": "vsce package"
   },
   "dependencies": {
-    "ts-dot-js-typescript-plugin": "0.1.0"
+    "ts-dot-js-typescript-plugin": "0.1.1"
   },
   "devDependencies": {
     "@types/node": "20.2.5",
