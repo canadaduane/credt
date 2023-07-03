@@ -74,7 +74,7 @@ await mount({
   async body() {
     const scrollY = o(0);
 
-    let moonFacts = {};
+    let moonFacts /*: Record<string, string> */ = { devmode: "no moon facts" };
     if (isServer) {
       moonFacts = (await import("../private/moonFacts.js")).moonFacts;
     } else {
@@ -88,7 +88,7 @@ await mount({
       </${FullPageGradientDown}>
       <div style="
         font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto;
-        height: 100dvh;
+        min-height: 100dvh;
         display: flex;
         flex-direction: column; 
         align-items: center;
@@ -99,8 +99,10 @@ await mount({
       ">
         ${Object.entries(moonFacts).map(
           ([title, body]) =>
-            html`<h2>${title}</h2>
-              <div>${body}</div>`
+            html`<div style="max-width: 500px; margin-left: 1rem; margin-right: 1rem;">
+              <h2>${title}</h2>
+              <div>${body}</div>
+            </div>`
         )} 
         <h3 style="color: #2f4157">Credt Framework Example</h3>
       </div>
