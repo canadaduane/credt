@@ -76,7 +76,7 @@ await mount({
 
     let moonFacts = {};
     if (isServer) {
-      moonFacts = (await import("../private/moonFacts.ts.js")).moonFacts;
+      moonFacts = (await import("../private/moonFacts.js")).moonFacts;
     } else {
       window.onscroll = (_ev) => scrollY(window.scrollY);
     }
