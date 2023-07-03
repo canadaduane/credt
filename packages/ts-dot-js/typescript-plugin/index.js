@@ -27,11 +27,11 @@ module.exports = function ({
         logger.log(info.config);
       }
 
+      const lsHost = info.languageServiceHost;
+
       /** @type {typeof info.languageServiceHost.getScriptSnapshot} */
-      const getScriptSnapshot = info.languageServiceHost.getScriptSnapshot.bind(
-        info.languageServiceHost
-      );
-      info.languageServiceHost.getScriptSnapshot = (fileName) => {
+      const getScriptSnapshot = lsHost.getScriptSnapshot.bind(lsHost);
+      lsHost.getScriptSnapshot = (fileName) => {
         const normalizedPath = typescript.server.toNormalizedPath(fileName);
 
         /** @type {import('typescript/lib/tsserverlibrary').server.ScriptInfo | undefined} */
@@ -44,7 +44,14 @@ module.exports = function ({
         const snapshot = getScriptSnapshot(fileName);
 
         if (!scriptInfo || !snapshot) return snapshot;
-        if (!fileName.endsWith(".ts.js")) return snapshot;
+
+        const customConditions =
+          lsHost.getCompilationSettings().customConditions ?? [];
+        const isTsDotJs = customConditions.includes("ts-dot-js");
+
+        if (!fileName.endsWith(".ts.js") && !isTsDotJs) {
+          return snapshot;
+        }
 
         // @ts-expect-error
         scriptInfo.scriptKind = typescript.ScriptKind.TS;
