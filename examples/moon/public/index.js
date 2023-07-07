@@ -5,25 +5,11 @@ function FullPageGradientDown(
   { color1, color2 } /*: { color1: string, color2: string }*/,
   ...children /*: any */
 ) {
-  const c1 = o(color1);
-  const c2 = o(color2);
-
-  // let i = 0;
-  // setInterval(() => {
-  //   if (i++ % 2 == 0) {
-  //     c1(color1);
-  //     c2(color2);
-  //   } else {
-  //     c1(color2);
-  //     c2(color1);
-  //   }
-  // }, 500);
-
   return html`<div
     style="
      position: relative;
      height: 100dvh;
-     background-image: linear-gradient(${c1}, ${c2});
+     background-image: linear-gradient(${color1}, ${color2});
      overflow: hidden;
     "
   >
@@ -33,7 +19,15 @@ function FullPageGradientDown(
 
 function FullPageBackground({ url } /*: { url: string }*/) {
   return html`<div
-    style="position: absolute; top: 0; height: 100dvh; width: 100dvw; background: url(${url}); background-size: cover; background-position: center;"
+    style="
+      position: absolute;
+      top: 0;
+      height: 100dvh;
+      width: 100dvw;
+      background: url(${url});
+      background-size: cover;
+      background-position: center;
+    "
   ></div>`;
 }
 
@@ -44,13 +38,13 @@ function Moon({ y } /*: { y : Observable<number> }*/) {
       left: 50%;
       transform: translateX(-50%);
       top: ${() => 50 + y() / 1.4}px
-      "
+    "
   >
     <img
       style="
         width: 50vw;
         max-width: 25vh;
-        "
+      "
       src="./moon.svg"
     />
   </div>`;
@@ -99,7 +93,9 @@ await mount({
       ">
         ${Object.entries(moonFacts).map(
           ([title, body]) =>
-            html`<div style="max-width: 500px; margin-left: 1rem; margin-right: 1rem;">
+            html`<div
+              style="max-width: 500px; margin-left: 1rem; margin-right: 1rem;"
+            >
               <h2>${title}</h2>
               <div>${body}</div>
             </div>`
