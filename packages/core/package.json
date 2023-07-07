@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "linkedom": "^0.14.26",
-    "sinuous": "github:canadaduane/sinuous#434f93f9",
+    "sinuous": "^0.32.1",
     "sinuous-lifecycle": "^2.1.0",
     "sinuous-trace": "^2.3.0"
   },

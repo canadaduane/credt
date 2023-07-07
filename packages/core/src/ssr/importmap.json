@@ -1,11 +1,13 @@
 {
   "env": ["browser", "development", "module"],
   "imports": {
-    "antimatter": "https://cdn.jsdelivr.net/npm/@braidjs/antimatter/+esm",
     "@credt/core": "https://cdn.jsdelivr.net/npm/@credt/core@0.1.0/src/index.js",
-    "sinuous": "https://cdn.jsdelivr.net/npm/sinuous@0.30.0/src/index.js",
-    "sinuous/hydrate": "https://cdn.jsdelivr.net/npm/sinuous@0.30.0/src/hydrate.js",
-    "sinuous/map": "https://cdn.jsdelivr.net/npm/sinuous@0.30.0/src/map.js",
-    "sinuous/observable": "https://cdn.jsdelivr.net/npm/sinuous@0.30.0/src/observable.js"
+    "sinuous": "https://cdn.jsdelivr.net/npm/sinuous@0.32.1/src/index.js",
+    "sinuous/hydrate": "https://cdn.jsdelivr.net/npm/sinuous@0.32.1/src/hydrate.js",
+    "sinuous/map": "https://cdn.jsdelivr.net/npm/sinuous@0.32.1/src/map.js",
+    "sinuous/observable": "https://cdn.jsdelivr.net/npm/sinuous@0.32.1/src/observable.js",
+    "sinuous/template": "https://cdn.jsdelivr.net/npm/sinuous@0.32.1/src/template.js",
+    "sinuous-lifecycle": "https://cdn.jsdelivr.net/npm/sinuous-lifecycle@2.1.0/index.js",
+    "sinuous-trace": "https://cdn.jsdelivr.net/npm/sinuous-trace@2.3.0/index.js"
   }
 }

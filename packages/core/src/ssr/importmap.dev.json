@@ -7,7 +7,7 @@
     "sinuous/map": "http://localhost:9000/node_modules/sinuous/src/map.js",
     "sinuous/observable": "http://localhost:9000/node_modules/sinuous/src/observable.js",
     "sinuous/template": "http://localhost:9000/node_modules/sinuous/src/template.js",
-    "sinuous-trace": "http://localhost:9000/node_modules/sinuous-trace/index.js",
-    "sinuous-lifecycle": "http://localhost:9000/node_modules/sinuous-lifecycle/index.js"
+    "sinuous-lifecycle": "http://localhost:9000/node_modules/sinuous-lifecycle/index.js",
+    "sinuous-trace": "http://localhost:9000/node_modules/sinuous-trace/index.js"
   }
 }

@@ -46,8 +46,8 @@ importers:
         specifier: ^0.14.26
         version: 0.14.26
       sinuous:
-        specifier: github:canadaduane/sinuous#434f93f9
-        version: github.com/canadaduane/sinuous/434f93f9
+        specifier: ^0.32.1
+        version: 0.32.1
       sinuous-lifecycle:
         specifier: ^2.1.0
         version: 2.1.0(sinuous-trace@2.3.0)
@@ -141,8 +141,8 @@ importers:
   packages/ts-dot-js/vscode-extension:
     dependencies:
       ts-dot-js-typescript-plugin:
-        specifier: 0.1.0
-        version: link:../typescript-plugin
+        specifier: 0.1.1
+        version: 0.1.1
     devDependencies:
       '@types/node':
         specifier: 20.2.5
@@ -2254,6 +2254,10 @@ packages:
     resolution: {integrity: sha512-J4+/eu+3M6n63V/1oAtuxthzbUE21CEK0p6WQXAijcp+E0KFQRhpMgpT1ObnGiJFRrJKkRIZp0xaxUEknnn5sA==}
     dev: false
 
+  /sinuous@0.32.1:
+    resolution: {integrity: sha512-kJihtBR43iiSMpeIb05gq1wC31UKtS4NlQ8wMcmMunOBfTxrv38EfHoebvml1Kq0mVh+n+nDbD5WvnZoYpigdg==}
+    dev: false
+
   /sirv-cli@2.0.2:
     resolution: {integrity: sha512-OtSJDwxsF1NWHc7ps3Sa0s+dPtP15iQNJzfKVz+MxkEo3z72mCD+yu30ct79rPr0CaV1HXSOBp+MIY5uIhHZ1A==}
     engines: {node: '>= 10'}
@@ -2471,6 +2475,12 @@ packages:
       escape-string-regexp: 1.0.5
     dev: true
 
+  /ts-dot-js-typescript-plugin@0.1.1:
+    resolution: {integrity: sha512-uMe2E7/u8xYOK7AsZzW6FsOEC4kGsZahCC8LUSu8SytFSGK7u5w98ygwp7O6vIG2+z49LBmvf33SvP5TEnt3jA==}
+    dependencies:
+      typescript: 5.1.6
+    dev: false
+
   /tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
@@ -2512,7 +2522,6 @@ packages:
     resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
     engines: {node: '>=14.17'}
     hasBin: true
-    dev: true
 
   /uc.micro@1.0.6:
     resolution: {integrity: sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==}
