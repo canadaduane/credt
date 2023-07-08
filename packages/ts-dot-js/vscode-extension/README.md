@@ -27,7 +27,7 @@ greet(firstname, "yo")
 
 The typescript annotations in the javascript file above are ignored completely by the javascript interpreter. But with ts-dot-js, VSCode can "see" the type annotations and give you type hints and error markings.
 
-<img src="./docs/language-highlight.png" width="600" alt="javascript with typescript comments">
+<img src="https://github.com/canadaduane/credt/tree/main/packages/ts-dot-js/vscode-extension/docs/language-highlight.png" width="600" alt="javascript with typescript comments">
 
 This is similar to the intent behind JSDoc annotations in Javascript files, but it is easier to use and more comprehensive, because ts-dot-js syntax does not require special syntax other than typescript and `/*+ */` or `/*: */`.
 
