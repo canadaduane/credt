@@ -9,6 +9,7 @@
   "main": "./src/extension.js",
   "author": "Duane Johnson <duane.johnson@gmail.com>",
   "publisher": "canadaduane",
+  "icon": "./ts-dot-js.png",
   "license": "MIT",
   "categories": [
     "Programming Languages",
