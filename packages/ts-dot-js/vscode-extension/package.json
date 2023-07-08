@@ -78,7 +78,8 @@
   },
   "scripts": {
     "vscode:prepublish": "rm -rf node_modules && npm install",
-    "package": "vsce package"
+    "package": "vsce package",
+    "publish": "vsce publish"
   },
   "dependencies": {
     "ts-dot-js-typescript-plugin": "0.1.1"
