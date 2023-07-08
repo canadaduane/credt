@@ -11,11 +11,7 @@ export * from "sinuous-trace";
 export * from "sinuous-lifecycle";
 
 // @ts-ignore
-globalThis.chtml = chtml;
-// @ts-ignore
-globalThis.dhtml = dhtml;
-// @ts-ignore
-globalThis.hydrate = hydrate;
+globalThis.credt = { chtml, dhtml, hydrate };
 
 export const isServer = typeof global === "object";
 const headEl = globalThis.document?.head.firstElementChild;
