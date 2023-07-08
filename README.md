@@ -102,14 +102,13 @@ See [notepad-app](https://github.com/widmogrod/notepad-app/tree/master/src) for 
 ### CSS
 
 - [css-in-js notes](https://github.com/nikitavoloboev/knowledge/blob/7c4bbc755c64368a82ca22b76566e9153cd2e377/docs/front-end/css/css-in-js.md)
-- [emotion](https://github.com/emotion-js/emotion)
 - [vanilla-extract](https://vanilla-extract.style/)
   - [css-to-vanilla-extract](https://css-to-vanilla-extract.netlify.app/)
-- [reshadow](https://reshadow.dev/)
+- [reshadow](https://reshadow.dev/) ~7.5kb
   - [codesandbox example with htm](https://codesandbox.io/s/reshadowhtm-x1ves?file=/src/html.js)
-- [jss](https://cssinjs.org)
 - [goober](https://github.com/cristianbote/goober) ~1kb
 - [cxs](https://github.com/cxs-css/cxs) 612B
+- [fela](https://github.com/robinweser/fela) ~4.3kb
 
 ### Web Components
 
