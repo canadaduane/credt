@@ -44,7 +44,7 @@ export interface CRDT<T> extends Merger<T>, Equaler<T> {}
 
 export type AssertFunc = (assertion: boolean, message: string) => void;
 
-export function axioms<T extends CRDT<any>>(
+export function axioms<T extends CRDT<unknown>>(
   assert: AssertFunc,
   a: T,
   b: T,

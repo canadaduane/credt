@@ -29,6 +29,7 @@
   "homepage": "https://github.com/widmogrod/js-crdt#readme",
   "devDependencies": {
     "@credt/tsconfig": "workspace:*",
+    "@types/node": "^20.4.1",
     "esbuild": "0.18.10",
     "mocha": "^10.2.0",
     "tsutils": "^2.8.2",
